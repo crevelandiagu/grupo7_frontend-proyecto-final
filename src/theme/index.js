@@ -1,2 +1,2 @@
-export * from './appTheme';
+export * from './AppTheme';
 export * from './blueTheme';

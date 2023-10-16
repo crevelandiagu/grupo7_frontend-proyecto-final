@@ -1,23 +1,25 @@
-# pull official base image
-FROM node:17-alpine
+FROM node:18-alpine as BUILD_IMAGE
+WORKDIR /Jobs-App
 
-# set working directory
-WORKDIR /app
-
-# install app dependencies
-COPY package.json ./
+COPY package.json .
 
 RUN npm install
 
+COPY . . 
 
-# add app
-COPY . ./
+RUN  npm run build
 
-# start app
-CMD ["npm", "start"]
 
-#FROM nginx:1.19.0
-#WORKDIR /usr/share/nginx/html
-#RUN rm -rf ./*
-#COPY --from=builder /app/build .
-#ENTRYPOINT ["nginx", "-g", "daemon off;"]
+FROM node:18-alpine as PROD_IMAGE
+WORKDIR /Jobs-App
+
+COPY --from=BUILD_IMAGE /Jobs-App/dist/ /Jobs-App/dist/
+EXPOSE 8080
+
+
+COPY package.json .
+COPY vite.config.js .
+
+RUN npm install typescript
+EXPOSE 8080
+CMD [ "npm", "run", "preview" ]
