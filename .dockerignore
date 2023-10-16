@@ -1,0 +1,13 @@
+node_modules
+*md
+!README.md
+.git
+npm-debug.log
+.coverage
+.coverage.*
+
+
+
+
+
+
