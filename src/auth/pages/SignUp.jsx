@@ -1,17 +1,12 @@
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useFetch } from '../../utilities/hooks/useFetch';
 import { Navigate } from 'react-router-dom';
 
 function Copyright(props) {
@@ -40,7 +35,7 @@ export const SignUp = () => {
       password: dataForm.get('password'),
     });
 
-    Navigate('/', {
+    Navigate('/auth/signin', {
       replace: true
     })
 
@@ -103,8 +98,8 @@ export const SignUp = () => {
               </Grid>
               <Grid item>
                 {`Already have an account? `}
-                <Link to="/auth/signin" variant="body2">
-                  Sign in
+                <Link href="/auth/signin" variant="body2">
+                  {"Sign In"}
                 </Link>
               </Grid>
             </Grid>
