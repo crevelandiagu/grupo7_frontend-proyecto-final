@@ -1,20 +1,25 @@
+import { useMemo, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import { Alert } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Navigate } from 'react-router-dom';
+
+import { useAuthStore, useForm } from '../../hooks';
+
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.primary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="landing">
+        ABC Jobs
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -22,23 +27,37 @@ function Copyright(props) {
   );
 }
 
+const formData = {
+  email:"",
+  password: ""
+}
+
+const formValidations =  {
+email: [ (value) => value.includes('@'), 'Enter a valid email' ],
+password: [(value) => value.length >= 8, 'password must be at least 8 characters long']
+}
+
 const defaultTheme = createTheme();
 
 export const SignUp = () => {
 
+  const { startSignUp, errorMessage, status } = useAuthStore();
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  
+  const isCheckingAuthentication = useMemo( () => status === 'checking', [status]);
+  console.log('isCheckingAuthentication', isCheckingAuthentication, status === 'checking' )
+  
+  const {
+    formState, email, password, onInputChange, isFormValid, 
+    emailValid, passwordValid, } = useForm( formData, formValidations );
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const dataForm = new FormData(event.currentTarget);
+    setFormSubmitted(true);
+    //console.log(formState, typeof isFormValid, isFormValid, !!emailValid && formSubmitted)
     
-    console.log({
-      email: dataForm.get('email'),
-      password: dataForm.get('password'),
-    });
-
-    Navigate('/auth/signin', {
-      replace: true
-    })
-
+    if ( !isFormValid ) return;
+    startSignUp(formState);//({email, password});
   };
 
   return (
@@ -53,38 +72,47 @@ export const SignUp = () => {
             alignItems: 'center',
           }}
         >
-          {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar> */}
           <Typography component="h1" variant="h4">
             Create an account
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  required
-                  fullWidth
-                  id="email"
                   label="Email Address"
+                  type="email"
+                  placeholder='your-email@domain.com'
+                  fullWidth
                   name="email"
-                  // autoComplete="email"
+                  value= {email}
+                  onChange={onInputChange}
+                  error = {!!emailValid && formSubmitted}
+                  helperText = {emailValid}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
-                  fullWidth
-                  name="password"
                   label="Password"
                   type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  placeholder="your password"
+                  fullWidth
+                  name="password"
+                  value= {password}
+                  onChange={onInputChange}
+                  error = {!!passwordValid && formSubmitted}
+                  helperText = {passwordValid}
                 />
               </Grid>
               
             </Grid>
+            <Grid item sx={{ mt: 2 }}
+              xs={12}
+              display={ errorMessage ? '' : 'none' }
+            >
+                <Alert severity="error">{errorMessage}</Alert>
+            </Grid> 
             <Button
+              disabled = { isCheckingAuthentication }
               type="submit"
               fullWidth
               variant="contained"
@@ -98,8 +126,8 @@ export const SignUp = () => {
               </Grid>
               <Grid item>
                 {`Already have an account? `}
-                <Link href="/auth/signin" variant="body2">
-                  {"Sign In"}
+                <Link component={ RouterLink } variant="body2" to="/auth/signin">
+                  {" Sign In"}
                 </Link>
               </Grid>
             </Grid>

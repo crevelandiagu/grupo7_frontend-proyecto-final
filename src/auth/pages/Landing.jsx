@@ -10,8 +10,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
 import candidateImg from '../../assets/candidate.svg';
 import companiesImg from '../../assets/companies.svg';
+import { getEnvVariablesCandidate, getEnvVariablesCompany, getEnvVariablesProject } from '../../helpers/getEnvVaribles';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -39,7 +41,8 @@ export const Landing = () => {
           }}
         >
           <Typography component="h1" variant="h4">
-            Select your profile
+            Select your profile 
+            { console.log(getEnvVariablesCandidate(), getEnvVariablesCompany(), getEnvVariablesProject()) }
           </Typography>
           <Box sx={{
             marginTop: 8,

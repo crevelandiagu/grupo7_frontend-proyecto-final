@@ -6,7 +6,7 @@ on:
 jobs:
   test-app-web:
     name: Correr-test
-    if:  ${{ contains(github.event.head_commit.message, 'done') }}
+    if:  ${{ contains(github.event.head_commit.message, 'hecho') }}
     runs-on: ubuntu-latest
     outputs:
       salida: ${{ steps.imprimir.outputs.respuesta }}
