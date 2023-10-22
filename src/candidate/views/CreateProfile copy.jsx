@@ -1,4 +1,4 @@
-export const CreateProfile = () => {
+export const Profile = () => {
 
   return (
     <>

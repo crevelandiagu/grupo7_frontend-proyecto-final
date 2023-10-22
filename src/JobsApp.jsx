@@ -1,12 +1,12 @@
 
-import { AuthProvider } from "./auth/context/AuthProvider"
+// import { AuthProvider } from "./auth/context/AuthProvider"
 import { AppRouter } from "./router/AppRouter"
 
 export const JobsApp = () => {
 
   return (
-    <AuthProvider>
+    // <AuthProvider>
       <AppRouter />
-    </AuthProvider>
+    // </AuthProvider>
   )
 }

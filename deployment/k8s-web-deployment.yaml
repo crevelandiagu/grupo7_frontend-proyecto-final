@@ -23,10 +23,13 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: USERS_URL
-              value: http://servicio-candidates/
+            - name: VITE_API_CANDIDATE
+              value: http://servicio-app-candidate/candidate
+            - name: VITE_API_COMPANY
+              value: http://servicio-app-company/company
+            - name: VITE_API_PROJECTS
+              value: http://servicio-app-projects/projects
           imagePullPolicy: Always
-
 ---
 # apiVersion: cloud.google.com/v1
 # kind: BackendConfig

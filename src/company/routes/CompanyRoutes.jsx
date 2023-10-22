@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuthStore } from "../../hooks";
 
-export const CandidateRoutes = () => {
+export const CompanyRoutes = () => {
   
   const { status} = useAuthStore();
 

@@ -5,7 +5,7 @@ import { Landing } from "../pages/Landing"
  
 export const ChildAuthRoutes = [
   { 
-    index: true,
+    
     path: "landing",
     element: <Landing />
   },
