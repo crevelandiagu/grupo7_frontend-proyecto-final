@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { getEnvVariables } from '../helpers/getEnvVaribles';
+import { getEnvVariablesCompany } from '../helpers/getEnvVaribles';
 
-const { VITE_API_COMPANY, VITE_API_COMPANY_LOCAL } = getEnvVariables()
+const VITE_API_COMPANY = getEnvVariablesCompany()
 
 
 
 
 const candidateApi = axios.create({
-    baseURL: VITE_API_COMPANY || VITE_API_COMPANY_LOCAL
+    baseURL: VITE_API_COMPANY
 });
 
 // axios.interceptors.request.use(

@@ -2,7 +2,6 @@ import { IconButton } from '@mui/material';
 import { AddOutlined } from '@mui/icons-material';
 
 import { CompanyLayout } from '../layout/CandidateLayout';
-import { NothingSelectedView } from '../views';
 import { CompanyDashboard } from '../views';
 
 export const Company = () => {
@@ -11,7 +10,7 @@ export const Company = () => {
       
       {/* <Typography>Sint id officia amet velit do aliqua aliqua est ea velit minim voluptate duis laboris. Esse esse consectetur ullamco excepteur ullamco amet. Mollit est nostrud nisi irure magna dolor eiusmod aliquip aliqua nostrud incididunt enim. Velit ipsum laborum Lorem anim laboris aute ullamco ipsum do adipisicing irure.</Typography> */}
 
-      <NothingSelectedView/>
+      <CompanyDashboard/>
       {/* <NoteView /> */}
 
 

@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { getEnvVariables } from '../helpers/getEnvVaribles';
+import { getEnvVariablesProject } from '../helpers/getEnvVaribles';
 
-const { VITE_API_PROJECT, VITE_API_PROJECT_LOCAL } = getEnvVariables()
+const VITE_API_PROJECTS = getEnvVariablesProject()
 
 
 
 
 const candidateApi = axios.create({
-    baseURL: VITE_API_PROJECT || VITE_API_PROJECT_LOCAL
+    baseURL: VITE_API_PROJECTS
 });
 
 // axios.interceptors.request.use(
