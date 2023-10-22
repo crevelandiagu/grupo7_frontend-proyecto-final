@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
 import candidateImg from '../../assets/candidate.svg';
 import companiesImg from '../../assets/companies.svg';
 
@@ -39,7 +40,8 @@ export const Landing = () => {
           }}
         >
           <Typography component="h1" variant="h4">
-            Select your profile
+            Select your profile 
+            { console.log(import.meta.env) }
           </Typography>
           <Box sx={{
             marginTop: 8,

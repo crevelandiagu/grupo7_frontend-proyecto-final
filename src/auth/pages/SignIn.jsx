@@ -1,4 +1,5 @@
-
+import { useMemo, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -8,14 +9,18 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Navigate } from 'react-router-dom';
+
+import { useAuthStore, useForm } from '../../hooks';
+import { Alert } from '@mui/material';
+
+// import { checkingAuthentication } from '../../store/auth/thunks';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.primary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="landing">
+        ABC Jobs
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -23,22 +28,43 @@ function Copyright(props) {
   );
 }
 
+const formData = {
+  email:"",
+  password: ""
+}
+
+const formValidations =  {
+email: [ (value) => value.includes('@'), 'Enter a valid email' ],
+password: [(value) => value.length >= 8, 'password must be at least 8 characters long']
+}
+
 const defaultTheme = createTheme();
 
 export const SignIn = () => {
 
+  const { startSignIn, errorMessage, status } = useAuthStore();
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const isCheckingAuthentication = useMemo( () => status === 'checking', [status]);
+  console.log('isCheckingAuthentication', isCheckingAuthentication, status === 'checking' )
+  
+  const {
+    formState, email, password, onInputChange, isFormValid, 
+    emailValid, passwordValid, } = useForm( formData, formValidations );
+  // const dispatch =  useDispatch(); cuando se usan thunks
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const dataForm = new FormData(event.currentTarget);
-    
-    console.log({
-      email: dataForm.get('email'),
-      password: dataForm.get('password'),
-    });
+    setFormSubmitted(true);
+    // dispatch(checkingAuthentication()); cunado se usan thunks
 
-    Navigate('/', {
+    if ( !isFormValid ) return;
+    startSignIn(formState);//({email, password});
+    
+    /*Navigate('/', {
       replace: true
     })
+    */
 
   };
 
@@ -57,16 +83,22 @@ export const SignIn = () => {
           <Typography component="h1" variant="h4">
             Welcome Back!
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  required
-                  fullWidth
-                  id="email"
                   label="Email Address"
+                  type="email"
+                  placeholder='yourmail@domain.com'
+                  fullWidth
                   name="email"
-                  autoComplete="email"
+                  value= {email}
+                  onChange={onInputChange}
+                  error = {!!emailValid && formSubmitted}
+                  helperText = {emailValid}
+                  // autoComplete="email"
+                  // id="email"
+                  // required
                 />
               </Grid>
               <Grid item xs justifySelf="flex-end">
@@ -76,18 +108,30 @@ export const SignIn = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
-                  fullWidth
-                  name="password"
                   label="Password"
                   type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  placeholder="your password"
+                  fullWidth
+                  name="password"
+                  value= {password}
+                  onChange={onInputChange}
+                  error = {!!passwordValid && formSubmitted}
+                  helperText = {passwordValid}
+                  // id="password"
+                  // required
+
                 />
               </Grid>
               
             </Grid>
+            <Grid item sx={{ mt: 2 }}
+              xs={12}
+              display={ errorMessage ? '' : 'none' }
+            >
+                <Alert severity="error">{errorMessage}</Alert>
+            </Grid> 
             <Button
+              disabled = { isCheckingAuthentication }
               type="submit"
               fullWidth
               variant="contained"
@@ -98,9 +142,12 @@ export const SignIn = () => {
             <Grid container>
               <Grid item>
                 {"Don't have an account?"}
-                <Link href="/auth/signup" variant="body2">
+                <Link component={ RouterLink } variant="body2" to="/auth/signup">
                   {" Sign Up"}
                 </Link>
+                {/* <Link href="/auth/signup" >
+                  con error
+                </Link> */}
               </Grid>
             </Grid>
           </Box>
