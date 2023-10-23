@@ -1,0 +1,60 @@
+###################################
+# frontapp
+###################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontapp
+  labels:
+    app: frontapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontapp
+  template:
+    metadata:
+      labels:
+        app: frontapp
+    spec:
+      containers:
+        - name: frontapp
+          image: us-central1-docker.pkg.dev/GOOGLE_PROJECT/abc-jobs-dockers/front-app:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: VITE_API_CANDIDATE
+              value: http://servicio-app-candidate/candidate
+            - name: VITE_API_COMPANY
+              value: http://servicio-app-company/company
+            - name: VITE_API_PROJECTS
+              value: http://servicio-app-projects/projects
+          imagePullPolicy: Always
+---
+# apiVersion: cloud.google.com/v1
+# kind: BackendConfig
+# metadata:
+#   name: frontapp-config
+# spec:
+#   healthCheck:
+#     checkIntervalSec: 30
+#     port: 3010
+#     type: HTTP
+#     requestPath: /app_selection_process/ping
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: servicio-frontapp
+  # annotations:
+  #   cloud.google.com/backend-config: '{"default": "frontapp-config"}'
+spec:
+  type: NodePort
+  selector:
+    app: frontapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 31050
+---

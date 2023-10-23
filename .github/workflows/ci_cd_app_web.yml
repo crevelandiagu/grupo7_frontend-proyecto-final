@@ -1,11 +1,12 @@
-name: App Candidate
+name: App Web
+run-name: ${{ github.actor }} is deploy App Web 🚀
 on:
   push:
-    branches: [RF**, FIX**]
+    branches: [feature/PROY**, fix/FIX**]
 jobs:
-  test-app-candidate:
+  test-app-web:
     name: Correr-test
-    if:  ${{ contains(github.event.head_commit.message, 'app_candidate') }}
+    if:  ${{ contains(github.event.head_commit.message, 'hecho') }}
     runs-on: ubuntu-latest
     outputs:
       salida: ${{ steps.imprimir.outputs.respuesta }}
@@ -13,24 +14,15 @@ jobs:
     steps:
       - name: Checkout de repositorio
         uses: actions/checkout@v2
-
-      - name: Configuración de entorno de python
-        uses: actions/setup-python@v2
+      
+      - name: Use Node 16.x
+        uses: actions/setup-node@v1
         with:
-          python-version: '3.9'
-
-      - name: Instalación de app_candidate
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r app_candidate/requirements.txt
-
-      - name: Correr pruebas app_candidate
-        id: correr-pruebas-usuarios
-        if: ${{ contains(github.event.head_commit.message, 'app_candidate') }}
-        run: |
-          cd app_candidate
-          export TEST_APP=True
-          pytest --cov=. -v -s --cov-fail-under=0
+          node-version: '16.x'
+      - name: Install dependencies
+        run: npm install
+      - name: run jest 
+        run: npm run test
 
       - name: Validar resultado con errores
         if: ${{ failure() }}
@@ -43,10 +35,9 @@ jobs:
           MENSAJE_EXITO: Todas las pruebas fueron exitosas
         run: echo "::set-output name=respuesta::${MENSAJE_EXITO}"
 
-
-  ci-app-candidate:
+  ci-app-web:
     name: Build and push to GCP
-    needs: test-app-candidate
+    needs: test-app-web
     runs-on: ubuntu-latest
 
     outputs:
@@ -65,16 +56,20 @@ jobs:
     - name: build and push the docker image
       env:
         GOOGLE_PROJECT: ${{ secrets.PROJECT_ID }}
-        IMAGE_NAME: web-app
+        IMAGE_NAME: front-app
+        IMAGE_TAG: ${{ github.run_number }}
       run: |
         gcloud auth configure-docker us-central1-docker.pkg.dev
-        docker build -t us-central1-docker.pkg.dev/$GOOGLE_PROJECT/abc-jobs-dockers/$IMAGE_NAME:latest .
-        docker push us-central1-docker.pkg.dev/$GOOGLE_PROJECT/abc-jobs-dockers/$IMAGE_NAME:latest
-        
+        docker build -t $IMAGE_NAME:latest .
+        docker tag $IMAGE_NAME:latest us-central1-docker.pkg.dev/$GOOGLE_PROJECT/abc-jobs-dockers/$IMAGE_NAME:latest 
+        docker tag $IMAGE_NAME:latest us-central1-docker.pkg.dev/$GOOGLE_PROJECT/abc-jobs-dockers/$IMAGE_NAME:$IMAGE_TAG 
+        docker push us-central1-docker.pkg.dev/$GOOGLE_PROJECT/abc-jobs-dockers/$IMAGE_NAME:latest 
+        docker push us-central1-docker.pkg.dev/$GOOGLE_PROJECT/abc-jobs-dockers/$IMAGE_NAME:$IMAGE_TAG 
+
 
   cd-app-candidate:
     name: Deploy to GCP k8s
-    needs: [test-app-candidate, ci-app-candidate]
+    needs: [test-app-web, ci-app-web]
     runs-on: ubuntu-latest
 
     outputs:
@@ -99,22 +94,23 @@ jobs:
         run: |
           cd deployment
           gcloud container clusters get-credentials autopilot-abc-jobs-k8s --region us-central1  --project $GOOGLE_PROJECT
-          sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" k8s-base-layer-deployment.yaml
-          kubectl apply -f k8s-base-layer-deployment.yaml
+          sed -i "s/GOOGLE_PROJECT/$GOOGLE_PROJECT/g" k8s-web-deployment.yaml
+          kubectl apply -f k8s-web-deployment.yaml
+          kubectl rollout restart deployment/frontapp
 
-  merege-develop:
+  merge-branch-develop:
     name: Merge-dev
-    needs: [test-app-candidate, ci-app-candidate]
+    needs: [test-app-web, ci-app-web]
     runs-on: ubuntu-latest
-    outputs:
-      salida: ${{ steps.imprimir.outputs.respuesta }}
     steps:
-      - name: Mezcla ${{ github.ref }} -> develop
-        if: echo ${{needs.correr-test-funcionalidad.outputs.salida}}
-        uses: tukasz/direct-merge-action@master
+      - uses: actions/checkout@master
+      - name: Branch name
+        run: |
+          echo running on branch ${GITHUB_REF##*/}
+      - name: Mezcla ${GITHUB_REF##*/} -> develop
+        uses: devmasx/merge-branch@master
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          source-branch: ${{ github.ref }}
-          target-branch: develop
-        env:
-          MENSAJE_MERGE: Merge successful
+          type: now
+          target_branch: develop
+          message: Merge ${GITHUB_REF##*/} into develop
+          github_token: ${{ secrets.GITHUB_TOKEN }}
