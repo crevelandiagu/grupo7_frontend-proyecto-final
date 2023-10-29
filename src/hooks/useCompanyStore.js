@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { candidateApi }  from '../api';
+import { candidateApi, companyApi }  from '../api';
 import { checking, signup, signin, logout, /*clearErrorMessages*/ } from '../store/auth/authSlice';
 
 
@@ -9,7 +9,7 @@ export const useAuthStore = () => {
     const dispatch = useDispatch();
 
     const startSignIn = async({ email, password }) => {
-        dispatch(checking());
+        dispatch(che);
         try {
             const { data } = await candidateApi.post('/login',{ email, password }); 
             console.log(data);
@@ -23,6 +23,16 @@ export const useAuthStore = () => {
             // setTimeout(() => {
             //     dispatch( clearErrorMessages() );
             // }, 10);
+        }
+    }
+
+    const findCandidate = async({experience, skill}) => {
+        dispatch(checking());
+        try {
+            const {data} = await companyApi.post('')
+            
+        } catch (error) {
+            
         }
     }
 

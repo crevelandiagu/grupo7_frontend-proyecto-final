@@ -7,6 +7,8 @@ import { ChildCandidateRoutes } from "../candidate/routes/ChildCandidateRoutes";
 import { Landing } from "../auth/pages/Landing";
 import { useEffect } from "react";
 import { useAuthStore } from "../hooks";
+import { CompanyRoutes } from "../company/routes/CompanyRoutes";
+import { ChildCompanyRoutes } from "../company/routes/ChildCompanyRoutes";
 
 const router = createBrowserRouter([
   { 
@@ -23,6 +25,12 @@ const router = createBrowserRouter([
     path: "/candidate/*",
     element: <CandidateRoutes />,
     children: ChildCandidateRoutes,
+  },
+
+  {
+    path: "/company/*",
+    element: <CompanyRoutes />,
+    children: ChildCompanyRoutes,
   },
 
 ]);
