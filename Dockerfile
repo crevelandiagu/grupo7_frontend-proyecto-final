@@ -1,5 +1,10 @@
 FROM node:18-alpine as BUILD_IMAGE
-WORKDIR /Jobs-App
+WORKDIR /jobs_app
+
+ENV VITE_API_CANDIDATE default
+ENV VITE_API_CANDIDATE default
+ENV VITE_API_COMPANY default
+ENV VITE_API_PROJECTS default
 
 COPY package.json .
 

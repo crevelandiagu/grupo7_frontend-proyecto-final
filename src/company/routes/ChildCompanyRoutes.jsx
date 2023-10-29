@@ -1,10 +1,10 @@
-import { Candidate } from "../pages/Candidate"
+import { Company } from "../pages/Company"
 import { Navigate } from "react-router-dom"
  
-export const ChildCandidateRoutes = [
+export const ChildCompanyRoutes = [
     {   index: true,
         path: "dashboard",
-        element: <Candidate />
+        element: <Company />
     },
     {
         path: "*",

@@ -5,7 +5,7 @@ export const CandidateRoutes = () => {
   
   const { status} = useAuthStore();
 
-  if (status === 'authenticated') {
+  if (status === 'not-authenticated') {
     return <Navigate to="/auth/signin" />
   }
 

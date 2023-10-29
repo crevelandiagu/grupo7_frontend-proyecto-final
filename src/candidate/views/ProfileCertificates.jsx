@@ -12,8 +12,10 @@ import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
 
 const formData = {
-  name:"",
-  description: ""
+  certification:'',
+  issuingOrganization: '',
+  startDate: '',
+  endDate: '',
 }
 
 const formValidations =  {
@@ -55,7 +57,7 @@ export const ProfileCertificates = () => {
           }}
         >
           <Typography component="h1" variant="h4">
-            Crate Project
+            Certificates
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>

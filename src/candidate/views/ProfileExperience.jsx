@@ -12,8 +12,11 @@ import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
 
 const formData = {
-  name:"",
-  description: ""
+  position:'',
+  company:'',
+  startDate:'',
+  location:'',
+  skills:'',
 }
 
 const formValidations =  {
@@ -56,7 +59,7 @@ export const ProfileExperience = () => {
           }}
         >
           <Typography component="h1" variant="h4">
-            Crate Project
+            Experience 
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
