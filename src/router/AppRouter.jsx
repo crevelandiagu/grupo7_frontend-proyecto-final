@@ -15,7 +15,8 @@ import { AppTheme } from "../theme";
 const router = createBrowserRouter([
   { 
     path: "/",
-    element: <Landing />,
+    // element: <Landing />,
+    element: <Landing />
     
   },
   {
