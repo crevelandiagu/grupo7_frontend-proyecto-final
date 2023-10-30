@@ -1,7 +1,10 @@
-name: Merge Dev
+name: Deploy Master
+run-name: ${{ github.actor }} is Deploy Master 🚀⚗🔮🤖
 on:
   push:
     branches: [develop]
+    paths:
+      - 'package.json'
 jobs:
   Crear-Release:
     name: Crear-release
@@ -39,79 +42,25 @@ jobs:
       env:
         MENSAJE_MERGE: Se unieron las ramas
 
-  correr-test-funcionalidad:
-    name: Correr-test
+  correr-test-frontend-app:
+    name: Correr-test-frontend-app
     needs: merege-release-desarrollo
     runs-on: ubuntu-latest
     outputs:
       salida: ${{ steps.imprimir.outputs.respuesta }}
+
     steps:
       - name: Checkout de repositorio
         uses: actions/checkout@v2
-      - name: Configuración de entorno de python
-        uses: actions/setup-python@v2
+
+      - name: Use Node 16.x
+        uses: actions/setup-node@v1
         with:
-          python-version: '3.9'
-
-      - name: Instalación de librerías y dependencias-usuarios
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r users/requirements.txt
-      - name: Correr pruebas usuarios
-        id: correr-pruebas-usuarios
-        if: ${{ contains(github.event.head_commit.message, 'RELEASE') }}
-        run: |
-          cd users
-          export TEST_APP=True
-          pytest --cov=. -v -s --cov-fail-under=80
-
-      - name: Instalación de librerías y dependencias-ofertas
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r offers/requirements.txt
-      - name: Correr pruebas oferas
-        id: correr-pruebas-ofertas
-        if: ${{ contains(github.event.head_commit.message, 'RELEASE') }}
-        run: |
-          cd offers
-          export TEST_APP=True
-          pytest --cov=. -v -s --cov-fail-under=80
-
-      - name: Instalación de librerías y dependencias-publicaciones
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r servicio_publicaciones/requirements.txt
-      - name: Correr pruebas publicaciones
-        id: correr-pruebas-publicaciones
-        if: ${{ contains(github.event.head_commit.message, 'RELEASE') }}
-        run: |
-          cd servicio_publicaciones
-          export TEST_APP=True
-          pytest --cov=. -v -s --cov-fail-under=80
-
-      - name: Instalación de librerías y dependencias-trayectos
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r servicio_trayectos/requirements.txt
-      - name: Correr pruebas trayectos
-        id: correr-pruebas-trayectos
-        if: ${{ contains(github.event.head_commit.message, 'RELEASE') }}
-        run: |
-          cd servicio_trayectos
-          export TEST_APP=True
-          pytest --cov=. -v -s --cov-fail-under=80
-
-      - name: Instalación de librerías y dependencias-public
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r public/requirements.txt
-      - name: Correr pruebas public
-        id: correr-pruebas-public
-        if: ${{ contains(github.event.head_commit.message, 'RELEASE') }}
-        run: |
-          cd public
-          export TEST_APP=True
-          pytest --cov=. -v -s --cov-fail-under=80
+          node-version: '16.x'
+      - name: Install dependencies
+        run: npm install
+      - name: run jest
+        run: npm run test
 
       - name: Validar resultado con errores
         if: ${{ failure() }}
@@ -127,17 +76,41 @@ jobs:
 
   merege-release-main:
     name: Merge-main
-    needs: correr-test-funcionalidad
+    needs: correr-test-frontend-app
     runs-on: ubuntu-latest
     outputs:
       salida: ${{ steps.imprimir.outputs.respuesta }}
     steps:
-    - name: Mezcla ${{ github.ref }} -> develop
-      if: echo ${{needs.correr-test-funcionalidad.outputs.salida}}
-      uses: tukasz/direct-merge-action@master
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        source-branch: release
-        target-branch: main
-      env:
-        MENSAJE_MERGE: Merge successful
+      - name: Mezcla ${{ github.ref }} -> develop
+        if: echo ${{needs.correr-test-funcionalidad.outputs.salida}}
+        uses: tukasz/direct-merge-action@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          source-branch: release
+          target-branch: main
+        env:
+          MENSAJE_MERGE: Merge successful
+
+  tags:
+    needs: [ correr-test-frontend-app, merege-release-main, ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: name branch
+        id: name_branch
+        run: echo "NAME_BRANCH=${GITHUB_REF##*/}" >> "$GITHUB_OUTPUT"
+
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          append_to_pre_release_tag:
+          custom_tag: 1.12.4-${{ steps.name_branch.outputs.NAME_BRANCH }}
+
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: v1.12.4
+          name: v1.12.4
+          body: Mitad sprint 2
