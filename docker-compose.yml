@@ -1,0 +1,13 @@
+version: '3'
+services:
+# -----------------------Servicio candidate -----------------------------
+  
+  app_candidate:
+    build: .
+    environment:
+      VITE_HOLA: "Hola desde el .env"
+      DATABASE_URL: postgresql://postgres:postgres@db_candidate:5432/
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"

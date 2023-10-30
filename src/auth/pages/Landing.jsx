@@ -1,5 +1,4 @@
-
-
+import { Link as RouterLink } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
@@ -42,7 +41,7 @@ export const Landing = () => {
         >
           <Typography component="h1" variant="h4">
             Select your profile 
-            { console.log(getEnvVariablesCandidate(), getEnvVariablesCompany(), getEnvVariablesProject()) }
+            { console.log(getEnvVariablesCandidate(), getEnvVariablesCompany(), getEnvVariablesProject(), import.meta.env.VITE_HOLA, import.meta.env.VITE_API_CANDIDATE)}
           </Typography>
           <Box sx={{
             marginTop: 8,
@@ -55,7 +54,7 @@ export const Landing = () => {
                 <Item>
                   <img src={candidateImg} width="200" alt=""/>
                 </Item>
-                <Button variant="outlined" href="/auth/signin">
+                <Button onClick={() => {localStorage.setItem('typeClient', 'company')}} component={ RouterLink } variant="outlined" to="/auth/signin">
                   You are a company
                 </Button>
               </Grid>
@@ -63,7 +62,7 @@ export const Landing = () => {
               <Item>
                 <img src={companiesImg} width="200" alt="" />
               </Item>
-              <Button variant="outlined" href="/auth/signin">
+              <Button onClick={() => {localStorage.setItem('typeClient', 'candidate')}} component={ RouterLink } variant="outlined" to="/auth/signin">
                   You are a candidate
                 </Button>
               </Grid>

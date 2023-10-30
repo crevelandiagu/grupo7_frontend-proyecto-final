@@ -1,7 +1,7 @@
 import { IconButton } from '@mui/material';
 import { AddOutlined } from '@mui/icons-material';
 
-import { CompanyLayout } from '../layout/CandidateLayout';
+import { CompanyLayout } from '../layout/CompanyLayout';
 import { CompanyDashboard } from '../views';
 
 export const Company = () => {

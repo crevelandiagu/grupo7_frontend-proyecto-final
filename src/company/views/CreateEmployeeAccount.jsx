@@ -12,29 +12,27 @@ import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
 
 const formData = {
-  certification:'',
-  issuingOrganization: '',
-  startDate: '',
-  endDate: '',
+  project:"",
+  name: "",
+  position: "",
 }
 
 const formValidations =  {
-  certification: [ (value) => value.length>= 3, 'certification must be at least 3 characters long' ],
-  issuingOrganization: [ (value) => value.length>= 3, 'issuing organization must be at least 3 characters long' ],
-  startDate: [ (value) => value.length>= 3, 'startDate must be valid date' ],
-  endDate: [ (value) => value.length>= 3, 'endDate must be a valid date' ],
+// project: [ (value) => value.length>= 3, 'project must be at least 3 characters long' ],
+name: [(value) => value.length >= 3, 'name must be at least 5 characters long'],
+position: [(value) => value.length >= 5, 'position must be at least 5 characters long']
 }
 
 const defaultTheme = createTheme();
 
-export const ProfileCertificates = () => {
+export const CreateEmployeeAccount = () => {
 
   const { startSignIn, errorMessage } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const {
-    formState, certification, issuingOrganization, startDate, endDate, onInputChange, isFormValid, 
-    certificationValid, issuingOrganizationValid, startDateValid, endDateValid } = useForm( formData, formValidations );
+    formState, project, name, position, onInputChange, isFormValid, 
+    nameValid, positionValid, } = useForm( formData, formValidations );
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -57,62 +55,50 @@ export const ProfileCertificates = () => {
           }}
         >
           <Typography component="h1" variant="h4">
-            Certificates
+            Create Project
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12}>
+            <Grid item xs={12}>
                 <TextField
-                  label="certification"
+                  label="project"
                   type="text"
-                  placeholder='certification'
+                  placeholder='project'
                   fullWidth
-                  name="certification"
-                  value= {certification}
+                  name="project"
+                  value= {project}
                   onChange={onInputChange}
-                  error = {!!certificationValid && formSubmitted}
-                  helperText = {certificationValid}
+                  // error = {!!nameValid && formSubmitted}
+                  // helperText = {nameValid}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="issuingOrganization"
+                  label="name"
                   type="text"
-                  placeholder='issuing organization'
+                  placeholder='employee name'
                   fullWidth
-                  name="issuingOrganization"
-                  value= {issuingOrganization}
+                  name="name"
+                  value= {name}
                   onChange={onInputChange}
-                  error = {!!issuingOrganizationValid && formSubmitted}
-                  helperText = {issuingOrganizationValid}
+                  error = {!!nameValid && formSubmitted}
+                  helperText = {nameValid}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="startDate"
+                  label="position"
                   type="text"
-                  placeholder="start date"
+                  placeholder="position"
                   fullWidth
-                  name="startDate"
-                  value= {startDate}
+                  name="position"
+                  value= {position}
                   onChange={onInputChange}
-                  error = {!!startDateValid && formSubmitted}
-                  helperText = {startDateValid}
+                  error = {!!positionValid && formSubmitted}
+                  helperText = {positionValid}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="endDate"
-                  type="text"
-                  placeholder="end date"
-                  fullWidth
-                  name="endDate"
-                  value= {endDate}
-                  onChange={onInputChange}
-                  error = {!!endDateValid && formSubmitted}
-                  helperText = {endDateValid}
-                />
-              </Grid>
+              
             </Grid>
             <Grid item sx={{ mt: 2 }}
               xs={12}
@@ -126,7 +112,7 @@ export const ProfileCertificates = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Save
+              Create
             </Button>
           </Box>
         </Box>

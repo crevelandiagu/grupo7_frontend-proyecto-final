@@ -2,19 +2,37 @@ import { IconButton } from '@mui/material';
 import { AddOutlined } from '@mui/icons-material';
 
 import { CandidateLayout } from '../layout/CandidateLayout';
-import { CandidateDashboard } from '../views';
+import { CandidateDashboard, ProfileBasic, ProfileCertificates, ProfileEducation, ProfileExperience  } from '../views';
+import { Project } from '../../company/views/Project';
+import { useCandidateStore } from '../../hooks/useCandidateStore';
+
+
 
 export const Candidate = () => {
+
+  // const { view } = useCandidateStore();
+
   return (
     <CandidateLayout>
-      
-      {/* <Typography>Sint id officia amet velit do aliqua aliqua est ea velit minim voluptate duis laboris. Esse esse consectetur ullamco excepteur ullamco amet. Mollit est nostrud nisi irure magna dolor eiusmod aliquip aliqua nostrud incididunt enim. Velit ipsum laborum Lorem anim laboris aute ullamco ipsum do adipisicing irure.</Typography> */}
+      <CandidateDashboard />
+      <ProfileBasic />
+      <ProfileCertificates />
+      <ProfileEducation />
+      <ProfileExperience />
+      <CandidateDashboard />
+      <Project />
 
-      <CandidateDashboard/>
-      {/* <NoteView /> */}
-
-
-      <IconButton
+    {/* </CandidateLayout>
+      {
+        view === 'dashboard' ? <CandidateDashboard /> :
+        view === 'basic' ? <ProfileBasic /> :
+        view === 'expirience' ? <ProfileCertificates /> :
+        view === 'education' ? <ProfileEducation /> :
+        view === 'certificates' ? <ProfileExperience /> :
+        <CandidateDashboard />
+      } */}
+       
+      {/* <IconButton
         size='large'
         sx={{
           color: 'white',
@@ -26,7 +44,7 @@ export const Candidate = () => {
         }}
       >
         <AddOutlined sx={{ fontSize: 30 }} />
-      </IconButton>
+      </IconButton> */}
 
     </CandidateLayout>
   )
