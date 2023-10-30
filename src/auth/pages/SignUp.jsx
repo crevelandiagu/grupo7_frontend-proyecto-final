@@ -18,7 +18,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.primary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="landing">
+      <Link component={ RouterLink } color="inherit" to ="landing">
         ABC Jobs
       </Link>{' '}
       {new Date().getFullYear()}
@@ -45,7 +45,7 @@ export const SignUp = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   
   const isCheckingAuthentication = useMemo( () => status === 'checking', [status]);
-  console.log('isCheckingAuthentication', isCheckingAuthentication, status === 'checking' )
+  //console.log('isCheckingAuthentication', isCheckingAuthentication, status === 'checking' )
   
   const {
     formState, email, password, onInputChange, isFormValid, 

@@ -4,11 +4,11 @@ import { Navigate } from "react-router-dom"
 import { Landing } from "../pages/Landing"
  
 export const ChildAuthRoutes = [
-  { 
+  // { 
     
-    path: "landing",
-    element: <Landing />
-  },
+  //   path: "landing",
+  //   element: <Landing />
+  // },
   {
     path: "signup",
     element: <SignUp />
@@ -20,7 +20,7 @@ export const ChildAuthRoutes = [
   },
   {
     path: "*",
-    element: <Navigate to={"/auth/landing"}/>
+    element: <Navigate to={"/"}/>
     
   }
 ]

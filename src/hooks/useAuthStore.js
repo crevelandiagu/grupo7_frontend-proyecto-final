@@ -61,11 +61,11 @@ export const useAuthStore = () => {
         // }
     }
 
-    // const startLogout = () => {
-    //     localStorage.clear();
-    //     dispatch( onLogoutCalendar() );
-    //     dispatch( onLogout() );
-    // }
+    const startLogout = () => {
+        localStorage.clear();
+        // dispatch( onLogoutCalendar() );
+        dispatch( logout() );
+    }
 
 
 
@@ -76,11 +76,10 @@ export const useAuthStore = () => {
         user, 
 
         //* Métodos
-        
         startSignUp,
         startSignIn,
         checkAuthToken,
-        // startLogout,
+        startLogout,
     }
 
 }

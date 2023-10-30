@@ -12,8 +12,12 @@ import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
 
 const formData = {
-  name:"",
-  description: ""
+  school:'',
+  degree:'',
+  startDate:'',
+  endDate:'',
+  location:'',
+  skills:'',
 }
 
 const formValidations =  {
@@ -57,7 +61,7 @@ export const ProfileEducation = () => {
           }}
         >
           <Typography component="h1" variant="h4">
-            Crate Project
+            Education
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -139,6 +143,7 @@ export const ProfileEducation = () => {
                   helperText = {skillsValid}
                 />
               </Grid>
+              
               
             </Grid>
             <Grid item sx={{ mt: 2 }}

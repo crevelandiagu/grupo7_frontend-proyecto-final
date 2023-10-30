@@ -53,7 +53,7 @@ export const Project = () => {
           }}
         >
           <Typography component="h1" variant="h4">
-            Crate Project
+            Create Project
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
