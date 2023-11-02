@@ -1,18 +1,18 @@
 FROM node:18-alpine as BUILD_IMAGE
-WORKDIR /jobs_app
+WORKDIR /usr/src/app
 
-ENV VITE_HOLA default
-ENV VITE_API_CANDIDATE default
-ENV VITE_API_COMPANY default
-ENV VITE_API_PROJECTS default
+ARG VITE_HOLA
+ARG VITE_API_CANDIDATE
+ARG VITE_API_COMPANY
+ARG VITE_API_PROJECTS
 
 COPY package.json .
 
 RUN npm install
 
-COPY . . 
+COPY . .
 
-RUN  npm run build
+RUN npm run build
 
 EXPOSE 8080
 CMD [ "npm", "run", "preview" ]

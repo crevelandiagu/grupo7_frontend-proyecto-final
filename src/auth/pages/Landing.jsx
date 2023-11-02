@@ -41,7 +41,7 @@ export const Landing = () => {
         >
           <Typography component="h1" variant="h4">
             Select your profile 
-            { console.log( import.meta.env.VITE_HOLA)}
+            { console.log(getEnvVariablesCandidate(), getEnvVariablesCompany(), getEnvVariablesProject(), import.meta.env.VITE_HOLA, import.meta.env.VITE_API_CANDIDATE)}
           </Typography>
           <Box sx={{
             marginTop: 8,
