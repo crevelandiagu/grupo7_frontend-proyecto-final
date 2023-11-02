@@ -11,3 +11,6 @@ services:
       - "8080:8080"
     expose:
       - "8080"
+    volumes:
+      - ./:/jobs_app
+      - /jobs_app/node_modules
