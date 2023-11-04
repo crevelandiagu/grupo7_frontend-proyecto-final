@@ -13,26 +13,28 @@ import { Alert } from '@mui/material';
 
 const formData = {
   project:"",
-  name: "",
-  position: "",
+  candidate: "",
+  // date: "",
+  hour: "",
 }
 
 const formValidations =  {
-// project: [ (value) => value.length>= 3, 'project must be at least 3 characters long' ],
-name: [(value) => value.length >= 3, 'name must be at least 5 characters long'],
-position: [(value) => value.length >= 5, 'position must be at least 5 characters long']
+  project: [ (value) => value.length>= 3, 'name must be at least 8 characters long' ],
+  candidate: [(value) => value.length >= 5, 'description must be at least 5 characters long'],
+  // date: [(value) => value.length >= 5, 'date not valid format'],
+  hour: [(value) => value.length >= 5, 'hour not valid format'],
 }
 
 const defaultTheme = createTheme();
 
-export const CreateEmployeeAccount = () => {
+export const CreateInterview = () => {
 
   const { startSignIn, errorMessage } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const {
-    formState, project, name, position, onInputChange, isFormValid, 
-    nameValid, positionValid, } = useForm( formData, formValidations );
+    formState, project, candidate, hour, onInputChange, isFormValid, 
+    projectValid, candidateValid, hourValid } = useForm( formData, formValidations );
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -55,50 +57,60 @@ export const CreateEmployeeAccount = () => {
           }}
         >
           <Typography component="h1" variant="h4">
-            Employee Account
+            Create Interview
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-            <Grid item xs={12}>
+              <Grid item xs={12}>
                 <TextField
-                  label="project"
+                  label="name of project"
                   type="text"
-                  placeholder='project'
+                  placeholder='name of project'
                   fullWidth
                   name="project"
                   value= {project}
                   onChange={onInputChange}
-                  // error = {!!nameValid && formSubmitted}
-                  // helperText = {nameValid}
+                  error = {!!projectValid && formSubmitted}
+                  helperText = {projectValid}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="name"
+                  label="candidate"
                   type="text"
-                  placeholder='employee name'
+                  placeholder="candidate name"
                   fullWidth
-                  name="name"
-                  value= {name}
+                  name="candidate"
+                  value= {candidate}
                   onChange={onInputChange}
-                  error = {!!nameValid && formSubmitted}
-                  helperText = {nameValid}
+                  error = {!!candidateValid && formSubmitted}
+                  helperText = {candidateValid}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="position"
-                  type="text"
-                  placeholder="position"
+                  label="date"
+                  type="date"
+                  // placeholder="date"
                   fullWidth
-                  name="position"
-                  value= {position}
+                  name="date"
+                  // value= {date}
                   onChange={onInputChange}
-                  error = {!!positionValid && formSubmitted}
-                  helperText = {positionValid}
+                  // error = {!!dateValid && formSubmitted}
+                  // helperText = {dateValid}
+                />
+                <TextField
+                  label="hour"
+                  type="text"
+                  placeholder="hour"
+                  fullWidth
+                  name="hour"
+                  value= {hour}
+                  onChange={onInputChange}
+                  error = {!!hourValid && formSubmitted}
+                  helperText = {hourValid}
                 />
               </Grid>
-              
             </Grid>
             <Grid item sx={{ mt: 2 }}
               xs={12}
@@ -112,7 +124,7 @@ export const CreateEmployeeAccount = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Create
+              Schedule
             </Button>
           </Box>
         </Box>
