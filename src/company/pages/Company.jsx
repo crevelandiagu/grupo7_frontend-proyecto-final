@@ -4,6 +4,7 @@ import { AddOutlined } from '@mui/icons-material';
 
 import { CompanyDashboard, SearchCandidateExperience } from '../views';
 import { CompanyLayout } from '../layout/CompanyLayout';
+import ListCandidates from '../views/ViewCandidateSearch';
 
 export const Company = () => {
   return (
@@ -15,8 +16,7 @@ export const Company = () => {
       <CompanyDashboard/>
       {/* <NoteView /> */}
       {/* <SearchCandidateExperience/> */}
-
-
+     
       <IconButton
         size='large'
         sx={{

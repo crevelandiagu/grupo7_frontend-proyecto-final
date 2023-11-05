@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
 import { CompanyLayout } from '../layout/CompanyLayout';
+import ListCandidates from './ViewCandidateSearch';
 
 const formData = {
   name:"",
@@ -103,6 +104,8 @@ export const SearchCandidateExperience = () => {
               Search
             </Button>
           </Box>
+          <ListCandidates />
+
         </Box>
       </Container>
     </ThemeProvider>
