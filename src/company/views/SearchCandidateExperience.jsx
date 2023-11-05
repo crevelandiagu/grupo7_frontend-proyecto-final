@@ -35,7 +35,7 @@ export const SearchCandidateExperience = () => {
   //   isExperienceValid, isSkillValid,} = useForm( formData, formValidations );
 
    const handleSubmit = (event) => {
-     event.preventDefault();
+   //  event.preventDefault();
      getCandidates()
    }
   //   setFormSubmitted(true);
@@ -45,14 +45,15 @@ export const SearchCandidateExperience = () => {
   // };
 
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState([{}])
   const [isLoading, setIsLoading] = useState(false)
   const [experience, setExperience] = useState("")
+  const [skills, setSkills] = useState("")
 
     const getCandidates = async () => {
         setIsLoading(true)
         try {
-            const res = await axios.get(`api-search-candidate/${experience}`)
+            const res = await axios.get(`api-search-candidate/`)
             setData(res.data)
             
         } catch (error) {
@@ -92,24 +93,24 @@ export const SearchCandidateExperience = () => {
                   value= {experience}
                   onChange={(e) => setExperience(e.target.value)}
                   // error = {!!isExperienceValid && formSubmitted}
-                  // helperText = {isExperienceValid}
+                  //helperText = {isExperienceValid}
                 />
               </Grid>
-              {/* <Grid item xs={12}>
+               <Grid item xs={12}>
                 <TextField
                   label="skill"
                   type="text"
                   placeholder='skill'
                   fullWidth
                   name="skill"
-                  // value= {skill}
-                  // onChange={onInputChange}
+                  value= {skills}
+                  onChange={(e)=> setSkills(e.target.value)}
                   // error = {!!isSkillValid && formSubmitted}
                   // helperText = {isSkillValid}
                 />
-              </Grid> */}
+              </Grid>
             </Grid>
-            {/* <Grid item sx={{ mt: 2 }}
+            {/* <Grid item sx={{ mt: 2 }}n
               xs={12}
               display={ errorMessage ? '' : 'none' }
             >
@@ -138,7 +139,7 @@ export const SearchCandidateExperience = () => {
                     </Grid>
                     <Grid item>
                         <Button
-                             type="submit"
+                             color="primary"
                              fullWidth
                              variant="contained"
                              sx={{ mt: 3, mb: 2 }}
