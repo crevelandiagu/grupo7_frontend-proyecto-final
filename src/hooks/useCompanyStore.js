@@ -3,7 +3,7 @@ import { candidateApi }  from '../api';
 import { checking, signup, signin, logout, /*clearErrorMessages*/ } from '../store/auth/authSlice';
 
 
-export const useAuthStore = () => {
+export const useCompanyStore = () => {
 
     const { status, user, errorMessage } = useSelector( state => state.auth );
     const dispatch = useDispatch();

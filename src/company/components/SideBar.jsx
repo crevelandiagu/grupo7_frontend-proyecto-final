@@ -1,8 +1,11 @@
-import { Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
+import { Box, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import { TurnedInNot } from '@mui/icons-material';
 
 
+menu
+
 export const SideBar = ({ drawerWidth = 240 }) => {
+
     return (
         <Box
             component='nav'
@@ -41,7 +44,6 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                     }
                 </List>
             </Drawer>
-
         </Box>
     )
 }
