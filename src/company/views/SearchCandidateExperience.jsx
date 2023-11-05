@@ -8,9 +8,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { useAuthStore, useForm } from '../../hooks';
-import { Alert, Divider, List, ListItem, ListItemText } from '@mui/material';
-import { CompanyLayout } from '../layout/CompanyLayout';
+import { Divider, List, ListItem, ListItemText } from '@mui/material';
+import searchApi from '../../api/searchApi';
 
 
 const formData = {
@@ -27,24 +26,11 @@ const defaultTheme = createTheme();
 
 export const SearchCandidateExperience = () => {
 
-  // const { startSignIn, errorMessage } = useAuthStore();
-  // const [formSubmitted, setFormSubmitted] = useState(false);
-
-  // const {
-  //   formState, experience, skill, onInputChange, isFormValid, 
-  //   isExperienceValid, isSkillValid,} = useForm( formData, formValidations );
-
    const handleSubmit = (event) => {
-   //  event.preventDefault();
-     getCandidates()
+    event.preventDefault();
+    getCandidates()
    }
-  //   setFormSubmitted(true);
-
-  //   if ( !isFormValid ) return;
-  //   startSignIn(formState);
-  // };
-
-
+ 
   const [data, setData] = useState([{}])
   const [isLoading, setIsLoading] = useState(false)
   const [experience, setExperience] = useState("")
@@ -53,8 +39,10 @@ export const SearchCandidateExperience = () => {
     const getCandidates = async () => {
         setIsLoading(true)
         try {
-            const res = await axios.get(`api-search-candidate/`)
-            setData(res.data)
+            // const { data } = await searchApi.get('/search', {params:{skill=${skills}&experienceYears=${experience}`)
+            const { data } = await searchApi.get('/search', {params:{skill:skills,experienceYears:experience}})
+            console.log(data)
+            // setData(res.data)
             
         } catch (error) {
             console.error("Error fetching data", error)
@@ -81,7 +69,7 @@ export const SearchCandidateExperience = () => {
           <Typography component="h1" variant="h4">
             Find Candidates
           </Typography>
-          <Box component="form" method={'GET'} onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -153,10 +141,6 @@ export const SearchCandidateExperience = () => {
                 <Divider/>
             </List>
           )}
-          
-          
-
-
         </Box>
       </Container>
     </ThemeProvider>

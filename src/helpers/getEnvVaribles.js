@@ -16,3 +16,12 @@ export const getEnvVariablesProject = () => {
   return import.meta.env.VITE_API_PROJECTS || import.meta.env.VITE_API_PROJECTS_LOCAL
 }
 
+export const getEnvVariablesSearch = () => {
+  return import.meta.env.VITE_API_SEARCH || import.meta.env.VITE_API_SEARCH_LOCAL
+}
+
+export const getEnvVariablesProcess = () => {
+  return import.meta.env.VITE_API_SELECTION_PROCESS || import.meta.env.VITE_API_SELECTION_PROCESS_LOCAL
+}
+
+

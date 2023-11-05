@@ -5,6 +5,8 @@ ARG VITE_HOLA=hola
 ARG VITE_API_CANDIDATE=http://servicio-app-candidate/candidate
 ARG VITE_API_COMPANY=http://servicio-app-company/company
 ARG VITE_API_PROJECTS=http://servicio-app-projects/projects
+ARG VITE_API_SEARCH =http://servicio-app-search-tool/search-tool
+ARG VITE_API_SELECTION_PROCESS=http://servicio-app-selection-procces/selection-procces
 
 COPY package.json .
 
