@@ -7,7 +7,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
     const items = [
         {
         "name": "Dashboard",
-        "to": "company/dashboard"
+        "to": "/company/dashboard"
         },
         {
         "name": "Search candidate",
@@ -15,15 +15,15 @@ export const SideBar = ({ drawerWidth = 240 }) => {
         },
         {
         "name": "Project",
-        "to": "project"
+        "to": "/company/project"
         },
         {
         "name": "Assesment",
-        "to": "assesment"
+        "to": "/company/assesment"
         },
         {
         "name": "Interview",
-        "to": "interview"
+        "to": "/company/interview"
         },
     ]
 
