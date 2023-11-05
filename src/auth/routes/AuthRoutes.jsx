@@ -3,12 +3,16 @@ import { useAuthStore } from "../../hooks";
 
 export const AuthRoutes = () => {
 
-  const { status} = useAuthStore();
+  const { status, profile} = useAuthStore();
 
   console.log('AuthRoutes-status', status)
+  
   if (status === 'authenticated') {
-    return <Navigate to="/candidate/dashboard" />
+    if (profile === 'candidate') 
+      return <Navigate to="/candidate/dashboard" />
+    else if (profile === 'company') 
+      return <Navigate to="/company/dashboard" />
   }
-
+  
   return <Outlet />
 }

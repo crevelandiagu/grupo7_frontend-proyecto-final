@@ -1,26 +1,11 @@
 import axios from 'axios';
-import { getEnvVariablesCandidate, getEnvVariablesCompany } from '../helpers/getEnvVaribles';
+import { getEnvVariablesCandidate } from '../helpers/getEnvVaribles';
 
-// const VITE_API_CANDIDATE = getEnvVariablesCandidate()
-
-const setEnvVariable = () => {
-  const typeClient = localStorage.getItem("typeClient");
-
-  if (typeClient === "candidate") {
-    return getEnvVariablesCandidate();
-  } else if (typeClient === "company") {
-    return getEnvVariablesCompany();
-  }
-
-};
-
-
+const VITE_API_CANDIDATE = getEnvVariablesCandidate()
 
 const candidateApi = axios.create({
-    baseURL: setEnvVariable()
+    baseURL: VITE_API_CANDIDATE,
 });
-
-console.log('baseUrl: ', setEnvVariable() )
 
 // axios.interceptors.request.use(
 //     (config) => {
