@@ -1,10 +1,31 @@
 import { Box, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import { TurnedInNot } from '@mui/icons-material';
-
-
-menu
+import { Link as RouterLink } from 'react-router-dom';
 
 export const SideBar = ({ drawerWidth = 240 }) => {
+
+    const items = [
+        {
+        "name": "Dashboard",
+        "to": "company/dashboard"
+        },
+        {
+        "name": "Search candidate",
+        "to": "/company/search"
+        },
+        {
+        "name": "Project",
+        "to": "project"
+        },
+        {
+        "name": "Assesment",
+        "to": "assesment"
+        },
+        {
+        "name": "Interview",
+        "to": "interview"
+        },
+    ]
 
     return (
         <Box
@@ -29,14 +50,14 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                 <List sx={{ bgcolor: 'primary.main', color: 'white' }} >
 
                     {
-                        ['Dashboard', 'Search candidate', 'Project', 'Assesment', 'Interview'].map(text => (
-                            <ListItem key={text} disablePadding>
-                                <ListItemButton>
+                        items.map(item => (
+                            <ListItem key={item.name} disablePadding>
+                                <ListItemButton component={RouterLink} to={item.to}>
                                     <ListItemIcon>
                                         <TurnedInNot />
                                     </ListItemIcon>
                                     <Grid container>
-                                        <ListItemText primary={text} />
+                                        <ListItemText primary={item.name} />
                                     </Grid>
                                 </ListItemButton>
                             </ListItem>

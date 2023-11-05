@@ -9,6 +9,10 @@ import { ChildCompanyRoutes } from "../company/routes/ChildCompanyRoutes";
 import { Landing } from "../auth/pages/Landing";
 import { useEffect } from "react";
 import { useAuthStore } from "../hooks";
+import { CompanyRoutes } from "../company/routes/CompanyRoutes";
+import { ChildCompanyRoutes } from "../company/routes/ChildCompanyRoutes";
+import { SearchCandidateExperience } from "../company/views";
+import { Company } from "../company/pages/Company";
 
 import { AppTheme } from "../theme";
 
@@ -29,6 +33,12 @@ const router = createBrowserRouter([
     element: <CandidateRoutes />,
     children: ChildCandidateRoutes,
   },
+  {
+    path: "/company/*",
+    element: <CompanyRoutes />,
+    children: ChildCompanyRoutes,
+  },
+
   {
     path: "/company/*",
     element: <CompanyRoutes />,
