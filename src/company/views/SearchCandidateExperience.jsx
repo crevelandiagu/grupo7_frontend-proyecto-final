@@ -11,7 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAuthStore, useForm } from '../../hooks';
 import { Alert, Divider, List, ListItem, ListItemText } from '@mui/material';
 import { CompanyLayout } from '../layout/CompanyLayout';
-import ListCandidates from './ViewCandidateSearch';
+
 
 const formData = {
   name:"",
@@ -34,8 +34,10 @@ export const SearchCandidateExperience = () => {
   //   formState, experience, skill, onInputChange, isFormValid, 
   //   isExperienceValid, isSkillValid,} = useForm( formData, formValidations );
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
+   const handleSubmit = (event) => {
+     event.preventDefault();
+     getCandidates()
+   }
   //   setFormSubmitted(true);
 
   //   if ( !isFormValid ) return;
@@ -80,7 +82,7 @@ export const SearchCandidateExperience = () => {
           <Typography component="h1" variant="h4">
             Find Candidates
           </Typography>
-          <Box component="form" /*onSubmit={handleSubmit} */sx={{ mt: 3 }}>
+          <Box component="form" method={'GET'} onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -88,7 +90,7 @@ export const SearchCandidateExperience = () => {
                   type="text"
                   placeholder='experience'
                   fullWidth
-                  name="experience"
+                  name="experienceYears"
                   value= {experience}
                   onChange={(e) => setExperience(e.target.value)}
                   // error = {!!isExperienceValid && formSubmitted}
@@ -116,10 +118,10 @@ export const SearchCandidateExperience = () => {
                 <Alert severity="error">{errorMessage}</Alert>
             </Grid>  */}
             <Button
-              color='primary'
+              type='submit'
               fullWidth
               variant="contained"
-              onClick={getCandidates}
+              // onClick={getCandidates}
               sx={{ mt: 3, mb: 2 }}
             >
               Search
