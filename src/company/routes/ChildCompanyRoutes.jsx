@@ -1,4 +1,4 @@
-import { Candidate } from "../pages/Candidate"
+
 import { Navigate } from "react-router-dom"
 import { SearchCandidateExperience } from "../views"
 import { Company } from "../pages/Company"

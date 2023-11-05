@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
+import { CompanyLayout } from '../layout/CompanyLayout';
 
 const formData = {
   name:"",
@@ -25,22 +26,25 @@ const defaultTheme = createTheme();
 
 export const SearchCandidateExperience = () => {
 
-  const { startSignIn, errorMessage } = useAuthStore();
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  // const { startSignIn, errorMessage } = useAuthStore();
+  // const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const {
-    formState, experience, skill, onInputChange, isFormValid, 
-    isExperienceValid, isSkillValid,} = useForm( formData, formValidations );
+  // const {
+  //   formState, experience, skill, onInputChange, isFormValid, 
+  //   isExperienceValid, isSkillValid,} = useForm( formData, formValidations );
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setFormSubmitted(true);
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   setFormSubmitted(true);
 
-    if ( !isFormValid ) return;
-    startSignIn(formState);
-  };
+  //   if ( !isFormValid ) return;
+  //   startSignIn(formState);
+  // };
 
   return (
+   
+    <CompanyLayout>
+    
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -53,9 +57,9 @@ export const SearchCandidateExperience = () => {
           }}
         >
           <Typography component="h1" variant="h4">
-            Crate Project
+            Find Candidates
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" /*onSubmit={handleSubmit} */sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -64,10 +68,10 @@ export const SearchCandidateExperience = () => {
                   placeholder='experience'
                   fullWidth
                   name="experience"
-                  value= {experience}
-                  onChange={onInputChange}
-                  error = {!!isExperienceValid && formSubmitted}
-                  helperText = {isExperienceValid}
+                  // value= {experience}
+                  // onChange={onInputChange}
+                  // error = {!!isExperienceValid && formSubmitted}
+                  // helperText = {isExperienceValid}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -77,19 +81,19 @@ export const SearchCandidateExperience = () => {
                   placeholder='skill'
                   fullWidth
                   name="skill"
-                  value= {skill}
-                  onChange={onInputChange}
-                  error = {!!isSkillValid && formSubmitted}
-                  helperText = {issuingOrganizationValid}
+                  // value= {skill}
+                  // onChange={onInputChange}
+                  // error = {!!isSkillValid && formSubmitted}
+                  // helperText = {isSkillValid}
                 />
               </Grid>
             </Grid>
-            <Grid item sx={{ mt: 2 }}
+            {/* <Grid item sx={{ mt: 2 }}
               xs={12}
               display={ errorMessage ? '' : 'none' }
             >
                 <Alert severity="error">{errorMessage}</Alert>
-            </Grid> 
+            </Grid>  */}
             <Button
               type="submit"
               fullWidth
@@ -102,5 +106,7 @@ export const SearchCandidateExperience = () => {
         </Box>
       </Container>
     </ThemeProvider>
+
+    </CompanyLayout>
   );
 }

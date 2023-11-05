@@ -9,11 +9,13 @@ import { useEffect } from "react";
 import { useAuthStore } from "../hooks";
 import { CompanyRoutes } from "../company/routes/CompanyRoutes";
 import { ChildCompanyRoutes } from "../company/routes/ChildCompanyRoutes";
+import { SearchCandidateExperience } from "../company/views";
+import { Company } from "../company/pages/Company";
 
 const router = createBrowserRouter([
   { 
     path: "/",
-    element: <Landing />,
+    element: <Company />,
     
   },
   {
