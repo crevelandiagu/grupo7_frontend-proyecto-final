@@ -29,7 +29,7 @@ export const SearchCandidateExperience = () => {
    const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!errorE && !errorS && experience.trim() !== '' && skills.trim() !== '') {
+    if (!errorE && !errorS) {
 
       getCandidates()
     }
