@@ -28,21 +28,71 @@ export const SearchCandidateExperience = () => {
 
    const handleSubmit = (event) => {
     event.preventDefault();
+    
     getCandidates()
    }
+
+   const datos = [
+    {
+    "name": "Daniel",
+    "candidateId": "1",
+    "lastName": "Huertas"
+    },
+    {
+    "name": "Arturo",
+    "candidateId": "3",
+    "lastName": "Castro"
+    },
+    {
+    "name": "Jose",
+    "candidateId": "4",
+    "lastName": "Bedoya"
+    },
+
+   ]
  
-  const [data, setData] = useState([{}])
+  const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [experience, setExperience] = useState("")
   const [skills, setSkills] = useState("")
+  const [errorE, setErrorE] = useState(false);
+  const [errorS, setErrorS] = useState(false);
+
+  const handleInputChangeE = (event) => {
+    const value = event.target.value;
+
+    // Validate if the input contains only numbers
+    if (/^[0-9]+$/.test(value)) {
+      setExperience(value);
+      setErrorE(false);
+    } else {
+      setExperience(value);
+      setErrorE(true);
+    }
+  };
+
+  const handleInputChangeS = (event) => {
+    const value = event.target.value;
+
+    if (/^([a-zA-Z]+(-?)[a-zA-Z]+){1,}$/.test(value)) {
+      setSkills(value);
+      setErrorS(false)
+    } else {
+      setSkills(value);
+      setErrorS(true);
+    }
+  
+
+  };
 
     const getCandidates = async () => {
         setIsLoading(true)
         try {
             // const { data } = await searchApi.get('/search', {params:{skill=${skills}&experienceYears=${experience}`)
-            const { data } = await searchApi.get('/search', {params:{skill:skills,experienceYears:experience}})
-            console.log(data)
-            // setData(res.data)
+            //const { data_r } = await searchApi.get('/search', {params:{skill:skills,experienceYears:experience}})
+            const data_r = datos
+            console.log(data_r)
+            setData(data_r)
             
         } catch (error) {
             console.error("Error fetching data", error)
@@ -78,9 +128,9 @@ export const SearchCandidateExperience = () => {
                   fullWidth
                   name="experienceYears"
                   value= {experience}
-                  onChange={(e) => setExperience(e.target.value)}
-                  // error = {!!isExperienceValid && formSubmitted}
-                  //helperText = {isExperienceValid}
+                  onChange={handleInputChangeE}
+                  error = {errorE}
+                  helperText = {errorE ? "Please enter numbers only": ""}
                 />
               </Grid>
                <Grid item xs={12}>
@@ -91,54 +141,52 @@ export const SearchCandidateExperience = () => {
                   fullWidth
                   name="skill"
                   value= {skills}
-                  onChange={(e)=> setSkills(e.target.value)}
-                  // error = {!!isSkillValid && formSubmitted}
-                  // helperText = {isSkillValid}
+                  onChange={handleInputChangeS}
+                   error = {errorS}
+                   helperText = {errorS ? "If there is more tha a skill put a hyphen between them": ""}
                 />
               </Grid>
             </Grid>
-            {/* <Grid item sx={{ mt: 2 }}n
-              xs={12}
-              display={ errorMessage ? '' : 'none' }
-            >
-                <Alert severity="error">{errorMessage}</Alert>
-            </Grid>  */}
             <Button
               type='submit'
               fullWidth
               variant="contained"
-              // onClick={getCandidates}
               sx={{ mt: 3, mb: 2 }}
             >
               Search
             </Button>
           </Box>
-
+          
           {isLoading && <p>Loading...</p>}
           {data.length > 0 && (
             <List>
-                <ListItem disablePadding>
-                <Grid container spacing={5} alignItems="center">
+             {data.map(item_r => (
+              <>
+                <ListItem disablePadding key={item_r.name}>
+                  <Grid container spacing={2} alignItems="center">
                     <Grid item>
                             <ListItemText
-                            primary="nombre candidato fffddddffddd"
-                            secondary="descripcion candidato" />
+                            primary={item_r.name + " " + item_r.lastName}
+                            />                         
                     </Grid>
                     <Grid item>
                         <Button
                              color="primary"
                              fullWidth
                              variant="contained"
+                             onClick={(e)=> console.log(item_r.candidateId)}
                              sx={{ mt: 3, mb: 2 }}
                             >
                                 Contact
                             
                         </Button>
                     </Grid>
-                </Grid>
+                  </Grid>
                 </ListItem>
                 <Divider/>
-            </List>
+              </>
+                ))}
+              </List>
           )}
         </Box>
       </Container>
