@@ -31,8 +31,10 @@ export const SearchCandidateExperience = () => {
 
    const handleSubmit = (event) => {
     event.preventDefault();
-    
-    getCandidates()
+    if (!errorE && !errorS) {
+      
+      getCandidates()
+    }
    }
 
    const datos = [
