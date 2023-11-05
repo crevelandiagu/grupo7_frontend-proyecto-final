@@ -89,7 +89,7 @@ export const CreateInterview = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="date"
+                  // label="date"
                   type="date"
                   // placeholder="date"
                   fullWidth
@@ -100,9 +100,9 @@ export const CreateInterview = () => {
                   // helperText = {dateValid}
                 />
                 <TextField
-                  label="hour"
-                  type="text"
-                  placeholder="hour"
+                  // label="hour"
+                  type="time"
+                  // placeholder="hour"
                   fullWidth
                   name="hour"
                   value= {hour}

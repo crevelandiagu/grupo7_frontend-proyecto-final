@@ -13,8 +13,8 @@ import { Alert } from '@mui/material';
 import { CompanyLayout } from '../layout/CompanyLayout';
 
 const formData = {
-  name:"",
-  description: ""
+  experience:"",
+  skill: ""
 }
 
 const formValidations =  {
@@ -42,8 +42,6 @@ export const SearchCandidateExperience = () => {
   // };
 
   return (
-   
-    <CompanyLayout>
     
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -106,7 +104,5 @@ export const SearchCandidateExperience = () => {
         </Box>
       </Container>
     </ThemeProvider>
-
-    </CompanyLayout>
   );
 }

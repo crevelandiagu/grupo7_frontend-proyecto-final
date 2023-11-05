@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { CompanyLayout } from '../layout/CompanyLayout';
-import { CompanyDashboard, CreateEmployeeAccount, CreateInterview, Project, Search } from '../views';
+import { CompanyDashboard, CreateEmployeeAccount, CreateInterview, Project, Search, SearchCandidateExperience } from '../views';
 
 export const Company = () => {
   const {view} = useSelector( state => state.company );
@@ -8,7 +8,7 @@ export const Company = () => {
 
   
  const children = view === 'dashboard' &&<CompanyDashboard />
-  || view === 'search' && <Search />
+  || view === 'search' && <SearchCandidateExperience />
   || view === 'project' && <Project />
   || view === 'assesment' && <Search />
   || view === 'interview' && <CreateInterview />
