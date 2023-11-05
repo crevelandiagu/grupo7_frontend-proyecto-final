@@ -9,8 +9,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useAuthStore, useForm } from '../../hooks';
-import { Alert } from '@mui/material';
+import { Alert, Divider, List, ListItem, ListItemText } from '@mui/material';
 import { CompanyLayout } from '../layout/CompanyLayout';
+
 
 const formData = {
   experience:"",
@@ -33,13 +34,35 @@ export const SearchCandidateExperience = () => {
   //   formState, experience, skill, onInputChange, isFormValid, 
   //   isExperienceValid, isSkillValid,} = useForm( formData, formValidations );
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
+   const handleSubmit = (event) => {
+     event.preventDefault();
+     getCandidates()
+   }
   //   setFormSubmitted(true);
 
   //   if ( !isFormValid ) return;
   //   startSignIn(formState);
   // };
+
+
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [experience, setExperience] = useState("")
+
+    const getCandidates = async () => {
+        setIsLoading(true)
+        try {
+            const res = await axios.get(`api-search-candidate/${experience}`)
+            setData(res.data)
+            
+        } catch (error) {
+            console.error("Error fetching data", error)
+            
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
 
   return (
     
@@ -57,7 +80,7 @@ export const SearchCandidateExperience = () => {
           <Typography component="h1" variant="h4">
             Find Candidates
           </Typography>
-          <Box component="form" /*onSubmit={handleSubmit} */sx={{ mt: 3 }}>
+          <Box component="form" method={'GET'} onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -65,14 +88,14 @@ export const SearchCandidateExperience = () => {
                   type="text"
                   placeholder='experience'
                   fullWidth
-                  name="experience"
-                  // value= {experience}
-                  // onChange={onInputChange}
+                  name="experienceYears"
+                  value= {experience}
+                  onChange={(e) => setExperience(e.target.value)}
                   // error = {!!isExperienceValid && formSubmitted}
                   // helperText = {isExperienceValid}
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   label="skill"
                   type="text"
@@ -84,7 +107,7 @@ export const SearchCandidateExperience = () => {
                   // error = {!!isSkillValid && formSubmitted}
                   // helperText = {isSkillValid}
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
             {/* <Grid item sx={{ mt: 2 }}
               xs={12}
@@ -93,14 +116,46 @@ export const SearchCandidateExperience = () => {
                 <Alert severity="error">{errorMessage}</Alert>
             </Grid>  */}
             <Button
-              type="submit"
+              type='submit'
               fullWidth
               variant="contained"
+              // onClick={getCandidates}
               sx={{ mt: 3, mb: 2 }}
             >
               Search
             </Button>
           </Box>
+
+          {isLoading && <p>Loading...</p>}
+          {data.length > 0 && (
+            <List>
+                <ListItem disablePadding>
+                <Grid container spacing={5} alignItems="center">
+                    <Grid item>
+                            <ListItemText
+                            primary="nombre candidato fffddddffddd"
+                            secondary="descripcion candidato" />
+                    </Grid>
+                    <Grid item>
+                        <Button
+                             type="submit"
+                             fullWidth
+                             variant="contained"
+                             sx={{ mt: 3, mb: 2 }}
+                            >
+                                Contact
+                            
+                        </Button>
+                    </Grid>
+                </Grid>
+                </ListItem>
+                <Divider/>
+            </List>
+          )}
+          
+          
+
+
         </Box>
       </Container>
     </ThemeProvider>
