@@ -52,7 +52,6 @@ export const SearchCandidateExperience = () => {
         }
     }
 
-
   return (
     
     <ThemeProvider theme={defaultTheme}>

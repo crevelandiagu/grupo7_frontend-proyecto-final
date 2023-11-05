@@ -5,7 +5,7 @@ import { checking, signup, signin, logout, setProfile /*clearErrorMessages*/ } f
 
 export const useAuthStore = () => {
 
-    const { status, profile, user, errorMessage } = useSelector( state => state.auth );
+    const { status, id,  profile, user, errorMessage } = useSelector( state => state.auth );
     const dispatch = useDispatch();
 
     const startSetProfile = (profile) => {
@@ -95,7 +95,8 @@ export const useAuthStore = () => {
         errorMessage,
         status, 
         user,
-        profile,  
+        profile,
+        id,  
 
         //* Métodos
         startSignUp,
