@@ -1,10 +1,10 @@
 FROM node:18-alpine as BUILD_IMAGE
 WORKDIR /usr/src/app
 
-ARG VITE_HOLA
-ARG VITE_API_CANDIDATE
-ARG VITE_API_COMPANY
-ARG VITE_API_PROJECTS
+ARG VITE_HOLA=hola
+ARG VITE_API_CANDIDATE=http://servicio-app-candidate/candidate
+ARG VITE_API_COMPANY=http://servicio-app-company/company
+ARG VITE_API_PROJECTS=http://servicio-app-projects/projects
 
 COPY package.json .
 
