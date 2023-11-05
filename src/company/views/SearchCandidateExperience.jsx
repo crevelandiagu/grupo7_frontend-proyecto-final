@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { Divider, List, ListItem, ListItemText } from '@mui/material';
 import searchApi from '../../api/searchApi';
+import { useCompanyStore } from '../../hooks';
 
 
 const formData = {
@@ -25,6 +26,8 @@ const formValidations =  {
 const defaultTheme = createTheme();
 
 export const SearchCandidateExperience = () => {
+
+  const { startActiveView } = useCompanyStore();
 
    const handleSubmit = (event) => {
     event.preventDefault();
@@ -174,7 +177,7 @@ export const SearchCandidateExperience = () => {
                              color="primary"
                              fullWidth
                              variant="contained"
-                             onClick={(e)=> console.log(item_r.candidateId)}
+                             onClick={() => {startActiveView('profile')}}
                              sx={{ mt: 3, mb: 2 }}
                             >
                                 Contact

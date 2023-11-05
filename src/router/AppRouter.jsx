@@ -12,12 +12,11 @@ import { useAuthStore } from "../hooks";
 
 
 import { AppTheme } from "../theme";
-import { Company } from "../company/pages/Company";
 
 const router = createBrowserRouter([
   { 
     path: "/",
-    element: <Company />
+    element: <Landing />
   },
   {
     path: "/auth/*",
