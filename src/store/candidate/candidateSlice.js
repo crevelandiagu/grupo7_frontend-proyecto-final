@@ -9,7 +9,6 @@ export const candidateSlice = createSlice({
   },
   reducers: {
     showView: (state, {payload}) => {
-      state.status = 'checking';
       state.view   = payload.view;
       state.errorMessage = undefined;
     },

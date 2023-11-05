@@ -1,15 +1,26 @@
-import { useCompanyStore } from '../../hooks';
+import { useSelector } from 'react-redux';
 import { CompanyLayout } from '../layout/CompanyLayout';
 import { CompanyDashboard, CreateEmployeeAccount, CreateInterview, Project, Search } from '../views';
 
 export const Company = () => {
+  const {view} = useSelector( state => state.company );
+  console.log('view', view)
 
- const { view } = useCompanyStore();
+  
+ const children = view === 'dashboard' &&<CompanyDashboard />
+  || view === 'search' && <Search />
+  || view === 'project' && <Project />
+  || view === 'assesment' && <Search />
+  || view === 'interview' && <CreateInterview />
+  || view === 'create-employee-account' && <CreateEmployeeAccount />
 
+  console.log('view', view,  children);
   return (
     
     <CompanyLayout>
-      <CompanyDashboard/>
+      { 
+        children
+      }
     </CompanyLayout>
   )
 }

@@ -1,15 +1,20 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { candidateApi, companyApi }  from '../api';
-import { checking, signup, signin, logout, /*clearErrorMessages*/ } from '../store/auth/authSlice';
+import { companyApi }  from '../api';
+import { checking, signup, signin, logout, showView, /*clearErrorMessages*/ } from '../store/company/companySlice';
 
 
 export const useCompanyStore = () => {
 
-    const { status, user, errorMessage } = useSelector( state => state.auth );
+    const { status, user, errorMessage } = useSelector( state => state.company );
     const dispatch = useDispatch();
 
+
+    const startActiveView = (newView) => {
+        dispatch(showView({ view:newView }))
+    }
+
     const startSignIn = async({ email, password }) => {
-        dispatch(che);
+        dispatch(checking());
         try {
             const { data } = await candidateApi.post('/login',{ email, password }); 
             console.log(data);
@@ -26,20 +31,20 @@ export const useCompanyStore = () => {
         }
     }
 
-    const findCandidate = async({experience, skill}) => {
-        dispatch(checking());
-        try {
-            const {data} = await companyApi.post('')
+    // const findCandidate = async({experience, skill}) => {
+    //     dispatch(checking());
+    //     try {
+    //         const {data} = await companyApi.post('')
             
-        } catch (error) {
+    //     } catch (error) {
             
-        }
-    }
+    //     }
+    // }
 
     const startSignUp = async({ email, password, name }) => {
         dispatch( checking() );
         try {
-            const { data } = await candidateApi.post('/signup',{ email, password, name });
+            const { data } = await companyApi.post('/signup',{ email, password, name });
             console.log(data, data.id, data.email);
             localStorage.setItem('token', data.token );
             localStorage.setItem('token-init-date', new Date().getTime() );
@@ -86,7 +91,7 @@ export const useCompanyStore = () => {
         user, 
 
         //* Métodos
-        
+        startActiveView,
         startSignUp,
         startSignIn,
         checkAuthToken,
