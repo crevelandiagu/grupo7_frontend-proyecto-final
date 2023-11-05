@@ -13,6 +13,7 @@ import { useAuthStore } from "../hooks";
 
 import { AppTheme } from "../theme";
 import { Company } from "../company/pages/Company";
+import { SearchCandidateExperience } from "../company/views";
 
 const router = createBrowserRouter([
   { 

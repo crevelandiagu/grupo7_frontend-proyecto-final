@@ -144,7 +144,7 @@ export const SearchCandidateExperience = () => {
                   value= {skills}
                   onChange={handleInputChangeS}
                    error = {errorS}
-                   helperText = {errorS ? "If there is more tha a skill put a hyphen between them": ""}
+                   helperText = {errorS ? "If there is more than a skill put a hyphen between them": ""}
                 />
               </Grid>
             </Grid>
@@ -165,12 +165,12 @@ export const SearchCandidateExperience = () => {
               <>
                 <ListItem disablePadding key={item_r.name}>
                   <Grid container spacing={2} alignItems="center">
-                    <Grid item>
+                    <Grid item xs={6}>
                             <ListItemText
                             primary={item_r.name + " " + item_r.lastName}
                             />                         
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={6}>
                         <Button
                              color="primary"
                              fullWidth
