@@ -44,7 +44,7 @@ export const AssingProject = () => {
           }}
         >
           <Typography component="h1" variant="h4">
-            Create Project
+            Assign Project
           </Typography>
           <Box component="form" sx={{ mt: 3 }}>
             <Grid container direction="column" spacing={2} justifyContent="space-around" alignItems="start" sx={{ width: '396px'}}>

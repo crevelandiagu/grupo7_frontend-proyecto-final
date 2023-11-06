@@ -1,5 +1,5 @@
 import { Circle, Email, Phone, Place } from "@mui/icons-material";
-import { Autocomplete, Avatar, Box, Button, Grid, Icon, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField, Typography } from "@mui/material"
+import { Autocomplete, Avatar, Box, Button, Grid, TextField, Typography } from "@mui/material"
 import { useCompanyStore } from "../../hooks";
 
 function stringToColor(string) {
