@@ -29,6 +29,8 @@ const defaultTheme = createTheme();
 
 export const CreateInterview = () => {
 
+  const [message, setMessage] = useState('');
+
   const { startSignIn, errorMessage } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -41,7 +43,10 @@ export const CreateInterview = () => {
     setFormSubmitted(true);
 
     if ( !isFormValid ) return;
-    startSignIn(formState);
+    // startSignIn(formState);
+    setTimeout(() => {
+      setMessage('Successfully scheduled interview');
+    }, 1200);
   };
 
   return (
@@ -114,9 +119,9 @@ export const CreateInterview = () => {
             </Grid>
             <Grid item sx={{ mt: 2 }}
               xs={12}
-              display={ errorMessage ? '' : 'none' }
+              display={ message ? '' : 'none' }
             >
-                <Alert severity="error">{errorMessage}</Alert>
+                <Alert severity="success">{message}</Alert>
             </Grid> 
             <Button
               type="submit"

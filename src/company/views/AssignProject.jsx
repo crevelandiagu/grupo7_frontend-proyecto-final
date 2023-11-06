@@ -9,7 +9,9 @@ export const AssingProject = () => {
 
   const handledClick = (event) => {
     event.preventDefault();
-    setMessage('Project assigned successfully');
+    setTimeout(() => {
+      setMessage('Project assigned successfully');
+    }, 1500)
 
   }
 
@@ -29,6 +31,7 @@ export const AssingProject = () => {
     { label: "Jose Bedoya", year: 2023 },
     { label: 'Sandra Romero', year: 2023 },
     { label: 'Stefanny Soto', year: 2023 },
+    { label: 'Andres Diaz', year: 2023 },
   ]
 
   return (

@@ -30,8 +30,7 @@ spec:
             - name: VITE_API_PROJECTS
               value: http://servicio-app-projects/projects
             - name: VITE_HOLA
-              value: HOLA_
-          args: ["$(VITE_API_CANDIDATE)", "$(VITE_API_COMPANY)", "$(VITE_API_PROJECTS)", "$(VITE_HOLA)"]
+              value: HOLA
           imagePullPolicy: Always
 ---
 # apiVersion: cloud.google.com/v1
