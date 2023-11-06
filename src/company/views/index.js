@@ -5,3 +5,4 @@ export * from './Project';
 export * from './SearchCandidateExperience';
 export * from './DetailProfile';
 export * from './AssignProject';
+export * from './Interview';

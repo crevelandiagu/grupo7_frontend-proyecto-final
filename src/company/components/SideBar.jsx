@@ -19,6 +19,11 @@ export const SideBar = ({ drawerWidth = 240 }) => {
             view: 'search'
         },
         {
+            "name": "Create Account",
+            "to": "/company/interview",
+            view: 'CreateEmployeeAccount'
+        },
+        {
             "name": "Project",
             "to": "/company/project",
             view: 'project',
@@ -39,10 +44,11 @@ export const SideBar = ({ drawerWidth = 240 }) => {
             view: 'interview'
         },
         {
-            "name": "Create Account",
+            "name": "Evaluate Interview",
             "to": "/company/interview",
-            view: 'CreateEmployeeAccount'
+            view: 'listInterview'
         },
+        
     ]
 
     return (

@@ -27,15 +27,9 @@ const columns = [
 ];
 
 const rows = [
-  { id: 1, company: 'Snow', score: 100, date: '12-12-2023', time:'12:00'  },
-  { id: 2, company: 'Lannister', score: 90, date: '12-12-2023', time:'12:00' },
-  { id: 3, company: 'Lannister', score: 80, date: '12-12-2023', time:'12:00' },
-  { id: 4, company: 'Stark', score: 80, date: '12-12-2023', time:'12:00' },
-  { id: 5, company: 'Targaryen', score: 85, date: null, time:'12:00' },
-  { id: 6, company: 'Melisandre', score: 80, date: '12-12-2023', time:'12:00' },
-  { id: 7, company: 'Clifford', score: 100, date: '12-12-2023', time:'12:00' },
-  { id: 8, company: 'Frances', score: 100, date: '12-12-2023', time:'12:00' },
-  { id: 9, company: 'Roxie', score: 100, date: '12-12-2023', time:'12:00' },
+  { id: 1, company: 'Snow', score: 100, date: '08-11-2023', time:'12:00'  },
+  { id: 2, company: 'Lannister', score: 90, date: '10-11-2023', time:'12:00' },
+  { id: 3, company: 'Compania A', score: 80, date: '12-12-2023', time:'12:00' },
 ];
 
 export const Interview = () => {

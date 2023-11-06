@@ -27,6 +27,8 @@ const defaultTheme = createTheme();
 
 export const CreateEmployeeAccount = () => {
 
+  const [message, setMessage] = useState('');
+
   const { startSignIn, errorMessage } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -39,7 +41,10 @@ export const CreateEmployeeAccount = () => {
     setFormSubmitted(true);
 
     if ( !isFormValid ) return;
-    startSignIn(formState);
+    // startSignIn(formState);
+    setTimeout(() => {
+      setMessage('Project create successfully');
+    }, 1000);
   };
 
   return (
@@ -59,7 +64,7 @@ export const CreateEmployeeAccount = () => {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                 <TextField
                   label="project"
                   type="text"
@@ -71,7 +76,7 @@ export const CreateEmployeeAccount = () => {
                   // error = {!!nameValid && formSubmitted}
                   // helperText = {nameValid}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   label="name"
@@ -102,9 +107,11 @@ export const CreateEmployeeAccount = () => {
             </Grid>
             <Grid item sx={{ mt: 2 }}
               xs={12}
-              display={ errorMessage ? '' : 'none' }
+              display={ message ? '' : 'none' }
+              // display={ errorMessage ? '' : 'none' }
+
             >
-                <Alert severity="error">{errorMessage}</Alert>
+                <Alert severity="success">{message}</Alert>
             </Grid> 
             <Button
               type="submit"

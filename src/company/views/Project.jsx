@@ -36,11 +36,11 @@ export const Project = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setFormSubmitted(true);
+    // setFormSubmitted(true);
 
-    if ( !isFormValid ) return;
+    // if ( !isFormValid ) return;
     // startSignIn(formState);
-    setMessage('Project assigned successfully');
+    setMessage('Project create successfully');
   };
 
   return (
@@ -58,7 +58,8 @@ export const Project = () => {
           <Typography component="h1" variant="h4">
             Create Project
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          {/* <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}> */}
+          <Box component="div" sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -96,7 +97,7 @@ export const Project = () => {
                 <Alert severity="success">{message}</Alert>
             </Grid> 
             <Button
-              type="submit"
+              onClick={handleSubmit}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
