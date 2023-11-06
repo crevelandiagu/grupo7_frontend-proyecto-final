@@ -1,5 +1,5 @@
 import { Box, Drawer,List, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
-import { ExpandLess, ExpandMore, TurnedInNot } from '@mui/icons-material';
+import { TurnedInNot } from '@mui/icons-material';
 import { useCompanyStore } from '../../hooks';
 
 export const SideBar = ({ drawerWidth = 240 }) => {
@@ -22,6 +22,11 @@ export const SideBar = ({ drawerWidth = 240 }) => {
             "name": "Project",
             "to": "/company/project",
             view: 'project',
+        },
+        {
+            "name": "Assing Project",
+            "to": "/company/project",
+            view: 'assingproject',
         },
         {
             "name": "Assesment",
@@ -50,10 +55,11 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                 open
                 sx={{
                     display: { xs: 'block' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, bgcolor: 'primary.main'},
+
                 }}
             >
-                <Toolbar sx={{ bgcolor: 'primary.main' }} >
+                <Toolbar >
                     <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1, color: 'white' }} >
                         ABC Jobs
                     </Typography>

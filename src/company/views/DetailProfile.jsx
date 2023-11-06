@@ -1,5 +1,6 @@
 import { Circle, Email, Phone, Place } from "@mui/icons-material";
 import { Autocomplete, Avatar, Box, Button, Grid, Icon, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField, Typography } from "@mui/material"
+import { useCompanyStore } from "../../hooks";
 
 function stringToColor(string) {
   let hash = 0;
@@ -41,18 +42,20 @@ const projects = [
 
 export const DetailProfile = () => {
 
+  const { startActiveView } = useCompanyStore();
 
   return (
     <Box>
-      <Grid container xs={12} direction="row" spacing={2} justifyContent="end">
+      <Grid container xs={12} direction="row" spacing={2} sx={{ marginTop:'10px' }} justifyContent="end">
         <Autocomplete
           disablePortal
-          id="combo-box-demo"
+          id="project"
           options={projects}
           sx={{ width: 200 }}
           renderInput={(params) => <TextField {...params} label="Project" />}
         />
-        <Button variant="contained">Start process</Button>
+        <Button variant="contained" onClick={() => {setTimeout(() => {startActiveView('dashboard')
+  }, 1500)}}>Start process</Button>
       </Grid>
       <Grid sx={{ width: '90%', background: '#F9F9FB', marginTop: '15px', padding: '25px', borderRadius: '16px' }} container xs={12} direction="column" alignItems="center">
         <Avatar sx={{ width: 150, height: 100 }} {...stringAvatar('Arturo Castro')} />

@@ -1,5 +1,5 @@
-import { Box, Collapse, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
-import { Approval, ExpandLess, ExpandMore, Feed, School, StarBorder, TurnedInNot, Work } from '@mui/icons-material';
+import { Box, Collapse, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
+import { Approval, ExpandLess, ExpandMore, Feed, School, TurnedInNot, Work } from '@mui/icons-material';
 import { useState } from 'react';
 import { useCandidateStore } from '../../hooks/useCandidateStore';
 
@@ -50,7 +50,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                 open
                 sx={{
                     display: { xs: 'block' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, drawerWidth, bgcolor: 'primary.main', color: 'white'},
                 }}
             >
                 <Toolbar sx={{ bgcolor: 'primary.main' }} >
@@ -70,7 +70,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                             </ListItemButton>
                         ))
                     } */}
-                    <ListItem key='Dashboard' disablePadding>
+                    <ListItem key='Dashboard' disablePadding sx={{ bgcolor: 'primary.main', color: 'white' }}>
                         <ListItemButton onClick={() => {startActiveView('dashboard')}}>
                             <ListItemIcon>
                                 <TurnedInNot />
