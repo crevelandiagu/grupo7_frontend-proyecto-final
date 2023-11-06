@@ -25,6 +25,8 @@ const defaultTheme = createTheme();
 
 export const Project = () => {
 
+  const [message, setMessage] = useState('');
+
   const { startSignIn, errorMessage } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -37,7 +39,8 @@ export const Project = () => {
     setFormSubmitted(true);
 
     if ( !isFormValid ) return;
-    startSignIn(formState);
+    // startSignIn(formState);
+    setMessage('Project assigned successfully');
   };
 
   return (
@@ -72,11 +75,11 @@ export const Project = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="description of project"
-                  type="description"
+                  label="description"
+                  type="text"
                   placeholder="description of project"
                   fullWidth
-                  name="descrition"
+                  name="description"
                   value= {description}
                   onChange={onInputChange}
                   error = {!!descriptionValid && formSubmitted}
@@ -87,9 +90,10 @@ export const Project = () => {
             </Grid>
             <Grid item sx={{ mt: 2 }}
               xs={12}
-              display={ errorMessage ? '' : 'none' }
+              display={ message ? '' : 'none' }
             >
-                <Alert severity="error">{errorMessage}</Alert>
+                {/* <Alert severity="error">{errorMessage}</Alert> */}
+                <Alert severity="success">{message}</Alert>
             </Grid> 
             <Button
               type="submit"

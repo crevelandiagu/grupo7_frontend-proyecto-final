@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import candidateImg from '../../assets/candidate.svg';
 import companiesImg from '../../assets/companies.svg';
 import { getEnvVariablesCandidate, getEnvVariablesCompany, getEnvVariablesProject } from '../../helpers/getEnvVaribles';
+import { useAuthStore } from '../../hooks/useAuthStore';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -26,6 +27,8 @@ const Item = styled(Paper)(({ theme }) => ({
 const defaultTheme = createTheme();
 
 export const Landing = () => {
+
+  const { startSetProfile } = useAuthStore();
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -54,7 +57,7 @@ export const Landing = () => {
                 <Item>
                   <img src={candidateImg} width="200" alt=""/>
                 </Item>
-                <Button onClick={() => {localStorage.setItem('typeClient', 'company')}} component={ RouterLink } variant="outlined" to="/auth/signin">
+                <Button onClick={() => {startSetProfile('company')}} component={ RouterLink } variant="outlined" to="/auth/signin">
                   You are a company
                 </Button>
               </Grid>
@@ -62,7 +65,7 @@ export const Landing = () => {
               <Item>
                 <img src={companiesImg} width="200" alt="" />
               </Item>
-              <Button onClick={() => {localStorage.setItem('typeClient', 'candidate')}} component={ RouterLink } variant="outlined" to="/auth/signin">
+              <Button onClick={() => {startSetProfile('candidate')}} component={ RouterLink } variant="outlined" to="/auth/signin">
                   You are a candidate
                 </Button>
               </Grid>

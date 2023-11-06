@@ -5,13 +5,23 @@ export const candidateSlice = createSlice({
   initialState: {   
     status: null,
     view: 'dashboard',
+    candidates: [],
     errorMessage: null,
   },
   reducers: {
     showView: (state, {payload}) => {
-      state.status = 'checking';
       state.view   = payload.view;
       state.errorMessage = undefined;
+    },
+    saveProfile: (state, {payload}) => {
+      console.log(state, payload.candidate);
+      state.candidates = [...state.candidates, payload.candidate]
+
+    },
+    updateProfile: (state, {payload}) => {
+      console.log(state, payload.candidate);
+      state.candidates = [...state.candidates]
+
     },
     checking: (state) => {
       state.status = 'checking';
@@ -50,4 +60,4 @@ export const candidateSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { showView, checking, signup, signin, logout, clearErrorMessages, checkingCredentials } = candidateSlice.actions
+export const { showView, saveProfile, updateProfile, checking, signup, signin, logout, clearErrorMessages, checkingCredentials } = candidateSlice.actions
