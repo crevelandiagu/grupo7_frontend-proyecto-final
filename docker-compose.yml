@@ -1,13 +1,23 @@
-version: '3'
+version: '3.9'
 services:
 # -----------------------Servicio candidate -----------------------------
   
   app_candidate:
-    build: .
-    environment:
-      VITE_HOLA: "Hola desde el .env"
-      DATABASE_URL: postgresql://postgres:postgres@db_candidate:5432/
+    build:
+      context: .
+      args:
+        - VITE_HOLA=postgresql://postgres:postgres@db_candidate:5432/
+        - VITE_API_CANDIDATE_LOCAL=http://localhost:3000/candidate
+        - VITE_API_COMPANY_LOCAL=http://localhost:3001/company
+        - VITE_API_PROJECTS_LOCAL=http://localhost:3007/projects
     ports:
       - "8080:8080"
     expose:
       - "8080"
+#    volumes:
+#      - ./:/usr/src/app
+#      - exclude:/usr/src/app/node_modules
+    restart: unless-stopped
+
+volumes:
+  exclude:

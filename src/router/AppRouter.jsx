@@ -10,13 +10,13 @@ import { Landing } from "../auth/pages/Landing";
 import { useEffect } from "react";
 import { useAuthStore } from "../hooks";
 
+
 import { AppTheme } from "../theme";
 
 const router = createBrowserRouter([
   { 
     path: "/",
-    element: <Landing />,
-    
+    element: <Landing />
   },
   {
     path: "/auth/*",

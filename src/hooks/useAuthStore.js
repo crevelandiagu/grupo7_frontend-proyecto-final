@@ -1,21 +1,33 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { candidateApi }  from '../api';
-import { checking, signup, signin, logout, /*clearErrorMessages*/ } from '../store/auth/authSlice';
+import { candidateApi, companyApi }  from '../api';
+import { checking, signup, signin, logout, setProfile /*clearErrorMessages*/ } from '../store/auth/authSlice';
 
 
 export const useAuthStore = () => {
 
-    const { status, user, errorMessage } = useSelector( state => state.auth );
+    const { status, id,  profile, user, errorMessage } = useSelector( state => state.auth );
     const dispatch = useDispatch();
+
+    const startSetProfile = (profile) => {
+        dispatch( setProfile(profile) );
+    }
 
     const startSignIn = async({ email, password }) => {
         dispatch(checking());
         try {
-            const { data } = await candidateApi.post('/login',{ email, password }); 
-            console.log(data);
-            localStorage.setItem('token', data.token );
-            localStorage.setItem('token-init-date', new Date().getTime() );
-            dispatch( signin({ name: data.name, id: data.id }) );
+            if(profile === 'candidate') {
+                const { data } =  await candidateApi.post('/login',{ email, password });
+                // console.log(data);
+                localStorage.setItem('token', data.token );
+                localStorage.setItem('token-init-date', new Date().getTime() );
+                dispatch( signin({ name: data.name, id: data.id }) );
+            } else if(profile === 'company') {
+                const { data } = await companyApi.post('/login',{ email, password });
+                // console.log(data);
+                localStorage.setItem('token', data.token );
+                localStorage.setItem('token-init-date', new Date().getTime() );
+                dispatch( signin({ name: data.name, id: data.id }) );
+            }
             
         } catch (error) {
             console.log('error', error);
@@ -29,13 +41,20 @@ export const useAuthStore = () => {
     const startSignUp = async({ email, password, name }) => {
         dispatch( checking() );
         try {
-            const { data } = await candidateApi.post('/signup',{ email, password, name });
-            console.log(data, data.id, data.email);
-            localStorage.setItem('token', data.token );
-            localStorage.setItem('token-init-date', new Date().getTime() );
-            dispatch( signup({ id:data.id, email:data.email }) );
-            // dispatch( signup({ name: data.name, id: data.id }) );
-            
+            if(profile === 'candidate') {
+                const { data } = await candidateApi.post('/signup',{ email, password, name });
+                // console.log(data, data.id, data.email);
+                localStorage.setItem('token', data.token );
+                localStorage.setItem('token-init-date', new Date().getTime() );
+                dispatch( signup({ id:data.id, email:data.email }) );
+            } else if(profile === 'company') {
+                const { data } = await companyApi.post('/signup',{ email, password, name });
+                // console.log(data, data.id, data.email);
+                localStorage.setItem('token', data.token );
+                localStorage.setItem('token-init-date', new Date().getTime() );
+                dispatch( signup({ id:data.id, email:data.email }) );
+            }
+
         } catch (error) {
             console.log('error', error.response?.data?.message);
             dispatch( logout( error.response?.data?.message || 'Service under maintenance, please try again later.' ) );
@@ -69,17 +88,22 @@ export const useAuthStore = () => {
 
 
 
+
+
     return {
         //* Propiedades
         errorMessage,
         status, 
-        user, 
+        user,
+        profile,
+        id,  
 
         //* Métodos
         startSignUp,
         startSignIn,
         checkAuthToken,
         startLogout,
+        startSetProfile
     }
 
 }

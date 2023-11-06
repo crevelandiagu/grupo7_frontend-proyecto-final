@@ -7,8 +7,12 @@ import {
     Notifications,
 } from "@mui/icons-material";
 import { blueTheme } from "../../theme/blueTheme";
+import { useAuthStore } from "../../hooks";
 
 export const NavBar = ({ drawerWidth = 240 }) => {
+
+    const { startLogout } = useAuthStore();
+
     return (
     <ThemeProvider theme={blueTheme}>
         <AppBar
@@ -71,7 +75,7 @@ export const NavBar = ({ drawerWidth = 240 }) => {
                         aria-label="account of current user"
                         aria-controls="menu-appbar"
                         aria-haspopup="true"
-                        // onClick={handleM
+                        onClick={startLogout}
                         color="inherit"
                     >
                         <LogoutOutlined />

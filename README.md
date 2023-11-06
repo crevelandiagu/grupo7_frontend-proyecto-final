@@ -71,3 +71,17 @@ npm install @mui/material @emotion/react @emotion/styled
 ```
 npm install @mui/icons-material
 ```
+## Dockerfile y docker-compose
+
+run Dockerfile
+```shell
+docker build -t front-app .
+```
+
+```shell
+docker run -p 8080:8080 front-app
+```
+run docker compose 
+```shell
+docker-compose up --build
+```

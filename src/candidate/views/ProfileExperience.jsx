@@ -8,13 +8,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
+import { useAuthStore, useCandidateStore, useForm } from '../../hooks';
 
 const formData = {
   position:'',
   company:'',
   startDate:'',
+  endDate:'',
   location:'',
   skills:'',
 }
@@ -23,6 +24,7 @@ const formValidations =  {
   position: [ (value) => value.length>= 3, 'name must be at least 8 characters long' ],
   company: [ (value) => value.length>= 3, 'last name must be at least 8 characters long' ],
   startDate: [ (value) => value.length>= 3, 'number must be at least 8 characters long' ],
+  endDate: [ (value) => value.length>= 0, 'number must be at least 8 characters long' ],
   location: [ (value) => value.length>= 3, 'location must be at least 8 characters long' ],
   skills: [ (value) => value.length>= 3, 'phone must be at least 8 characters long' ],
 }
@@ -30,20 +32,22 @@ const formValidations =  {
 const defaultTheme = createTheme();
 
 export const ProfileExperience = () => {
-
-  const { startSignIn, errorMessage } = useAuthStore();
+  
+  const { startSaveProfile, errorMessage } = useCandidateStore();
+  const { id } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const {
     formState, position, company, startDate, endDate, location, skills,  onInputChange, isFormValid, 
-    positionValid, companyValid, startDateValid, locationValid, skillsValid } = useForm( formData, formValidations );
+    positionValid, companyValid, startDateValid, endDateValid, locationValid, skillsValid } = useForm( formData, formValidations );
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
 
     if ( !isFormValid ) return;
-    startSignIn(formState);
+    console.log('expirience', {...formState, id});
+    startSaveProfile({...formState, id});
   };
 
   return (
@@ -91,9 +95,9 @@ export const ProfileExperience = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="startDate"
-                  type="text"
-                  placeholder="start date"
+                  // label="startDate"
+                  type="date"
+                  // placeholder="start date"
                   fullWidth
                   name="startDate"
                   value= {startDate}
@@ -104,14 +108,14 @@ export const ProfileExperience = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="endDate"
-                  type="text"
+                  // label="endDate"
+                  type="date"
                   placeholder="end date"
                   fullWidth
                   name="endDate"
                   value= {endDate}
                   onChange={onInputChange}
-                  error = "false"
+                  error = {!!endDateValid && formSubmitted}
                   helperText = ""
                 />
               </Grid>

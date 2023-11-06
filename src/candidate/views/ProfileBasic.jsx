@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { useAuthStore, useForm } from '../../hooks';
+import { useAuthStore, useCandidateStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
 
 const formData = {
@@ -31,7 +31,8 @@ const defaultTheme = createTheme();
 
 export const ProfileBasic = () => {
 
-  const { startSignIn, errorMessage } = useAuthStore();
+  const { startSaveProfile, errorMessage } = useCandidateStore();
+  const { id } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const {
@@ -43,7 +44,8 @@ export const ProfileBasic = () => {
     setFormSubmitted(true);
 
     if ( !isFormValid ) return;
-    startSignIn(formState);
+    console.log('form:', {...formState, id})
+    startSaveProfile({...formState, id});
   };
 
   return (

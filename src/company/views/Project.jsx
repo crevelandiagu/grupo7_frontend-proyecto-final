@@ -25,6 +25,8 @@ const defaultTheme = createTheme();
 
 export const Project = () => {
 
+  const [message, setMessage] = useState('');
+
   const { startSignIn, errorMessage } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -34,10 +36,11 @@ export const Project = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setFormSubmitted(true);
+    // setFormSubmitted(true);
 
-    if ( !isFormValid ) return;
-    startSignIn(formState);
+    // if ( !isFormValid ) return;
+    // startSignIn(formState);
+    setMessage('Project create successfully');
   };
 
   return (
@@ -55,7 +58,8 @@ export const Project = () => {
           <Typography component="h1" variant="h4">
             Create Project
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          {/* <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}> */}
+          <Box component="div" sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -72,11 +76,11 @@ export const Project = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="description of project"
-                  type="description"
+                  label="description"
+                  type="text"
                   placeholder="description of project"
                   fullWidth
-                  name="descrition"
+                  name="description"
                   value= {description}
                   onChange={onInputChange}
                   error = {!!descriptionValid && formSubmitted}
@@ -87,12 +91,13 @@ export const Project = () => {
             </Grid>
             <Grid item sx={{ mt: 2 }}
               xs={12}
-              display={ errorMessage ? '' : 'none' }
+              display={ message ? '' : 'none' }
             >
-                <Alert severity="error">{errorMessage}</Alert>
+                {/* <Alert severity="error">{errorMessage}</Alert> */}
+                <Alert severity="success">{message}</Alert>
             </Grid> 
             <Button
-              type="submit"
+              onClick={handleSubmit}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}

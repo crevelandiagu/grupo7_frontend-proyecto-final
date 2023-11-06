@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: frontapp
-          image: us-central1-docker.pkg.dev/abc-jobs-grupo7/abc-jobs-dockers/front-app:97
+          image: us-central1-docker.pkg.dev/GOOGLE_PROJECT/abc-jobs-dockers/front-app:latest
           ports:
             - containerPort: 8080
           env:

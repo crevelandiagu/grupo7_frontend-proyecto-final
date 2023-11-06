@@ -1,18 +1,20 @@
 FROM node:18-alpine as BUILD_IMAGE
-WORKDIR /jobs_app
+WORKDIR /usr/src/app
 
-ENV VITE_API_CANDIDATE default
-ENV VITE_API_CANDIDATE default
-ENV VITE_API_COMPANY default
-ENV VITE_API_PROJECTS default
+ARG VITE_HOLA=hola
+ARG VITE_API_CANDIDATE=http://servicio-app-candidate/candidate
+ARG VITE_API_COMPANY=http://servicio-app-company/company
+ARG VITE_API_PROJECTS=http://servicio-app-projects/projects
+ARG VITE_API_SEARCH=http://servicio-app-search-tool/search-tool
+ARG VITE_API_SELECTION_PROCESS=http://servicio-app-selection-procces/selection-procces
 
 COPY package.json .
 
 RUN npm install
 
-COPY . . 
+COPY . .
 
-RUN  npm run build
+RUN npm run build
 
 EXPOSE 8080
 CMD [ "npm", "run", "preview" ]
