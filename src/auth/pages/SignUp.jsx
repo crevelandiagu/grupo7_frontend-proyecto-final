@@ -34,7 +34,7 @@ const formData = {
 
 const formValidations =  {
 email: [ (value) => value.includes('@'), 'Enter a valid email' ],
-password: [(value) => value.length >= 8, 'password must be at least 8 characters long']
+password: [(value) => value.length >= 6, 'password must be at least 8 characters long']
 }
 
 const defaultTheme = createTheme();

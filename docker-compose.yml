@@ -7,9 +7,11 @@ services:
       context: .
       args:
         - VITE_HOLA=postgresql://postgres:postgres@db_candidate:5432/
-        - VITE_API_CANDIDATE=API_CANDIDATE
-        - VITE_API_COMPANY=API_COMPANY
-        - VITE_API_PROJECTS=API_PROJECTS
+        - VITE_API_CANDIDATE=http://34.149.255.183/candidate    
+        - VITE_API_COMPANY=http://servicio-app-company/company
+        - VITE_API_COMPANY_EMPLOYEES=http://servicio-app-company-employees/company-employees
+        - VITE_API_SEARCH=http://servicio-app-search-tool/search-tool
+        - VITE_API_SELECTION_PROCESS=http://servicio-app-selection-procces/interviews
     ports:
       - "8080:8080"
     expose:

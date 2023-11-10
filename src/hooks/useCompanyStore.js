@@ -1,12 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { candidateApi }  from '../api';
-import { checking, signup, signin, logout, /*clearErrorMessages*/ } from '../store/auth/authSlice';
+import { candidateApi, companyApi }  from '../api';
+import { checking, signup, signin, logout, showView, selectCandidate, /*clearErrorMessages*/ } from '../store/company/companySlice';
 
 
-export const useAuthStore = () => {
+export const useCompanyStore = () => {
 
-    const { status, user, errorMessage } = useSelector( state => state.auth );
+    const { status, user, errorMessage } = useSelector( state => state.company );
     const dispatch = useDispatch();
+
+
+    const startActiveView = (newView) => {
+        dispatch(showView({ view:newView }))
+    }
+
+    const startSelectCandidate = (idCandidate) => {
+        dispatch(selectCandidate({ idCandidate }))
+    }
 
     const startSignIn = async({ email, password }) => {
         dispatch(checking());
@@ -26,10 +35,20 @@ export const useAuthStore = () => {
         }
     }
 
+    // const findCandidate = async({experience, skill}) => {
+    //     dispatch(checking());
+    //     try {
+    //         const {data} = await companyApi.post('')
+            
+    //     } catch (error) {
+            
+    //     }
+    // }
+
     const startSignUp = async({ email, password, name }) => {
         dispatch( checking() );
         try {
-            const { data } = await candidateApi.post('/signup',{ email, password, name });
+            const { data } = await companyApi.post('/signup',{ email, password, name });
             console.log(data, data.id, data.email);
             localStorage.setItem('token', data.token );
             localStorage.setItem('token-init-date', new Date().getTime() );
@@ -76,7 +95,8 @@ export const useAuthStore = () => {
         user, 
 
         //* Métodos
-        
+        startActiveView,
+        startSelectCandidate,
         startSignUp,
         startSignIn,
         checkAuthToken,

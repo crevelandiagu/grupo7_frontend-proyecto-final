@@ -5,7 +5,7 @@
 
 # testing
 /coverage
-/pruebas/node_modules
+/pruebas
 
 # production
 /dist

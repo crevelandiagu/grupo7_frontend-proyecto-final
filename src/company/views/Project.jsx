@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
+import { projectsApi } from '../../api';
 
 const formData = {
   name:"",
@@ -21,11 +22,23 @@ name: [ (value) => value.length>= 3, 'name must be at least 8 characters long' ]
 description: [(value) => value.length >= 5, 'description must be at least 5 characters long']
 }
 
+const saveProject = async (companyId, projectName, description) => {
+  try {
+    const { data } = await projectsApi.post('/', { companyId, projectName, description })
+    console.log('data', data);
+    return data.message;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
 const defaultTheme = createTheme();
 
 export const Project = () => {
 
-  const { startSignIn, errorMessage } = useAuthStore();
+  const [message, setMessage] = useState('');
+
+  const { id, errorMessage } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const {
@@ -37,7 +50,8 @@ export const Project = () => {
     setFormSubmitted(true);
 
     if ( !isFormValid ) return;
-    startSignIn(formState);
+    saveProject(id, name, description);
+    
   };
 
   return (
@@ -55,7 +69,8 @@ export const Project = () => {
           <Typography component="h1" variant="h4">
             Create Project
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          {/* <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}> */}
+          <Box component="div" sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -72,11 +87,11 @@ export const Project = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="description of project"
-                  type="description"
+                  label="description"
+                  type="text"
                   placeholder="description of project"
                   fullWidth
-                  name="descrition"
+                  name="description"
                   value= {description}
                   onChange={onInputChange}
                   error = {!!descriptionValid && formSubmitted}
@@ -87,12 +102,13 @@ export const Project = () => {
             </Grid>
             <Grid item sx={{ mt: 2 }}
               xs={12}
-              display={ errorMessage ? '' : 'none' }
+              display={ message ? '' : 'none' }
             >
-                <Alert severity="error">{errorMessage}</Alert>
+                {/* <Alert severity="error">{errorMessage}</Alert> */}
+                <Alert severity="success">{message}</Alert>
             </Grid> 
             <Button
-              type="submit"
+              onClick={handleSubmit}
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}

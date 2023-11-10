@@ -4,6 +4,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     status: 'not-authenticated', //'checking',
+    profile:null,
     id: null,
     email: null,
     displayName: null,
@@ -11,6 +12,9 @@ export const authSlice = createSlice({
     errorMessage: null,
   },
   reducers: {
+    setProfile: (state, {payload}) => {
+      state.profile = payload;
+    },
     checking: (state) => {
       state.status = 'checking';
       state.user   = null;
@@ -48,4 +52,4 @@ export const authSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { checking, signup, signin, logout, clearErrorMessages, checkingCredentials } = authSlice.actions
+export const { checking, signup, signin, logout, clearErrorMessages, checkingCredentials, setProfile } = authSlice.actions

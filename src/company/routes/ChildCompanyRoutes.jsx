@@ -10,6 +10,6 @@ export const ChildCompanyRoutes = [
         path: "*",
         element: <Navigate to={"dashboard"}/>
       
-    }
+    },
  
 ]

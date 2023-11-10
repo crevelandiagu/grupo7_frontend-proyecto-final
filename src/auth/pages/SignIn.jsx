@@ -28,14 +28,10 @@ function Copyright(props) {
   );
 }
 
-// const formData = {
-//   email:"candidate-z@gmail.com",
-//   password: "$C123456"
-// }
 
 const formData = {
-  email:"candidate-z@gmail.com",
-  password: "$C123456"
+  email:"usuario-a@gmail.com",
+  password: "$Qq12345"
 }
 
 const formValidations =  {
