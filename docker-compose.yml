@@ -7,7 +7,7 @@ services:
       context: .
       args:
         - VITE_HOLA=postgresql://postgres:postgres@db_candidate:5432/
-        - VITE_API_CANDIDATE=http://servicio-app-candidate/candidate    
+        - VITE_API_CANDIDATE=http://34.149.255.183/candidate    
         - VITE_API_COMPANY=http://servicio-app-company/company
         - VITE_API_COMPANY_EMPLOYEES=http://servicio-app-company-employees/company-employees
         - VITE_API_SEARCH=http://servicio-app-search-tool/search-tool
