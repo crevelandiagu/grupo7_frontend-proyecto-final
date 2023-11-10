@@ -1,10 +1,13 @@
 import axios from 'axios';
-import { getEnvCandidate } from '../helpers/getEnvVaribles';
+import { getEnvProjects } from '../helpers/getEnvVaribles';
 
-const VITE_API_CANDIDATE = getEnvCandidate()
+const VITE_API_PROJECTS = getEnvProjects()
 
-const candidateApi = axios.create({
-    baseURL: VITE_API_CANDIDATE,
+
+
+
+const projectsApi = axios.create({
+    baseURL: VITE_API_PROJECTS
 });
 
 // axios.interceptors.request.use(
@@ -21,4 +24,4 @@ const candidateApi = axios.create({
 //   );
 
 
-export default candidateApi;
+export default projectsApi;

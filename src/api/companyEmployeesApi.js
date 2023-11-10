@@ -1,13 +1,10 @@
 import axios from 'axios';
-import { getEnvVariablesProject } from '../helpers/getEnvVaribles';
+import { getEnvCompanyEmployees } from '../helpers/getEnvVaribles';
 
-const VITE_API_PROJECTS = getEnvVariablesProject()
+const VITE_API_COMPANY_EMPLOYEES = getEnvCompanyEmployees()
 
-
-
-
-const candidateApi = axios.create({
-    baseURL: VITE_API_PROJECTS
+const companyEmployeesApi = axios.create({
+    baseURL: VITE_API_COMPANY_EMPLOYEES
 });
 
 // axios.interceptors.request.use(
@@ -24,4 +21,4 @@ const candidateApi = axios.create({
 //   );
 
 
-export default candidateApi;
+export default companyEmployeesApi;
