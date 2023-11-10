@@ -1,6 +1,8 @@
 import { Grid, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
+import { getEnvSelectionProcess } from '../../helpers/getEnvVaribles';
+import { useAuthStore, useFetch } from '../../hooks';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 20 },
@@ -27,30 +29,34 @@ const columns = [
   },
 ];
 
-const rows = [
-  { id: 1, project: 'Assurence project', candidate: 'Jose Sandoval',  date: '10-12-2023', score: 100},
-  { id: 2, project: 'Assurence project', candidate: 'Diana Garcia', date: '12:12-2023', score: 90, },
-  { id: 3, project: 'Assurence project', candidate: 'Andres Sicoariza', date: '12-11-2023', score: 80},
-  { id: 4, project: 'Assurence project', candidate: 'Alejandro Tafur', date: '12-12-2023', score: 80,},
-  { id: 5, project: 'Modernization project', candidate: 'Adriana Vasquez', date: '12-12-2023', score: 85,},
-  { id: 6, project: 'Modernization project', candidate: 'Monica Carvajal', date: '12-12-2023', score: 80},
-  { id: 7, project: 'Modernization project', candidate: 'Fernando Moya',  date: '12-12-2023', score: 98 },
-  { id: 8, project: 'Importan project', candidate: 'Andres Riaño',  date: '12-12-2023', score: 100},
-  { id: 9, project: 'Other project', candidate: 'Daniel Huertas',  date: '12-12-2023', score: 10},
-  { id: 10, project: 'Assurence project', candidate: 'Arturo Castro',  date: '12-12-2023', score: null},
-];
+
+const selectionProcess = getEnvSelectionProcess();
 
 export const Interview = () => {
+
+  const { id } = useAuthStore();
+  const { data, loading } = useFetch(`${selectionProcess}/company/${id}`)
+
+  console.log(loading, !data,  loading && !data)
+
   return (
     <Box>
       <Grid container justifyContent="center" mt={3} mb={3} >
-      <Typography component="h1" variant="h4">
-            List Interviews
-      </Typography>
+        <Typography component="h1" variant="h4">
+          List Interviews
+        </Typography>
       </Grid>
-      <DataGrid
-        rows={rows}
+      <DataGrid 
         columns={columns}
+        rows={  
+            data?.map((item, index) => ({
+            id: index+1,
+            project: item.project_id,
+            candidate: item.candidate_name,
+            date: item.date_interview,
+            score: item.score,
+          })) || []
+        }
         initialState={{
           pagination: {
             paginationModel: {
@@ -62,6 +68,6 @@ export const Interview = () => {
         checkboxSelection
         disableRowSelectionOnClick
       />
-    </Box>
+    </Box >
   );
 }

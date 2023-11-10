@@ -1,38 +1,44 @@
-import { Alert, Autocomplete, Box, Button, Container, CssBaseline, Grid, TextField, ThemeProvider, Typography, createTheme } from "@mui/material"
-import { useState } from "react";
+import { Alert, Autocomplete, Box, Button, CircularProgress, Container, CssBaseline, Grid, TextField, ThemeProvider, Typography, createTheme } from "@mui/material"
+import { projectsApi } from "../../api";
+import { useAuthStore, useFetch } from "../../hooks";
+import { getEnvCompanyEmployees, getEnvProjects } from "../../helpers/getEnvVaribles";
+import { Fragment, useState } from "react";
+
+const assignProject = async (projectId, employeeId) => {
+  try {
+    const { data } = await projectsApi.post('/project-employe', { projectId, employeeId })
+    console.log('data', data);
+    return data.message;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
 
 const defaultTheme = createTheme();
 
+const projects = getEnvProjects();
+const companyEmployees = getEnvCompanyEmployees();
+
 export const AssingProject = () => {
 
+  const { id } = useAuthStore();
+
   const [message, setMessage] = useState('');
+  const [openProjects, setopenProjects] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [openEmployees, setopenEmployees] = useState(false);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  const { data: dataProjects, loading:loadingDataProject } = useFetch(`${projects}?companyId=${id}`)
+  const { data: dataEmployees, loading:loadingDataEmployees } = useFetch(`${companyEmployees}/employee/${id}`)
 
   const handledClick = (event) => {
     event.preventDefault();
-    setTimeout(() => {
-      setMessage('Project assigned successfully');
-    }, 1500)
-
+    if (!selectedProject || !selectedEmployee) return;
+    console.log('validated', selectedProject, selectedEmployee)
+    assignProject(selectedProject, selectedEmployee);
+    setMessage('Employee was link with the project');
   }
-
-  const projects = [
-    { label: 'SAS project', year: 2023 },
-    { label: 'Assurance project', year: 2023 },
-    { label: 'Upgrade project', year: 2023 },
-    { label: 'Project 11', year: 2023 },
-    { label: 'Projct empty', year: 2023 },
-    { label: "Schindler's List", year: 2023 },
-  ]
-
-  const candidates = [
-    { label: 'Arturo Castro', year: 2023 },
-    { label: 'Cristian Velandia', year: 2023 },
-    { label: 'Daniel Huertas', year: 2023 },
-    { label: "Jose Bedoya", year: 2023 },
-    { label: 'Sandra Romero', year: 2023 },
-    { label: 'Stefanny Soto', year: 2023 },
-    { label: 'Andres Diaz', year: 2023 },
-  ]
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -50,29 +56,80 @@ export const AssingProject = () => {
             Assign Project
           </Typography>
           <Box component="form" sx={{ mt: 3 }}>
-            <Grid container direction="column" spacing={2} justifyContent="space-around" alignItems="start" sx={{ width: '396px'}}>
-              <Autocomplete 
-                disablePortal
-                fullWidth
-                id="prjects"
-                options={projects}
-                sx={{marginBottom: '20px' }}
-                renderInput={(params) => <TextField {...params} label="Project" />}
+            <Grid container direction="column" spacing={2} justifyContent="space-around" alignItems="start" sx={{ width: '396px' }}>
+              <Autocomplete
+                id="projects"
+                sx={{ width: '100%', marginBottom: '15px' }}
+                onChange={(event, value) => {
+                  setSelectedProject(value.id);
+                }}
+                open={openProjects}
+                onOpen={() => {
+                  setopenProjects(true);
+                }}
+                onClose={() => {
+                  setopenProjects(false);
+                }}
+                isOptionEqualToValue={(option, value) => option.id === value.id}
+                getOptionLabel={(option) => option.projectName}
+                options={dataProjects}
+                loading={loadingDataProject}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="projects"
+                    InputProps={{
+                      ...params.InputProps,
+                      endAdornment: (
+                        <Fragment>
+                          {loadingDataProject ? <CircularProgress color="inherit" size={20} /> : null}
+                          {params.InputProps.endAdornment}
+                        </Fragment>
+                      ),
+                    }}
+                  />
+                )}
               />
               <Autocomplete
-                disablePortal
-                fullWidth
-                id="canidates"
-                options={candidates}
-                sx={{marginBottom: '20px' }}
-                renderInput={(params) => <TextField {...params} label="Candidate" />}
+                id="employees"
+                sx={{ width: '100%', marginBottom: '15px' }}
+                onChange={(event, value) => {
+                  console.log('employees', value.employeeId)
+                  setSelectedEmployee(value.employeeId);
+                }}
+                open={openEmployees}
+                onOpen={() => {
+                  setopenEmployees(true);
+                }}
+                onClose={() => {
+                  setopenEmployees(false);
+                }}
+                isOptionEqualToValue={(option, value) => option.email === value.email}
+                getOptionLabel={(option) => option.email}
+                options={dataEmployees}
+                loading={loadingDataEmployees}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="employees"
+                    InputProps={{
+                      ...params.InputProps,
+                      endAdornment: (
+                        <Fragment>
+                          {loadingDataEmployees ? <CircularProgress color="inherit" size={20} /> : null}
+                          {params.InputProps.endAdornment}
+                        </Fragment>
+                      ),
+                    }}
+                  />
+                )}
               />
               <Button fullWidth onClick={handledClick} variant="contained">Assign Project</Button>
-              <Grid item sx={{ width: '380px'}}
-                display={ message ? '' : 'none' }
+              <Grid item sx={{ width: '380px' }}
+                display={message ? '' : 'none'}
               >
-               <Alert severity="success">{message}</Alert>
-              </Grid> 
+                <Alert severity="success">{message}</Alert>
+              </Grid>
             </Grid>
           </Box>
         </Box>

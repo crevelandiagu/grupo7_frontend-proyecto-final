@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { getEnvVariablesSearch } from '../helpers/getEnvVaribles';
+import { getEnvSearchTool } from '../helpers/getEnvVaribles';
 
-const VITE_API_SEARCH = getEnvVariablesSearch()
+const VITE_API_SEARCH_TOOL = getEnvSearchTool()
 
-const searchApi = axios.create({
-    baseURL: VITE_API_SEARCH,
+const searchToolApi = axios.create({
+    baseURL: VITE_API_SEARCH_TOOL,
 });
 
 // axios.interceptors.request.use(
@@ -21,4 +21,4 @@ const searchApi = axios.create({
 //   );
 
 
-export default searchApi;
+export default searchToolApi;

@@ -12,7 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import candidateImg from '../../assets/candidate.svg';
 import companiesImg from '../../assets/companies.svg';
-import { getEnvVariablesCandidate, getEnvVariablesCompany, getEnvVariablesProject } from '../../helpers/getEnvVaribles';
+import { getEnvCandidate, getEnvCompany, getEnvProjects } from '../../helpers/getEnvVaribles';
 import { useAuthStore } from '../../hooks/useAuthStore';
 
 
@@ -44,7 +44,7 @@ export const Landing = () => {
         >
           <Typography component="h1" variant="h4">
             Select your profile 
-            { console.log(getEnvVariablesCandidate(), getEnvVariablesCompany(), getEnvVariablesProject(), import.meta.env.VITE_HOLA, import.meta.env.VITE_API_CANDIDATE)}
+            { console.log(getEnvCandidate(), getEnvCompany(), getEnvProjects())}
           </Typography>
           <Box sx={{
             marginTop: 8,

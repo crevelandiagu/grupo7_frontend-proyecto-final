@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { getEnvVariablesCompany } from '../helpers/getEnvVaribles';
+import { getEnvCompany } from '../helpers/getEnvVaribles';
 
-const VITE_API_COMPANY = getEnvVariablesCompany()
+const VITE_API_COMPANY = getEnvCompany()
 
-const candidateApi = axios.create({
+const companyApi = axios.create({
     baseURL: VITE_API_COMPANY
 });
 
@@ -21,4 +21,4 @@ const candidateApi = axios.create({
 //   );
 
 
-export default candidateApi;
+export default companyApi;

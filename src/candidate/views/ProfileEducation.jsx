@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -6,10 +7,13 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Alert from '@mui/material/Alert';
+import Autocomplete from '@mui/material/Autocomplete';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { useAuthStore, useForm } from '../../hooks';
-import { Alert } from '@mui/material';
+import { useAuthStore, useCandidateStore, useForm } from '../../hooks';
+import { candidateApi } from '../../api';
+import { skillsListSelect } from '../../helpers/skillsListSelect';
 
 const formData = {
   school:'',
@@ -17,35 +21,49 @@ const formData = {
   startDate:'',
   endDate:'',
   location:'',
-  skills:'',
 }
 
 const formValidations =  {
   school: [ (value) => value.length>= 3, 'school must be at least 3 characters long' ],
   degree: [ (value) => value.length>= 3, 'degree must be at least 5 characters long' ],
-  startDate: [ (value) => value.length>= 3, 'startDate must be valid date' ],
-  endDate: [ (value) => value.length>= 3, 'endDate must be a valid date' ],
+  startDate: [(value) => value.length >= 0, 'star date must be a date valid'],
+  endDate: [(value) => value.length >= 0, 'end date must be a date valid'],
   location: [ (value) => value.length>= 5, 'location must be at least 5 characters long' ],
-  skills: [ (value) => value.length>= 3, 'skills must be at least 3 characters long' ],
 }
+
+const saveEducationInfo = async (candidateId, { school: univerisity, endDate: end_date, degree:subject, skills, startDate: start_date }) => {
+  try {
+    const { data } = await candidateApi.post(`/profile/education/${candidateId}`, { univerisity, end_date,  subject, skills, start_date })
+    console.log('data', data);
+    return data.message;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
 
 const defaultTheme = createTheme();
 
 export const ProfileEducation = () => {
 
-  const { startSignIn, errorMessage } = useAuthStore();
+  const { id } = useAuthStore();
+  const { errorMessage } = useCandidateStore();
+
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [skillsList, setSkillsList] = useState(null);
 
   const {
-    formState, school, degree, startDate, endDate, location, skills,  onInputChange, isFormValid, 
-    schoolValid, degreeValid, startDateValid, endDateValid, locationValid, skillsValid } = useForm( formData, formValidations );
+    formState, school, degree, startDate, endDate, location, onInputChange, isFormValid, 
+    schoolValid, degreeValid, startDateValid, endDateValid, locationValid } = useForm( formData, formValidations );
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
 
     if ( !isFormValid ) return;
-    startSignIn(formState);
+    console.log('formState', formState);
+    saveEducationInfo(id, { ...formState, skills: skillsList });
+
   };
 
   return (
@@ -94,11 +112,10 @@ export const ProfileEducation = () => {
               <Grid item xs={12}>
                 <TextField
                   label="startDate"
-                  type="text"
-                  placeholder="start date"
+                  type="date"
                   fullWidth
                   name="startDate"
-                  value= {startDate}
+                  value= {startDate || "2023-01-01" }
                   onChange={onInputChange}
                   error = {!!startDateValid && formSubmitted}
                   helperText = {startDateValid}
@@ -107,11 +124,10 @@ export const ProfileEducation = () => {
               <Grid item xs={12}>
                 <TextField
                   label="endDate"
-                  type="text"
-                  placeholder="end date"
+                  type="date"
                   fullWidth
                   name="endDate"
-                  value= {endDate}
+                  value= {endDate || "2023-01-01" }
                   onChange={onInputChange}
                   error = {!!endDateValid && formSubmitted}
                   helperText = {endDateValid}
@@ -131,20 +147,27 @@ export const ProfileEducation = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  label="skills"
-                  type="text"
-                  placeholder="skills"
-                  fullWidth
-                  name="skills"
-                  value= {skills}
-                  onChange={onInputChange}
-                  error = {!!skillsValid && formSubmitted}
-                  helperText = {skillsValid}
+                <Autocomplete
+                  id="skills"
+                  multiple
+                  limitTags={4}
+                  onChange={(event, value) => {
+                    console.log('skills', value)
+                    setSkillsList(value);
+                  }}
+                  options={skillsListSelect}
+                  getOptionLabel={(option) => option}
+                  // defaultValue={[skillList[1]]}
+                  filterSelectedOptions
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Skills"
+                      placeholder="Select your skills"
+                    />
+                  )}
                 />
               </Grid>
-              
-              
             </Grid>
             <Grid item sx={{ mt: 2 }}
               xs={12}

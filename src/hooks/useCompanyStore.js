@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { companyApi }  from '../api';
-import { checking, signup, signin, logout, showView, /*clearErrorMessages*/ } from '../store/company/companySlice';
+import { candidateApi, companyApi }  from '../api';
+import { checking, signup, signin, logout, showView, selectCandidate, /*clearErrorMessages*/ } from '../store/company/companySlice';
 
 
 export const useCompanyStore = () => {
@@ -11,6 +11,10 @@ export const useCompanyStore = () => {
 
     const startActiveView = (newView) => {
         dispatch(showView({ view:newView }))
+    }
+
+    const startSelectCandidate = (idCandidate) => {
+        dispatch(selectCandidate({ idCandidate }))
     }
 
     const startSignIn = async({ email, password }) => {
@@ -92,6 +96,7 @@ export const useCompanyStore = () => {
 
         //* Métodos
         startActiveView,
+        startSelectCandidate,
         startSignUp,
         startSignIn,
         checkAuthToken,
