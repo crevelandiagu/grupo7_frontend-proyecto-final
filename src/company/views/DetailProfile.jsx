@@ -160,9 +160,9 @@ export const DetailProfile = ({idCandidate}) => {
             infoCertificates?.certificates.map(cert =>
             (
               <Grid key={cert.name_certificatel}>
-                <Typography variant="h6" >{cert.name_certificatel} </Typography>
-                <Typography variant="body1" >{cert.company} </Typography>
-                <Typography variant="body2" >Inssued<Circle sx={{ widh: "10px", height: "10px" }} color="primary" /> {cert.expedition_date}</Typography>
+                <Typography variant="h6" >{cert.name_certificate} </Typography>
+                <Typography variant="body1" >Inssued<Circle sx={{ widh: "10px", height: "10px" }} color="primary" />{cert.company} </Typography>
+                <Typography variant="body2" >{cert.expedition_date}</Typography>
               </Grid>
             ))
           }
