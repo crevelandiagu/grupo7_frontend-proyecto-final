@@ -10,9 +10,6 @@ import { Landing } from "../auth/pages/Landing";
 import { useEffect } from "react";
 import { useAuthStore } from "../hooks";
 
-
-import { AppTheme } from "../theme";
-
 const router = createBrowserRouter([
   { 
     path: "/",
@@ -51,11 +48,8 @@ export const AppRouter = () => {
   }
 
   return (
-    <AppTheme>
       <RouterProvider 
         router={router}
-        // future={{ v7_startTransition: true }} 
       />
-    </AppTheme>
   )
 }

@@ -1,12 +1,13 @@
 
-// import { AuthProvider } from "./auth/context/AuthProvider"
 import { AppRouter } from "./router/AppRouter"
+import { AppTheme, blueTheme } from "./theme"
+
 
 export const JobsApp = () => {
 
   return (
-    // <AuthProvider>
+    <AppTheme theme={blueTheme}>
       <AppRouter />
-    // </AuthProvider>
+    </AppTheme>
   )
 }
