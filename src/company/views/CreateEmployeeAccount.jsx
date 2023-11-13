@@ -10,42 +10,50 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
+import { companyEmployeesApi } from '../../api';
 
 const formData = {
-  project:"",
   name: "",
   position: "",
 }
 
-const formValidations =  {
-// project: [ (value) => value.length>= 3, 'project must be at least 3 characters long' ],
-name: [(value) => value.length >= 3, 'name must be at least 5 characters long'],
-position: [(value) => value.length >= 5, 'position must be at least 5 characters long']
+const formValidations = {
+  name: [(value) => value.length >= 3, 'name must be at least 5 characters long'],
+  position: [(value) => value.length >= 3, 'position must be at least 5 characters long']
+}
+
+const saveAccount = async (companyId, name, position) => {
+  try {
+    const password = '$Qq123456';
+    const email = `${name}@company_${companyId}.com`;
+    const { data } = await companyEmployeesApi.post('/create-employee', { companyId, name, position, email, password })
+    console.log('data', data);
+    return data.message;
+  } catch (error) {
+    console.log('error', error);
+  }
 }
 
 const defaultTheme = createTheme();
 
 export const CreateEmployeeAccount = () => {
 
-  const [message, setMessage] = useState('');
-
-  const { startSignIn, errorMessage } = useAuthStore();
+  const { id } = useAuthStore();
+  
+  const [message] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const {
-    formState, project, name, position, onInputChange, isFormValid, 
-    nameValid, positionValid, } = useForm( formData, formValidations );
+    name, position, onInputChange, isFormValid,
+    nameValid, positionValid } = useForm(formData, formValidations);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
 
-    if ( !isFormValid ) return;
-    // startSignIn(formState);
-    setTimeout(() => {
-      setMessage('Project create successfully');
-    }, 1000);
-  };
+    if (!isFormValid) return;
+    saveAccount(id, name, position);
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -64,19 +72,6 @@ export const CreateEmployeeAccount = () => {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-            {/* <Grid item xs={12}>
-                <TextField
-                  label="project"
-                  type="text"
-                  placeholder='project'
-                  fullWidth
-                  name="project"
-                  value= {project}
-                  onChange={onInputChange}
-                  // error = {!!nameValid && formSubmitted}
-                  // helperText = {nameValid}
-                />
-              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   label="name"
@@ -84,10 +79,10 @@ export const CreateEmployeeAccount = () => {
                   placeholder='employee name'
                   fullWidth
                   name="name"
-                  value= {name}
+                  value={name}
                   onChange={onInputChange}
-                  error = {!!nameValid && formSubmitted}
-                  helperText = {nameValid}
+                  error={!!nameValid && formSubmitted}
+                  helperText={nameValid}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -97,22 +92,22 @@ export const CreateEmployeeAccount = () => {
                   placeholder="position"
                   fullWidth
                   name="position"
-                  value= {position}
+                  value={position}
                   onChange={onInputChange}
-                  error = {!!positionValid && formSubmitted}
-                  helperText = {positionValid}
+                  error={!!positionValid && formSubmitted}
+                  helperText={positionValid}
                 />
               </Grid>
-              
+
             </Grid>
             <Grid item sx={{ mt: 2 }}
               xs={12}
-              display={ message ? '' : 'none' }
-              // display={ errorMessage ? '' : 'none' }
+              display={message ? '' : 'none'}
+            // display={ errorMessage ? '' : 'none' }
 
             >
-                <Alert severity="success">{message}</Alert>
-            </Grid> 
+              <Alert severity="success">{message}</Alert>
+            </Grid>
             <Button
               type="submit"
               fullWidth

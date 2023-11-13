@@ -19,7 +19,7 @@ const defaultTheme = createTheme();
 const projects = getEnvProjects();
 const companyEmployees = getEnvCompanyEmployees();
 
-export const AssingProject = () => {
+export const AssignEvaluator = () => {
 
   const { id } = useAuthStore();
 
@@ -53,7 +53,7 @@ export const AssingProject = () => {
           }}
         >
           <Typography component="h1" variant="h4">
-            Assign Project
+            Assign Evaluator
           </Typography>
           <Box component="form" sx={{ mt: 3 }}>
             <Grid container direction="column" spacing={2} justifyContent="space-around" alignItems="start" sx={{ width: '396px' }}>
@@ -124,7 +124,49 @@ export const AssingProject = () => {
                   />
                 )}
               />
-              <Button fullWidth onClick={handledClick} variant="contained">Assign Project</Button>
+               <Autocomplete
+                id="employees"
+                sx={{ width: '100%', marginBottom: '15px' }}
+                onChange={(event, value) => {
+                  console.log('employees', value.employeeId)
+                  setSelectedEmployee(value.employeeId);
+                }}
+                open={openEmployees}
+                onOpen={() => {
+                  setopenEmployees(true);
+                }}
+                onClose={() => {
+                  setopenEmployees(false);
+                }}
+                isOptionEqualToValue={(option, value) => option.email === value.email}
+                getOptionLabel={(option) => option.email}
+                options={dataEmployees}
+                loading={loadingDataEmployees}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="candidate"
+                    InputProps={{
+                      ...params.InputProps,
+                      endAdornment: (
+                        <Fragment>
+                          {loadingDataEmployees ? <CircularProgress color="inherit" size={20} /> : null}
+                          {params.InputProps.endAdornment}
+                        </Fragment>
+                      ),
+                    }}
+                  />
+                )}
+              />
+              <TextField
+                label="Score"
+                placeholder="Score"
+                fullWidth
+              >
+
+              </TextField>
+
+              <Button fullWidth onClick={handledClick} variant="contained">Evaluate</Button>
               <Grid item sx={{ width: '380px' }}
                 display={message ? '' : 'none'}
               >

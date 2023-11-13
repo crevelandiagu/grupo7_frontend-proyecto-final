@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -6,48 +6,69 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Alert from '@mui/material/Alert';
+import Autocomplete from '@mui/material/Autocomplete';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { useAuthStore, useForm } from '../../hooks';
-import { Alert } from '@mui/material';
+import { useAuthStore, useFetch, useForm } from '../../hooks';
+import selectionProcessApi from '../../api/selectionProcess';
+import { getEnvProjects } from '../../helpers/getEnvVaribles';
 
 const formData = {
-  project:"",
-  candidate: "",
-  // date: "",
+  date: "",
   hour: "",
 }
 
-const formValidations =  {
-  project: [ (value) => value.length>= 3, 'name must be at least 8 characters long' ],
-  candidate: [(value) => value.length >= 5, 'description must be at least 5 characters long'],
-  // date: [(value) => value.length >= 5, 'date not valid format'],
-  hour: [(value) => value.length >= 5, 'hour not valid format'],
+const formValidations = {
+  date: [(value) => value.length >= 0, 'date is not valid'],
+  hour: [(value) => value.length >= 5, 'hour is not valid '],
+}
+
+const createInterview = async (companyId,  projectId, candidateId, dateTime, candidateName = `candidato_${candidateId}`, companyEmployeeId = 1, interviewStatus = 'create') => {
+  try {
+    const { data } = await selectionProcessApi.post('', {companyId,  projectId, candidateId, dateTime, candidateName, companyEmployeeId, interviewStatus })
+    console.log('data', data);
+    return data.message;
+  } catch (error) {
+    console.log('error', error);
+  }
 }
 
 const defaultTheme = createTheme();
 
+const projects = getEnvProjects();
+
 export const CreateInterview = () => {
 
-  const [message, setMessage] = useState('');
+  const { id } = useAuthStore();
 
-  const { startSignIn, errorMessage } = useAuthStore();
+  const [message, setMessage] = useState('');
+  const [openProjects, setOpenProjects] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [openCandidates, setOpenCandidates] = useState(false);
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
+
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const {
-    formState, project, candidate, hour, onInputChange, isFormValid, 
-    projectValid, candidateValid, hourValid } = useForm( formData, formValidations );
+  const { data: dataProjects, loading: loadingDataProject } = useFetch(`${projects}?companyId=${id}`)
 
+  const {
+    formState, date, hour, onInputChange, isFormValid,
+    dateValid, hourValid } = useForm(formData, formValidations);
+
+  console.log(!selectedCandidate, selectedCandidate?.length == 0, !selectedCandidate && selectedCandidate?.length == 0)
   const handleSubmit = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
 
-    if ( !isFormValid ) return;
-    // startSignIn(formState);
-    setTimeout(() => {
-      setMessage('Successfully scheduled interview');
-    }, 1200);
-  };
+    if (!isFormValid) return;
+    let dateTime = `${formState.date}T${formState.hour}:00`;
+    
+    console.log(id, selectedProject, selectedCandidate, dateTime )
+    createInterview(id, selectedProject, selectedCandidate, dateTime);
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -67,62 +88,108 @@ export const CreateInterview = () => {
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <TextField
-                  label="name of project"
-                  type="text"
-                  placeholder='name of project'
-                  fullWidth
-                  name="project"
-                  value= {project}
-                  onChange={onInputChange}
-                  error = {!!projectValid && formSubmitted}
-                  helperText = {projectValid}
+                <Autocomplete
+                  id="projects"
+                  sx={{ width: '100%', marginBottom: '15px' }}
+                  onChange={(event, value) => {
+                    setSelectedProject(value.id);
+                    setSelectedCandidate(value.project_employees_companie_id);
+                  }}
+                  open={openProjects}
+                  onOpen={() => {
+                    setOpenProjects(true);
+                  }}
+                  onClose={() => {
+                    setOpenProjects(false);
+                  }}
+                  isOptionEqualToValue={(option, value) => option.id === value.id}
+                  getOptionLabel={(option) => option.projectName}
+                  options={dataProjects}
+                  loading={loadingDataProject}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="projects"
+                      InputProps={{
+                        ...params.InputProps,
+                        endAdornment: (
+                          <Fragment>
+                            {loadingDataProject ? <CircularProgress color="inherit" size={20} /> : null}
+                            {params.InputProps.endAdornment}
+                          </Fragment>
+                        ),
+                      }}
+                    />
+                  )}
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  label="candidate"
-                  type="text"
-                  placeholder="candidate name"
-                  fullWidth
-                  name="candidate"
-                  value= {candidate}
-                  onChange={onInputChange}
-                  error = {!!candidateValid && formSubmitted}
-                  helperText = {candidateValid}
+                <Autocomplete
+                  disabled={!selectedCandidate}
+                  id="candidates"
+                  sx={{ width: '100%', marginBottom: '15px' }}
+                  onChange={(event, value) => {
+                    setSelectedCandidate(value);
+                  }}
+                  // open={openCandidates}
+                  // onOpen={() => {
+                  //   setOpenCandidates(true);
+                  // }}
+                  // onClose={() => {
+                  //   setOpenCandidates(false);
+                  // }}
+                  // isOptionEqualToValue={(option, value) => option === value}
+                  // getOptionLabel={(option) => option.projectName}
+                  options={selectedCandidate}
+                  // loading={loadingDataProject}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="candidates"
+                    // InputProps={{
+                    //   ...params.InputProps,
+                    //   endAdornment: (
+                    //     <Fragment>
+                    //       {loadingDataProject ? <CircularProgress color="inherit" size={20} /> : null}
+                    //       {params.InputProps.endAdornment}
+                    //     </Fragment>
+                    //   ),
+                    // }}
+                    />
+                  )}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} >
                 <TextField
-                  // label="date"
+                  label="date"
                   type="date"
-                  // placeholder="date"
                   fullWidth
                   name="date"
-                  // value= {date}
+                  value={date || new Date().toISOString().slice(0, 10)}
                   onChange={onInputChange}
-                  // error = {!!dateValid && formSubmitted}
-                  // helperText = {dateValid}
+                  error={!!dateValid && formSubmitted}
+                  helperText={dateValid}
                 />
+              </Grid>
+              <Grid item xs={12} >
                 <TextField
-                  // label="hour"
+                  label="hour"
                   type="time"
-                  // placeholder="hour"
                   fullWidth
                   name="hour"
-                  value= {hour}
+                  value={hour || '00:00'}
                   onChange={onInputChange}
-                  error = {!!hourValid && formSubmitted}
-                  helperText = {hourValid}
+                  error={!!hourValid && formSubmitted}
+                  helperText={hourValid}
                 />
               </Grid>
             </Grid>
             <Grid item sx={{ mt: 2 }}
               xs={12}
-              display={ message ? '' : 'none' }
+              display={message ? '' : 'none'}
             >
-                <Alert severity="success">{message}</Alert>
-            </Grid> 
+              <Alert severity="success">{message}</Alert>
+            </Grid>
             <Button
               type="submit"
               fullWidth
@@ -134,6 +201,6 @@ export const CreateInterview = () => {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }

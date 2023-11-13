@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
+import { projectsApi } from '../../api';
 
 const formData = {
   name:"",
@@ -21,13 +22,23 @@ name: [ (value) => value.length>= 3, 'name must be at least 8 characters long' ]
 description: [(value) => value.length >= 5, 'description must be at least 5 characters long']
 }
 
+const saveProject = async (companyId, projectName, description) => {
+  try {
+    const { data } = await projectsApi.post('/', { companyId, projectName, description })
+    console.log('data', data);
+    return data.message;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
 const defaultTheme = createTheme();
 
 export const Project = () => {
 
   const [message, setMessage] = useState('');
 
-  const { startSignIn, errorMessage } = useAuthStore();
+  const { id, errorMessage } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const {
@@ -36,11 +47,11 @@ export const Project = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setFormSubmitted(true);
+    setFormSubmitted(true);
 
-    // if ( !isFormValid ) return;
-    // startSignIn(formState);
-    setMessage('Project create successfully');
+    if ( !isFormValid ) return;
+    saveProject(id, name, description);
+    
   };
 
   return (

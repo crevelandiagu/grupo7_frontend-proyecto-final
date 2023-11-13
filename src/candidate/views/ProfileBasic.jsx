@@ -10,13 +10,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useAuthStore, useCandidateStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
+import { candidateApi } from '../../api';
 
 const formData = {
   name:'',
-  numberId: '',
   lastName: '',
-  phone: '',
+  numberId: '',
   location: '',
+  phone: '',
 }
 
 const formValidations =  {
@@ -25,6 +26,16 @@ const formValidations =  {
   numberId: [ (value) => value.length>= 3, 'number must be at least 8 characters long' ],
   location: [ (value) => value.length>= 3, 'location must be at least 8 characters long' ],
   phone: [ (value) => value.length>= 3, 'phone must be at least 8 characters long' ],
+}
+
+const saveBasicInfo = async (candidateId, { birthdate='01/01/1999', lastName:lastname, location:nacionality, name, numberId, phone: phone_number }) => {
+  try {
+    const { data } = await candidateApi.post(`/profile/basicinfo/${candidateId}`, { birthdate, lastname, nacionality, name, numberId, phone_number })
+    console.log('data', data);
+    return data.message;
+  } catch (error) {
+    console.log('error', error);
+  }
 }
 
 const defaultTheme = createTheme();
@@ -44,8 +55,8 @@ export const ProfileBasic = () => {
     setFormSubmitted(true);
 
     if ( !isFormValid ) return;
-    console.log('form:', {...formState, id})
-    startSaveProfile({...formState, id});
+    console.log('form:', {...formState})
+    saveBasicInfo(id, {...formState});
   };
 
   return (

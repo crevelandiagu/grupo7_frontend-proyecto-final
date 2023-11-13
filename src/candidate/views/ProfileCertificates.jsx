@@ -10,38 +10,51 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
+import { candidateApi } from '../../api';
 
 const formData = {
-  certification:'',
+  certification: '',
   issuingOrganization: '',
   startDate: '',
   endDate: '',
 }
 
-const formValidations =  {
-  certification: [ (value) => value.length>= 3, 'certification must be at least 3 characters long' ],
-  issuingOrganization: [ (value) => value.length>= 3, 'issuing organization must be at least 3 characters long' ],
-  startDate: [ (value) => value.length>= 3, 'startDate must be valid date' ],
-  endDate: [ (value) => value.length>= 3, 'endDate must be a valid date' ],
+const formValidations = {
+  certification: [(value) => value.length >= 3, 'certification must be at least 3 characters long'],
+  issuingOrganization: [(value) => value.length >= 3, 'issuing organization must be at least 3 characters long'],
+  startDate: [(value) => value.length >= 0, 'star date must be a date valid'],
+  endDate: [(value) => value.length >= 0, 'end date must be a date valid'],
+}
+
+const saveCerticatesInfo = async (candidateId, { issuingOrganization: company, certification: name_certificate, endDate: date_expiry, startDate: expedition_date }) => {
+  try {
+    console.log(expedition_date)
+    const { data } = await candidateApi.post(`/profile/certificates/${candidateId}`, { company, name_certificate, date_expiry, expedition_date })
+    console.log('data', data);
+    return data.message;
+  } catch (error) {
+    console.log('error', error);
+  }
 }
 
 const defaultTheme = createTheme();
 
 export const ProfileCertificates = () => {
 
-  const { startSignIn, errorMessage } = useAuthStore();
+  const { id } = useAuthStore();
+  const { errorMessage } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const {
-    formState, certification, issuingOrganization, startDate, endDate, onInputChange, isFormValid, 
-    certificationValid, issuingOrganizationValid, startDateValid, endDateValid } = useForm( formData, formValidations );
+    formState, certification, issuingOrganization, startDate, endDate, onInputChange, isFormValid,
+    certificationValid, issuingOrganizationValid, startDateValid, endDateValid } = useForm(formData, formValidations);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
-
-    if ( !isFormValid ) return;
-    startSignIn(formState);
+    if (!isFormValid) return;
+    console.log('formState', formState);
+    saveCerticatesInfo(id, { ...formState });
   };
 
   return (
@@ -68,10 +81,10 @@ export const ProfileCertificates = () => {
                   placeholder='certification'
                   fullWidth
                   name="certification"
-                  value= {certification}
+                  value={certification}
                   onChange={onInputChange}
-                  error = {!!certificationValid && formSubmitted}
-                  helperText = {certificationValid}
+                  error={!!certificationValid && formSubmitted}
+                  helperText={certificationValid}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -81,45 +94,43 @@ export const ProfileCertificates = () => {
                   placeholder='issuing organization'
                   fullWidth
                   name="issuingOrganization"
-                  value= {issuingOrganization}
+                  value={issuingOrganization}
                   onChange={onInputChange}
-                  error = {!!issuingOrganizationValid && formSubmitted}
-                  helperText = {issuingOrganizationValid}
+                  error={!!issuingOrganizationValid && formSubmitted}
+                  helperText={issuingOrganizationValid}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   label="startDate"
-                  type="text"
-                  placeholder="start date"
+                  type="date"
                   fullWidth
                   name="startDate"
-                  value= {startDate}
+                  value={startDate || '2023-01-01'}
                   onChange={onInputChange}
-                  error = {!!startDateValid && formSubmitted}
-                  helperText = {startDateValid}
+                  error={!!startDateValid && formSubmitted}
+                  helperText={startDateValid}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   label="endDate"
-                  type="text"
-                  placeholder="end date"
+                  type="date"
                   fullWidth
                   name="endDate"
-                  value= {endDate}
+                  value={endDate || '2023-01-01'}
                   onChange={onInputChange}
-                  error = {!!endDateValid && formSubmitted}
-                  helperText = {endDateValid}
+                  error={!!endDateValid && formSubmitted}
+                  helperText={endDateValid}
                 />
               </Grid>
             </Grid>
             <Grid item sx={{ mt: 2 }}
               xs={12}
-              display={ errorMessage ? '' : 'none' }
+              display={errorMessage ? '' : 'none'}
             >
-                <Alert severity="error">{errorMessage}</Alert>
-            </Grid> 
+              <Alert severity="error">{errorMessage}</Alert>
+            </Grid>
             <Button
               type="submit"
               fullWidth
