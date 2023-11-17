@@ -18,8 +18,6 @@ jobs:
           node-version: '16.x'
       - name: Install dependencies
         run: npm install
-      - name: run jest
-        run: npm run test
       - name: Test and coverage
         run: npm run coverage
       - name: SonarCloud Scan
