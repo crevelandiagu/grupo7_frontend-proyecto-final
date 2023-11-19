@@ -14,10 +14,10 @@ import { candidateApi } from '../../api';
 
 const formData = {
   name:'',
-  numberId: '',
   lastName: '',
-  phone: '',
+  numberId: '',
   location: '',
+  phone: '',
 }
 
 const formValidations =  {
@@ -28,9 +28,9 @@ const formValidations =  {
   phone: [ (value) => value.length>= 3, 'phone must be at least 8 characters long' ],
 }
 
-const saveBasicInfo = async (candidateId, { birthdate='01/01/1999', lastname, location:nacionality, name, numberId, phone: phone_number }) => {
+const saveBasicInfo = async (candidateId, { birthdate='01/01/1999', lastName:lastname, location:nacionality, name, numberId, phone: phone_number }) => {
   try {
-    const { data } = await candidateApi.post(`/profile/basicinfo/${candidateId}`, { birthdate, lastname, nacionality, name, numberId, phone: phone_number })
+    const { data } = await candidateApi.post(`/profile/basicinfo/${candidateId}`, { birthdate, lastname, nacionality, name, numberId, phone_number })
     console.log('data', data);
     return data.message;
   } catch (error) {

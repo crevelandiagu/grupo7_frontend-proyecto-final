@@ -7,7 +7,6 @@ import {
     Notifications,
 } from "@mui/icons-material";
 
-import { blueTheme } from "../../theme/blueTheme";
 import { useAuthStore } from "../../hooks";
 
 export const NavBar = ({ drawerWidth = 240 }) => {
@@ -15,15 +14,13 @@ export const NavBar = ({ drawerWidth = 240 }) => {
     const { startLogout } = useAuthStore();
 
     return (
-    <ThemeProvider theme={blueTheme}>
         <AppBar
             position="fixed"
             sx={{
                 width: { sm: `calc(100% - ${drawerWidth}px)` },
-                ml: { sm: `${drawerWidth}px`},
+                ml: { sm: `${drawerWidth}px` },
                 bgcolor: 'primary.main'
             }}
-
         >
             <Toolbar >
                 <IconButton
@@ -84,6 +81,5 @@ export const NavBar = ({ drawerWidth = 240 }) => {
                 </Grid>
             </Toolbar>
         </AppBar>
-        </ThemeProvider>
     );
 };

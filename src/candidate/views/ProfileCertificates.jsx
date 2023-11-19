@@ -28,6 +28,7 @@ const formValidations = {
 
 const saveCerticatesInfo = async (candidateId, { issuingOrganization: company, certification: name_certificate, endDate: date_expiry, startDate: expedition_date }) => {
   try {
+    console.log(expedition_date)
     const { data } = await candidateApi.post(`/profile/certificates/${candidateId}`, { company, name_certificate, date_expiry, expedition_date })
     console.log('data', data);
     return data.message;
@@ -52,7 +53,7 @@ export const ProfileCertificates = () => {
     event.preventDefault();
     setFormSubmitted(true);
     if (!isFormValid) return;
-    // console.log('formState', formState);
+    console.log('formState', formState);
     saveCerticatesInfo(id, { ...formState });
   };
 
