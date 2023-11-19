@@ -39,7 +39,7 @@ export const SearchCandidate = () => {
   const { startActiveView, startSelectCandidate } = useCompanyStore();
 
   const [skillsList, setSkillsList] = useState(null);
-  const [queryString, setQueryString] = useState('?experienceYears=100')
+  const [queryString, setQueryString] = useState('')
 
   const { data, loading } = useFetch(`${searchTool}/search${queryString}`)
   const { experience, onInputChange } = useForm();
