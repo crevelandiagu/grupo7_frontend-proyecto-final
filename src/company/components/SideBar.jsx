@@ -53,6 +53,11 @@ export const SideBar = ({ drawerWidth = 240 }) => {
             "to": "/company/interview",
             view: 'assignEvaluator'
         },
+        {
+            "name": "Performance",
+            "to": "/company/performance",
+            view: 'performance'
+        },
         
     ]
 
