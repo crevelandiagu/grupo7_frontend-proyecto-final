@@ -38,6 +38,10 @@ export const SideBar = ({ drawerWidth = 240 }) => {
             "name": "Interview",
             view: 'interview'
         },
+        {
+            "name": "Sign contract",
+            view: 'signcontract'
+        },
     ]
 
     return (
@@ -132,7 +136,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                         </ListItemButton>
                     </ListItem>
                     <ListItem key='Assesment' disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={() => { startActiveView('assesment') }}>
                             <ListItemIcon>
                                 <TurnedInNot />
                             </ListItemIcon>
@@ -142,7 +146,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                         </ListItemButton>
                     </ListItem>
                     <ListItem key='Sign contract' disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={() => { startActiveView('signcontract') }}>
                             <ListItemIcon>
                                 <TurnedInNot />
                             </ListItemIcon>

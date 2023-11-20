@@ -93,7 +93,7 @@ export const CreateInterview = () => {
                   sx={{ width: '100%', marginBottom: '15px' }}
                   onChange={(event, value) => {
                     setSelectedProject(value.id);
-                    setSelectedCandidate(value.project_employees_companie_id);
+                    setSelectedCandidate(value.candidate_project_id);
                   }}
                   open={openProjects}
                   onOpen={() => {
