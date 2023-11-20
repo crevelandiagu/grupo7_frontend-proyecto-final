@@ -26,3 +26,7 @@ export const getEnvSearchTool = () => {
 export const getEnvSelectionProcess = () => {
   return import.meta.env.VITE_API_SELECTION_PROCESS || import.meta.env.VITE_API_SELECTION_PROCESS_LOCAL
 }
+
+export const getEnvPerformance = () => {
+  return import.meta.env.VITE_API_PERFORMANCE || import.meta.env.VITE_API_PERFORMANCE_LOCAL
+}
