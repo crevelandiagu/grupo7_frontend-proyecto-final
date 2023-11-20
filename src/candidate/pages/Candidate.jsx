@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { CandidateLayout } from '../layout/CandidateLayout';
 import { CandidateDashboard, Interview, ProfileBasic, ProfileCertificates, ProfileEducation, ProfileExperience  } from '../views';
+import { SignContract } from '../views/SignContract';
 
 export const Candidate = () => {
 
@@ -12,6 +13,7 @@ export const Candidate = () => {
   || view === 'education' && <ProfileEducation />
   || view === 'experience' && <ProfileExperience />
   || view === 'interview' && <Interview />
+  || view === 'signcontract' && <SignContract />
 
   return (
     <CandidateLayout>
