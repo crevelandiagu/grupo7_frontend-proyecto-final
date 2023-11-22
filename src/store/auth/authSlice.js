@@ -7,8 +7,6 @@ export const authSlice = createSlice({
     profile:null,
     id: null,
     email: null,
-    displayName: null,
-    photoURL: null,
     errorMessage: null,
   },
   reducers: {

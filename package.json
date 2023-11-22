@@ -10,6 +10,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "jest",
+    "test:watch": "jest --watch",
     "coverage": "jest --collect-coverage"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "@mui/x-data-grid": "^6.18.0",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.5.1",
+    "dotenv": "^16.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.3",
