@@ -1,0 +1,27 @@
+name: test sonarcloud
+run-name: ${{ github.actor }} is test sonarcloud App Web 🚀
+on:
+  push:
+  pull_request:
+
+jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout de repositorio
+        uses: actions/checkout@v2
+
+      - name: Use Node 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+      - name: Install dependencies
+        run: npm install
+      - name: Test and coverage
+        run: npm run coverage
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
