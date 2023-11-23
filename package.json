@@ -10,8 +10,9 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "jest",
+    "test:cov": "jest --coverageReporters=\"text-summary\"",
     "test:watch": "jest --watch",
-    "coverage": "jest --collect-coverage"
+    "coverage": "jest --collectCoverage"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
