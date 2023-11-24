@@ -1,7 +1,7 @@
 {
   "name": "grupo7_frontend-proyecto-final",
   "private": true,
-  "version": "3.17.4",
+  "version": "3.21.4",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
