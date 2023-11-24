@@ -17,7 +17,21 @@ Before(async function() {
    this.projectdescription = faker.lorem.sentence();
    this.employeename = faker.person.fullName();
    this.employeeposition = faker.person.jobTitle();
-  })
+   this.candidatename = faker.person.firstName();
+   this.candidatelastname = faker.person.lastName();
+   this.candidateid = faker.number.int({min:100000, max:99999999999})
+   this.candidatelocation = faker.location.country();
+   this.candidatetel = faker.number.int({min:100000, max:99999999999})
+   this.candidateposition = faker.person.jobTitle();
+   this.candidatecompany = faker.company.name();
+   this.candidateexperience = faker.date.past().toLocaleDateString('en-GB').split(',')[0].replaceAll('-', '/');
+   this.candidateschool = faker.company.name();
+   this.candidatedegree = faker.person.jobTitle();
+   this.candidatecertificate = faker.person.jobTitle();
+   this.candidatecertorg = faker.company.name();
+   this.candidateinterview = faker.date.future().toLocaleDateString('en-GB').split(',')[0].replaceAll('-', '/');
+
+})
   
   After(async function() {
     await this.driver.quit();
