@@ -6,7 +6,6 @@ export const companySlice = createSlice({
     status: null,
     idCandidate: null,
     view: 'dashboard',
-
     errorMessage: null,
   },
   reducers: {
