@@ -22,18 +22,15 @@ export const authSlice = createSlice({
       state.status = 'authenticated';
       state.id = payload.id;
       state.email = payload.email;
-      // state.user   = payload.user;
       state.errorMessage = undefined;
     },
     signin: (state, { payload }) => {
       state.status = 'authenticated';
       state.id = payload.id;
       state.email = payload.email;
-      // state.user   = payload.user;
       state.errorMessage = undefined;
     },
     logout: (state, { payload }) => {
-      console.log('payload-logout', payload);
       state.status = 'not-authenticated';
       state.id = null;
       state.email = null;

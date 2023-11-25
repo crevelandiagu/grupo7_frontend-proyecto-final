@@ -1,4 +1,12 @@
-import { authSlice, checking, clearErrorMessages, logout, setProfile, signin, signup } from '../../../src/store/auth/authSlice';
+import {
+  authSlice,
+  checking,
+  clearErrorMessages,
+  logout,
+  setProfile,
+  signin,
+  signup,
+} from '../../../src/store/auth/authSlice';
 import { authenticated, initialState } from '../../fixtures/authStates';
 import { testCandidateCredentials } from '../../fixtures/testUser';
 
@@ -31,7 +39,10 @@ describe('authSlice', () => {
   });
 
   test('It should change the status to authenticade ', () => {
-    const state = authSlice.reducer(initialState, signin(testCandidateCredentials));
+    const state = authSlice.reducer(
+      initialState,
+      signin(testCandidateCredentials)
+    );
     expect(state).toEqual({
       status: 'authenticated',
       profile: null,
@@ -42,7 +53,10 @@ describe('authSlice', () => {
   });
 
   test('It should change the status to authenticade ', () => {
-    const state = authSlice.reducer(initialState, signup(testCandidateCredentials));
+    const state = authSlice.reducer(
+      initialState,
+      signup(testCandidateCredentials)
+    );
     expect(state).toEqual({
       status: 'authenticated',
       profile: null,
@@ -52,29 +66,25 @@ describe('authSlice', () => {
     });
   });
 
-
   test('It should change the state to not-authenticated ', () => {
     const state = authSlice.reducer(authenticated, logout());
-    console.log('***', state)
     expect(state).toEqual({
       status: 'not-authenticated',
-      profile:null,
+      profile: null,
       id: null,
       email: null,
-      errorMessage: undefined
+      errorMessage: undefined,
     });
   });
 
   test('It should delete errorMessage on state ', () => {
     const state = authSlice.reducer(initialState, clearErrorMessages());
-    console.log(state)
     expect(state).toEqual({
       status: 'not-authenticated',
-      profile:null,
+      profile: null,
       id: null,
       email: null,
-      errorMessage: undefined
+      errorMessage: undefined,
     });
   });
-
 });
