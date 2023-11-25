@@ -81,7 +81,7 @@ export const SignIn = () => {
                 value={email}
                 onChange={onInputChange}
                 error={!!emailValid && formSubmitted}
-                helperText={emailValid}
+                helperText={formSubmitted? emailValid: ''}
               />
             </Grid>
             <Grid item xs justifySelf="flex-end">
@@ -99,7 +99,7 @@ export const SignIn = () => {
                 value={password}
                 onChange={onInputChange}
                 error={!!passwordValid && formSubmitted}
-                helperText={passwordValid}
+                helperText={formSubmitted? passwordValid: ''}
               />
             </Grid>
           </Grid>

@@ -6,8 +6,6 @@ import { Performance } from '../views/Performance';
 
 export const Company = () => {
   const { view, idCandidate } = useSelector(state => state.company);
-  console.log('view', view)
-
 
   const children = view === 'dashboard' && <CompanyDashboard />
     || view === 'search' && <SearchCandidate />
@@ -21,8 +19,6 @@ export const Company = () => {
     || view === 'assignEvaluator' && <AssignEvaluator />
     || view === 'performance' && <Performance />
 
-
-  console.log('view', view, children);
   return (
     <CompanyLayout>
       {

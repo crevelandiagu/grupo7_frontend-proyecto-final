@@ -33,7 +33,7 @@ const selectionProcess = getEnvSelectionProcess();
 
 export const Interview = () => {
   const { id } = useAuthStore();
-  const { data, loading } = useFetch(`${selectionProcess}/candidate/${id}`)
+  const { data, loading } = useFetch(`${selectionProcess}/interviews/candidate/${id}`)
 
   console.log(loading, !data,  loading && !data)
 
