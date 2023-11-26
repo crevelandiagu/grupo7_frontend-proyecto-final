@@ -21,36 +21,11 @@ export const companySlice = createSlice({
       state.user   = null;
       state.errorMessage = undefined;
     },
-    signup: (state, {payload}) => {
-      state.status = 'authenticated';
-      state.id   = payload.id;
-      state.email = payload.email;
-      // state.user   = payload.user;
-      state.errorMessage = undefined;
-      
-    },
-    signin: (state, {payload}) => {
-      state.status = 'authenticated';
-      state.id   = payload.id;
-      state.email = payload.email;
-      // state.user   = payload.user;
-      state.errorMessage = undefined;
-    },
-    logout: (state, {payload}) => {
-      console.log('payload-logout', payload)
-      state.status = 'not-authenticated';
-      state.user   = null;
-      state.errorMessage = payload;
-      
-    },
     clearErrorMessages: (state) => {
       state.errorMessage = undefined;
     },
-    // checkingCredentials: (state) => {
-    //   state.status = 'checking';
-    // },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { showView, selectCandidate, checking, signup, signin, logout, clearErrorMessages, checkingCredentials } = companySlice.actions
+export const { showView, selectCandidate, clearErrorMessages } = companySlice.actions
