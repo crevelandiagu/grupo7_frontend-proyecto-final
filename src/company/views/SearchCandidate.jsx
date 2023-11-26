@@ -132,8 +132,8 @@ export const SearchCandidate = () => {
                 gap: '5px',
               }}>
                 <CardContent >
-                  <Typography sx={{ fontSize: 14, color: 'primary' }} gutterBottom>
-                    <strong>Name: </strong>{candidate.name} {candidate.lastName} <Circle sx={{ widh: "10px", height: "10px" }} color="primary" />  <strong>Exp: </strong> {candidate.years_exp}
+                  <Typography sx={{ fontSize: 14, color: 'primary.main' }} gutterBottom>
+                    <strong>Name: </strong>{candidate.name} {candidate.lastName} <Circle sx={{ widh: "10px", height: "10px" }} color="primary.main" />  <strong>Exp: </strong> {candidate.years_exp}
                   </Typography>
                   {candidate.skills.skills.map((skill) => (
                     <Chip key={skill} label={skill} size='small' sx={{ margin: '3px' }} />
