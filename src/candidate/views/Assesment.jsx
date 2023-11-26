@@ -6,13 +6,13 @@ import Container from '@mui/material/Container';
 
 import { useAuthStore, useFetch } from '../../hooks';
 import { Alert, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
-import { candidateApi } from '../../api';
 import { getEnvSelectionProcess } from '../../helpers/getEnvVaribles';
 
 
-const sendAssesment = async (id = 1,) => {
+
+const sendAssesment = async (answer) => {
   try {
-    const { data } = await candidateApi.get(`/assement/take-exam/${id}/candidate`)
+    const { data } = await selectionProcessApi.post(`/assement/take-exam/1/candidate`, { answer })
     console.log('data', data);
     return data.message;
   } catch (error) {
@@ -20,39 +20,76 @@ const sendAssesment = async (id = 1,) => {
   }
 }
 
+
+
 const questions = [
   {
-    question: "What is the capital of France?",
-    options: ["Paris", "London", "Madrid", "Rome"]
+    "choices": [
+      "JavaScript Object Notation",
+      "JavaScript Object Normalization",
+      "JavaScript Object-Oriented Notation"
+    ],
+    "id": 0,
+    "question": "JSON stands for "
   },
   {
-    question: "Which planet is known as the Red Planet?",
-    options: ["Mars", "Jupiter", "Venus", "Saturn"]
+    "choices": [
+      "xml format",
+      "text format",
+      "JavaScript"
+    ],
+    "id": 1,
+    "question": " JSON is a _____ for storing and transporting data."
   },
   {
-    question: "What is the largest ocean in the world?",
-    options: ["Pacific Ocean", "Atlantic Ocean", "Indian Ocean", "Arctic Ocean"]
+    "choices": [
+      "Ajax",
+      "JavaScript",
+      "Php"
+    ],
+    "id": 2,
+    "question": "The JSON syntax is a subset of the _____ syntax."
   },
   {
-    question: "Who painted the Mona Lisa?",
-    options: ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Michelangelo"]
+    "choices": [
+      "Commas",
+      "Colons",
+      "Hyper"
+    ],
+    "id": 3,
+    "question": "In the JSON syntax, data is separated by _____."
   },
   {
-    question: "What is the chemical symbol for gold?",
-    options: ["Au", "Ag", "Fe", "Cu"]
+    "choices": [
+      "True",
+      "False",
+      "None"
+    ],
+    "id": 4,
+    "question": " JSON names (keys) require double quotes?"
   }
-];
-
+]
+const answerList = [];
 const selectionProcessApi = getEnvSelectionProcess()
 
 export const Assesment = () => {
-
+  // const [ answerList, setAnswerList ] = useState([]);
   const { id, errorMessage } = useAuthStore();
-  const { data, loading } = useFetch(`${selectionProcessApi}/assement/take-exam/1/candidate/`)
+  const { data, loading } = useFetch(`${selectionProcessApi}/assement/take-exam/1/candidate`)
+
+  function handleClick(event) {
+    const selectedAnswer = event.target.value;
+    const selectedAnswerId = event.target.id;
+    const questionId = event.target.name.split('-')[1];
+    const answerObject = { id: parseInt(questionId), answer: selectedAnswerId };
+    answerList[questionId] = answerObject;
+
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    sendAssesment(id);
+    if (questions.length !== answerList.length) return
+    sendAssesment(answerList);
   };
 
   return (
@@ -77,13 +114,13 @@ export const Assesment = () => {
                   aria-label={`question-${index}`}
                   name={`question-${index}`}
                   defaultValue=""
-
+                  onClick={handleClick}
                 >
-                  {question.options.map((option, optionIndex) => (
+                  {question.choices.map((option, optionIndex) => (
                     <FormControlLabel
                       key={optionIndex}
                       value={option}
-                      control={<Radio size="small" />}
+                      control={<Radio id={optionIndex} size="small" onClick={handleClick} />}
                       label={option}
                     />
                   ))}
