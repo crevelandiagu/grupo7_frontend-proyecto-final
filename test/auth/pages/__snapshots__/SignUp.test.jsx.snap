@@ -37,7 +37,6 @@ exports[`Test to componenet <Landing /> Should be match with snapshot 1`] = `
                 class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
               >
                 <input
-                  aria-describedby=":r0:-helper-text"
                   aria-invalid="false"
                   class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
                   id=":r0:"
@@ -59,12 +58,6 @@ exports[`Test to componenet <Landing /> Should be match with snapshot 1`] = `
                   </legend>
                 </fieldset>
               </div>
-              <p
-                class="MuiFormHelperText-root MuiFormHelperText-sizeMedium MuiFormHelperText-contained css-1wc848c-MuiFormHelperText-root"
-                id=":r0:-helper-text"
-              >
-                Enter a valid email
-              </p>
             </div>
           </div>
           <div
@@ -85,7 +78,6 @@ exports[`Test to componenet <Landing /> Should be match with snapshot 1`] = `
                 class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
               >
                 <input
-                  aria-describedby=":r1:-helper-text"
                   aria-invalid="false"
                   class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
                   id=":r1:"
@@ -107,12 +99,6 @@ exports[`Test to componenet <Landing /> Should be match with snapshot 1`] = `
                   </legend>
                 </fieldset>
               </div>
-              <p
-                class="MuiFormHelperText-root MuiFormHelperText-sizeMedium MuiFormHelperText-contained css-1wc848c-MuiFormHelperText-root"
-                id=":r1:-helper-text"
-              >
-                password must be at least 8 characters long
-              </p>
             </div>
           </div>
         </div>
