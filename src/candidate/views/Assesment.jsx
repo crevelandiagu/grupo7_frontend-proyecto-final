@@ -6,7 +6,8 @@ import Container from '@mui/material/Container';
 
 import { useAuthStore, useFetch } from '../../hooks';
 import { Alert, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
-import { candidateApi, selectionProcess } from '../../api';
+import { candidateApi } from '../../api';
+import { getEnvSelectionProcess } from '../../helpers/getEnvVaribles';
 
 
 const sendAssesment = async (id = 1,) => {
@@ -42,11 +43,12 @@ const questions = [
   }
 ];
 
+const selectionProcessApi = getEnvSelectionProcess()
 
 export const Assesment = () => {
 
   const { id, errorMessage } = useAuthStore();
-  const { data, loading } = useFetch(`${selectionProcess}/assement/take-exam/1/candidate`)
+  const { data, loading } = useFetch(`${selectionProcessApi}/assement/take-exam/1/candidate/`)
 
   const handleSubmit = (event) => {
     event.preventDefault();

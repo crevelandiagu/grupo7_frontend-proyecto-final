@@ -32,13 +32,13 @@ const saveProject = async (companyId, projectName, description) => {
 
 export const Project = () => {
 
-  const [message, setMessage] = useState('');
+  const [message] = useState('');
 
-  const { id, errorMessage } = useAuthStore();
+  const { id } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const {
-    formState, name, description, onInputChange, isFormValid,
+    name, description, onInputChange, isFormValid,
     nameValid, descriptionValid, } = useForm(formData, formValidations);
 
   const handleSubmit = (event) => {

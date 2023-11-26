@@ -1,43 +1,74 @@
-import { Grid, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { getEnvSelectionProcess } from '../../helpers/getEnvVaribles';
 import { useAuthStore, useFetch } from '../../hooks';
+import selectionProcessApi from '../../api/selectionProcess';
+
+
+
+const sendScore = (params) => {
+  const score = params.row.score;
+  const idInterview = params.row.id;
+  if(score === 'Pending') return;
+  assignScoreInterview(idInterview, score)
+}
+
+const assignScoreInterview = async (idInterview, score) => {
+  try {
+    const { data } = await selectionProcessApi.post(`/interviews/score/${idInterview}`, { score: score })
+    console.log('data', data);
+    return data.message;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 20 },
-  { field: 'project', headerName: 'Project', width: 200 },
+  { field: 'idInterview', headerName: 'Interview', width: 80 },
+  { field: 'project', headerName: 'Project', width: 65},
   {
     field: 'candidate',
     headerName: 'Candidate',
     type: 'text',
     width: 200,
-    editable: true,
+    editable: false,
   },
   {
     field: 'date',
     headerName: 'Date',
-    width: 130,
-    editable: true,
+    width: 180,
+    editable: false,
   },
   {
     field: 'score',
     headerName: 'Score',
     type: 'number',
-    width: 80,
+    width: 90,
     editable: true,
   },
+  {
+    field: 'click',
+    headerName: 'Action',
+    type: 'click',
+    width: 110,
+    renderCell: (params) => {
+      return (
+        <strong>
+          <Button variant='contained' size='small' onClick={sendScore(params)} >Evaluate</Button>
+        </strong>
+      )
+    }
+  },
 ];
-
 
 const selectionProcess = getEnvSelectionProcess();
 
 export const Interview = () => {
 
   const { id } = useAuthStore();
-  const { data, loading } = useFetch(`${selectionProcess}/interviews/company/${id}`)
-
-  console.log(loading, !data,  loading && !data)
+  const { data } = useFetch(`${selectionProcess}/interviews/company/${id}`)
 
   return (
     <Box>
@@ -51,10 +82,12 @@ export const Interview = () => {
         rows={  
             data?.map((item, index) => ({
             id: index+1,
+            idInterview: item.id,
             project: item.project_id,
             candidate: item.candidate_name,
             date: item.date_interview,
-            score: item.score,
+            score: item.score || 'Pending',
+            click: item.id
           })) || []
         }
         initialState={{
@@ -65,8 +98,8 @@ export const Interview = () => {
           },
         }}
         pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
+        // checkboxSelection
+        // disableRowSelectionOnClick
       />
     </Box >
   );

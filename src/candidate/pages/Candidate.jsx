@@ -1,8 +1,6 @@
 import { useSelector } from 'react-redux';
 import { CandidateLayout } from '../layout/CandidateLayout';
-import { CandidateDashboard, Interview, ProfileBasic, ProfileCertificates, ProfileEducation, ProfileExperience  } from '../views';
-import { SignContract } from '../views/SignContract';
-import { Assesment } from '../views/Assesment';
+import { CandidateDashboard, Interview, ProfileBasic, ProfileCertificates, ProfileEducation, ProfileExperience, SignContract, Assesment  } from '../views';
 
 export const Candidate = () => {
 

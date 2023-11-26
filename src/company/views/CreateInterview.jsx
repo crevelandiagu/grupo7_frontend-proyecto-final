@@ -14,18 +14,18 @@ import selectionProcessApi from '../../api/selectionProcess';
 import { getEnvProjects } from '../../helpers/getEnvVaribles';
 
 const formData = {
-  date: "",
-  hour: "",
+  date: new Date().toISOString().slice(0, 10),
+  hour: '00:00',
 }
 
 const formValidations = {
   date: [(value) => value.length >= 0, 'date is not valid'],
-  hour: [(value) => value.length >= 5, 'hour is not valid '],
+  hour: [(value) => value.length >= 0, 'hour is not valid '],
 }
 
-const createInterview = async (companyId, projectId, candidateId, dateTime, candidateName = `candidato_${candidateId}`, companyEmployeeId = 1, interviewStatus = 'create') => {
+const createInterview = async (companyId, projectId, {candidate_id:candidateId, full_name:candidateName}, dateTime, companyEmployeeId = 1, interviewStatus = 'create') => {
   try {
-    const { data } = await selectionProcessApi.post('', { companyId, projectId, candidateId, dateTime, candidateName, companyEmployeeId, interviewStatus })
+    const { data } = await selectionProcessApi.post('/interviews', { companyId, projectId, candidateId, dateTime, candidateName, companyEmployeeId, interviewStatus })
     console.log('data', data);
     return data.message;
   } catch (error) {
@@ -42,6 +42,7 @@ export const CreateInterview = () => {
   const [message] = useState('');
   const [openProjects, setOpenProjects] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  // const [openCandidates, setOpenCandidates] = useState(false);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
 
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -52,16 +53,13 @@ export const CreateInterview = () => {
     formState, date, hour, onInputChange, isFormValid,
     dateValid, hourValid } = useForm(formData, formValidations);
 
-  console.log(!selectedCandidate, selectedCandidate?.length == 0, !selectedCandidate && selectedCandidate?.length == 0)
   const handleSubmit = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
 
     if (!isFormValid) return;
     let dateTime = `${formState.date}T${formState.hour}:00`;
-
-    console.log(id, selectedProject, selectedCandidate, dateTime)
-    createInterview(id, selectedProject, selectedCandidate, dateTime);
+    createInterview(id, selectedProject, selectedCandidate, dateTime, );
   }
 
   return (
@@ -85,7 +83,7 @@ export const CreateInterview = () => {
                 sx={{ width: '100%', marginBottom: '15px' }}
                 onChange={(event, value) => {
                   setSelectedProject(value.id);
-                  setSelectedCandidate(value.candidate_project_id);
+                  setSelectedCandidate(value.candidate_project);
                 }}
                 open={openProjects}
                 onOpen={() => {
@@ -118,22 +116,23 @@ export const CreateInterview = () => {
             <Grid item xs={12}>
               <Autocomplete
                 disabled={!selectedCandidate}
+                clearText='Clear'
                 id="candidates"
                 sx={{ width: '100%', marginBottom: '15px' }}
                 onChange={(event, value) => {
                   setSelectedCandidate(value);
                 }}
-                // open={openCandidates}
-                // onOpen={() => {
-                //   setOpenCandidates(true);
+                //  open={openCandidates}
+                //  onOpen={() => {
+                //  setOpenCandidates(true);
                 // }}
                 // onClose={() => {
                 //   setOpenCandidates(false);
                 // }}
-                // isOptionEqualToValue={(option, value) => option === value}
-                // getOptionLabel={(option) => option.projectName}
+                isOptionEqualToValue={(option, value) => option === value}
+                getOptionLabel={(option) => option.full_name}
                 options={selectedCandidate}
-                // loading={loadingDataProject}
+                loading={loadingDataProject}
                 renderInput={(params) => (
                   <TextField
                     {...params}

@@ -2,10 +2,10 @@
 import axios from 'axios';
 import { getEnvSelectionProcess } from '../helpers/getEnvVaribles';
 
-const VITE_API_SEARCH_TOOL = getEnvSelectionProcess()
+const VITE_API_SELECTION_PROCESS = getEnvSelectionProcess()
 
 const selectionProcessApi = axios.create({
-    baseURL: VITE_API_SEARCH_TOOL,
+    baseURL: VITE_API_SELECTION_PROCESS,
 });
 
 // axios.interceptors.request.use(
