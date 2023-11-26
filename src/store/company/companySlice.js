@@ -20,4 +20,4 @@ export const companySlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { showView, selectCandidate, checking, signup, signin, logout, clearErrorMessages, checkingCredentials } = companySlice.actions
+export const { showView, selectCandidate, clearErrorMessages } = companySlice.actions
