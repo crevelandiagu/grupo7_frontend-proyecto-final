@@ -66,7 +66,7 @@ export const DetailProfile = ({idCandidate}) => {
   const handledClick = (event) => {
     event.preventDefault();
     if (!selectedProject) return;
-    startProcess(idCandidate, id, selectedProject);
+    startProcess(id, selectedProject, idCandidate);
   }
 
   return (

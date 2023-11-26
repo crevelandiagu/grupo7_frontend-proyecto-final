@@ -16,39 +16,6 @@ export const companySlice = createSlice({
     selectCandidate: (state, {payload}) => { 
       state.idCandidate = payload.idCandidate;
     },
-    checking: (state) => {
-      state.status = 'checking';
-      state.user   = null;
-      state.errorMessage = undefined;
-    },
-    signup: (state, {payload}) => {
-      state.status = 'authenticated';
-      state.id   = payload.id;
-      state.email = payload.email;
-      // state.user   = payload.user;
-      state.errorMessage = undefined;
-      
-    },
-    signin: (state, {payload}) => {
-      state.status = 'authenticated';
-      state.id   = payload.id;
-      state.email = payload.email;
-      // state.user   = payload.user;
-      state.errorMessage = undefined;
-    },
-    logout: (state, {payload}) => {
-      console.log('payload-logout', payload)
-      state.status = 'not-authenticated';
-      state.user   = null;
-      state.errorMessage = payload;
-      
-    },
-    clearErrorMessages: (state) => {
-      state.errorMessage = undefined;
-    },
-    // checkingCredentials: (state) => {
-    //   state.status = 'checking';
-    // },
   },
 })
 

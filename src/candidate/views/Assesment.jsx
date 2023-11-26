@@ -20,8 +20,6 @@ const sendAssesment = async (answer) => {
   }
 }
 
-
-
 const questions = [
   {
     "choices": [
@@ -75,7 +73,7 @@ const selectionProcessApi = getEnvSelectionProcess()
 export const Assesment = () => {
   // const [ answerList, setAnswerList ] = useState([]);
   const { id, errorMessage } = useAuthStore();
-  const { data, loading } = useFetch(`${selectionProcessApi}/assement/take-exam/1/candidate`)
+  const { data, loading } = useFetch(`${selectionProcessApi}/assement/take-exam/3/candidate`)
 
   function handleClick(event) {
     const selectedAnswer = event.target.value;
@@ -107,7 +105,7 @@ export const Assesment = () => {
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           {
-            questions.map((question, index) => (
+            data?.map((question, index) => (
               <FormControl key={index} component="fieldset" sx={{ mb: 3 }}>
                 <FormLabel component="legend">{question.question}</FormLabel>
                 <RadioGroup
@@ -116,17 +114,17 @@ export const Assesment = () => {
                   defaultValue=""
                   onClick={handleClick}
                 >
-                  {question.choices.map((option, optionIndex) => (
+                  {data?.choices.map((option, optionIndex) => (
                     <FormControlLabel
                       key={optionIndex}
                       value={option}
                       control={<Radio id={optionIndex} size="small" onClick={handleClick} />}
                       label={option}
                     />
-                  ))}
+                  ))||[]}cu
                 </RadioGroup>
               </FormControl>
-            ))
+            ))||[]
           }
           <Grid item sx={{ mt: 2 }}
             xs={12}
