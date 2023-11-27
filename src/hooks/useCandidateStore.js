@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { candidateApi }  from '../api';
-import { showView, saveProfile, updateProfile } from '../store/candidate/candidateSlice';
+import { showView } from '../store/candidate/candidateSlice';
 
 
 export const useCandidateStore = () => {
@@ -12,34 +11,6 @@ export const useCandidateStore = () => {
         dispatch( showView({view:currentView}) );
     }
 
-    const startSaveProfile = async (profile) => {
-        // try {
-        //     const { data } = await candidateApi.post(`/profile/basicinfo/${profile.id}`, profile);
-        // } catch (error) {
-        //     console.log('error', error);
-        // }
-        
-        
-        const existingCandidate = candidates.find(
-            (candidate) => candidate.id === profile.id
-        );
-
-           
-        if (existingCandidate) {
-            const updateCandidate = candidates.map((candidate) => {
-                if (candidate.id === profile.id) {
-                    return {
-                        ...candidate,
-                        ...profile,
-                    };
-                }
-            });
-        
-        } else {
-            dispatch( saveProfile({candidate:profile}) );
-        }
-    }
-
     return {
         //* Propiedades
         errorMessage,
@@ -49,7 +20,6 @@ export const useCandidateStore = () => {
 
         //* Métodos
         startActiveView,
-        startSaveProfile,
     }
 
 }
