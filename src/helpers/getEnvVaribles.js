@@ -32,7 +32,7 @@ export const getEnvPerformance = () => {
 }
 
 export const getEnvContract = () => {
-  return import.meta.env.VITE_API_CONTRACT || import.meta.env.VITE_API_CONTRACT_LOCAL
+  return import.meta.env.VITE_API_CONTRACTS || import.meta.env.VITE_API_CONTRACTS_LOCAL
 }
 
 
