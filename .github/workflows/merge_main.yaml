@@ -59,7 +59,7 @@ jobs:
           node-version: '16.x'
       - name: Install dependencies
         run: npm install
-      - name: run jest
+#      - name: run jest
 #        run: npm run test
 
       - name: Validar resultado con errores
