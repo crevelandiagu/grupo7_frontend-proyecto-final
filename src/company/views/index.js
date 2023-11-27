@@ -6,3 +6,5 @@ export * from './SearchCandidate';
 export * from './DetailProfile';
 export * from './AssignProject';
 export * from './Interview';
+export * from './AssesmentList';
+export * from './ContractList';

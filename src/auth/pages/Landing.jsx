@@ -7,10 +7,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
+
+
 import candidateImg from '../../assets/candidate.svg';
 import companiesImg from '../../assets/companies.svg';
 import { getEnvCandidate, getEnvCompany, getEnvProjects } from '../../helpers/getEnvVaribles';
 import { useAuthStore } from '../../hooks/useAuthStore';
+import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -24,6 +28,8 @@ const Item = styled(Paper)(({ theme }) => ({
 export const Landing = () => {
 
   const { startSetProfile } = useAuthStore();
+  const { t, i18n: { changeLanguage, language } } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(language)
 
   return (
     <Container component="main">

@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import { getEnvSelectionProcess } from '../../helpers/getEnvVaribles';
+import { getEnvPerformance } from '../../helpers/getEnvVaribles';
 import { useAuthStore, useFetch } from '../../hooks';
 
 const columns = [
@@ -17,17 +17,17 @@ const columns = [
   },
 ];
 
-const selectionProcess = getEnvSelectionProcess();
+const performance = getEnvPerformance();
 
-export const AssesmentList = () => {
+export const PerformanceList = () => {
   const { id } = useAuthStore();
-  const { data } = useFetch(`${selectionProcess}/assement/candidate/${id}`)
+  const { data } = useFetch(`${performance}/candidate/${id}/evaluation`)
 
   return (
     <Box>
       <Grid container justifyContent="center" mt={3} mb={3} >
         <Typography component="h1" variant="h4">
-          List Assesment
+          List Performace Evaluation
         </Typography>
       </Grid>
       <DataGrid

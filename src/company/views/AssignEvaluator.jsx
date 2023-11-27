@@ -161,7 +161,7 @@ export const AssignEvaluator = () => {
 
             </TextField>
 
-            <Button fullWidth onClick={handledClick} variant="contained">Evaluate</Button>
+            <Button fullWidth onClick={handledClick} variant="contained" sx={{ mt: 3 }}>Evaluate</Button>
             <Grid item sx={{ width: '380px' }}
               display={message ? '' : 'none'}
             >

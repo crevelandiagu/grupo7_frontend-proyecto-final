@@ -1,4 +1,4 @@
-import { AppBar, Grid, IconButton, ThemeProvider, Toolbar, Typography, createTheme } from "@mui/material";
+import { AppBar, Grid, IconButton, ThemeProvider, Toolbar, Typography } from "@mui/material";
 import {
     AccountCircle,
     Language,
@@ -8,81 +8,90 @@ import {
 } from "@mui/icons-material";
 import { blueTheme } from "../../theme/blueTheme";
 import { useAuthStore } from "../../hooks";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const NavBar = ({ drawerWidth = 240 }) => {
 
     const { startLogout } = useAuthStore();
+    const { i18n: { changeLanguage, language } } = useTranslation();
+    const [currentLanguage, setCurrentLanguage] = useState(language)
+
+    const handleChangeLanguage = () => {
+        const newLanguage = currentLanguage === "EN" ? "ES" : "EN";
+        setCurrentLanguage(newLanguage);
+        changeLanguage(newLanguage);
+    }
 
     return (
-    <ThemeProvider theme={blueTheme}>
-        <AppBar
-            position="fixed"
-            sx={{
-                width: { sm: `calc(100% - ${drawerWidth}px)` },
-                ml: { sm: `${drawerWidth}px`},
-                bgcolor: 'primary.main'
-            }}
+        <ThemeProvider theme={blueTheme}>
+            <AppBar
+                position="fixed"
+                sx={{
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                    ml: { sm: `${drawerWidth}px` },
+                    bgcolor: 'primary.main'
+                }}
 
-        >
-            <Toolbar >
-                <IconButton
-                    color="inherit"
-                    edge="start"
-                    sx={{ mr: 2, display: { sm: "none" } }}
-                >
-                    <MenuOutlined />
-                </IconButton>
-
-                <Grid
-                    container
-                    direction="row"
-                    justifyContent="flex-end"
-                    alignItems="center"
-                >
+            >
+                <Toolbar >
                     <IconButton
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        // onClick={handleM
                         color="inherit"
+                        edge="start"
+                        sx={{ mr: 2, display: { sm: "none" } }}
                     >
-                        <Language />
-                    </IconButton>
-                    <IconButton
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        // onClick={handleM
-                        color="inherit"
-                    >
-                        <Notifications />
-                    </IconButton>
-                    <IconButton
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        // onClick={handleM
-                        color="inherit"
-                    >
-                        <AccountCircle />
+                        <MenuOutlined />
                     </IconButton>
 
-                    <IconButton
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        onClick={startLogout}
-                        color="inherit"
+                    <Grid
+                        container
+                        direction="row"
+                        justifyContent="flex-end"
+                        alignItems="center"
                     >
-                        <LogoutOutlined />
-                    </IconButton>
-                </Grid>
-            </Toolbar>
-        </AppBar>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleChangeLanguage}
+                            color="inherit"
+                        >
+                            <Language />
+                            <Typography ml={1}>{language} </Typography>
+                        </IconButton>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            color="inherit"
+                        >
+                            <Notifications />
+                        </IconButton>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            color="inherit"
+                        >
+                            <AccountCircle />
+                        </IconButton>
+
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={startLogout}
+                            color="inherit"
+                        >
+                            <LogoutOutlined />
+                        </IconButton>
+                    </Grid>
+                </Toolbar>
+            </AppBar>
         </ThemeProvider>
     );
 };

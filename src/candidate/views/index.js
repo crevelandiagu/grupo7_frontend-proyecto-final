@@ -4,6 +4,7 @@ export * from './ProfileCertificates';
 export * from './ProfileEducation';
 export * from './ProfileExperience';
 export * from './Interview';
-export * from './Assesment';
+export * from './AssesmentList';
 export * from './SignContract';
+export * from './PerformanceList';
 

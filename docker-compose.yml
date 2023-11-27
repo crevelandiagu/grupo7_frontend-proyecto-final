@@ -13,6 +13,7 @@ services:
         - VITE_API_PROJECTS=http://34.149.255.183/projects
         - VITE_API_SEARCH_TOOL=http://34.149.255.183/search-tool
         - VITE_API_SELECTION_PROCESS=http://34.149.255.183
+        - VITE_API_CONTRACTS=http://34.149.255.183/contracts
         - VITE_API_PERFORMANCE=http://34.149.255.183/performance
     ports:
       - "8080:8080"

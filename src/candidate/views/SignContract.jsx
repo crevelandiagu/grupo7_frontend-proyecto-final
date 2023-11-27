@@ -4,14 +4,15 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
-import { useAuthStore } from '../../hooks';
+import { useAuthStore, useFetch } from '../../hooks';
 import { Alert, TextField } from '@mui/material';
-import { candidateApi } from '../../api';
+import contractApi  from '../../api/contractApi';
+import { getEnvContract } from '../../helpers/getEnvVaribles';
 
 
-const signContract = async (candidateId, { birthdate = '01/01/1999', lastName: lastname, location: nacionality, name, numberId, phone: phone_number }) => {
+const signContract = async (candidateId) => {
   try {
-    const { data } = await candidateApi.post(`/profile/basicinfo/${candidateId}`, { birthdate, lastname, nacionality, name, numberId, phone_number })
+    const { data } = await contractApi.post(`/candidate/${candidateId}`)
     console.log('data', data);
     return data.message;
   } catch (error) {
@@ -19,9 +20,12 @@ const signContract = async (candidateId, { birthdate = '01/01/1999', lastName: l
   }
 }
 
+const contract = getEnvContract();
+
 export const SignContract = () => {
 
   const { id, errorMessage } = useAuthStore();
+  const { data } = useFetch(`${contract}/candidate/${id}`);
 
   const handleSubmit = (event) => {
     event.preventDefault();

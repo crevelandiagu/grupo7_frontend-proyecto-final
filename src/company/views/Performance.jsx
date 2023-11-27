@@ -5,7 +5,7 @@ import { getEnvPerformance } from '../../helpers/getEnvVaribles';
 import { useAuthStore, useFetch } from '../../hooks';
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 20 },
+  { field: 'id', headerName: 'IDs', width: 20 },
   { field: 'project', headerName: 'Project', width: 200 },
   {
     field: 'candidate',
@@ -15,18 +15,19 @@ const columns = [
     editable: true,
   },
   {
-    field: 'date',
-    headerName: 'Date',
-    width: 130,
-    editable: true,
-  },
-  {
     field: 'score',
     headerName: 'Score',
     type: 'number',
     width: 80,
     editable: true,
   },
+];
+
+const datas = [
+  { id: 1, project_id: 'Big project', candidate_name: 'Peter Parker',  score: 35 },
+  { id: 2, project_id: 'Small project', candidate_name: 'Harry Osborn',  score: 42 },
+  { id: 3, project_id: 'Medium Project', candidate_name: 'Ben Parker',  score: 45 },
+ 
 ];
 
 
@@ -49,11 +50,10 @@ export const Performance = () => {
       <DataGrid 
         columns={columns}
         rows={  
-            data?.map((item, index) => ({
+            datas?.map((item, index) => ({
             id: index+1,
             project: item.project_id,
             candidate: item.candidate_name,
-            date: item.date_interview,
             score: item.score,
           })) || []
         }

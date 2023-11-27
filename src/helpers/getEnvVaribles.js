@@ -30,3 +30,9 @@ export const getEnvSelectionProcess = () => {
 export const getEnvPerformance = () => {
   return import.meta.env.VITE_API_PERFORMANCE || import.meta.env.VITE_API_PERFORMANCE_LOCAL
 }
+
+export const getEnvContract = () => {
+  return import.meta.env.VITE_API_CONTRACT || import.meta.env.VITE_API_CONTRACT_LOCAL
+}
+
+
