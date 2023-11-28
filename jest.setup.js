@@ -9,7 +9,6 @@ jest.mock('./src/helpers/getEnvVaribles.js', () => {
     getEnvCandidate: () => {
       return 'http://localhost:3000/candidate';
     },
-
     getEnvCompany: () => {
       return 'http://localhost:3001/company';
     },
@@ -17,16 +16,19 @@ jest.mock('./src/helpers/getEnvVaribles.js', () => {
       return 'http://localhost:3002/api/company/employees';
     },
     getEnvProjects: () => {
-      return 'http://localhost:3000/api/projects';
+      return 'http://localhost:3007/projects';
     },
     getEnvSearchTool: () => {
-      return 'http://localhost:3000/api/search-tool';
+      return 'http://localhost:3008/search-tool';
     },
     getEnvSelectionProcess: () => {
-      return 'http://localhost:3000/api/selection-process';
+      return 'http://localhost:3010';
     },
     getEnvPerformance: () => {
-      return 'http://localhost:3000/api/performance';
+      return 'http://localhost:3006/performance';
+    },
+    getEnvContract: () => {
+      return 'http://localhost:3003/contracts';
     },
   };
 });
