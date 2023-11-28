@@ -1,7 +1,7 @@
 {
   "name": "grupo7_frontend-proyecto-final",
   "private": true,
-  "version": "3.21.4",
+  "version": "4.29.9",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -50,3 +50,4 @@
     "whatwg-fetch": "^3.6.19"
   }
 }
+
