@@ -11,7 +11,7 @@ exports[`Test to componenet <Landing /> Should be match with snapshot 1`] = `
       <h1
         class="MuiTypography-root MuiTypography-h4 css-5lbw0b-MuiTypography-root"
       >
-        Create an account
+        signup.title
       </h1>
       <form
         class="MuiBox-root css-178yklu"
@@ -31,7 +31,7 @@ exports[`Test to componenet <Landing /> Should be match with snapshot 1`] = `
                 for=":r0:"
                 id=":r0:-label"
               >
-                Email Address
+                signup.nameTextFieldLabel
               </label>
               <div
                 class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
@@ -40,9 +40,9 @@ exports[`Test to componenet <Landing /> Should be match with snapshot 1`] = `
                   aria-invalid="false"
                   class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
                   id=":r0:"
-                  name="email"
-                  placeholder="your-email@domain.com"
-                  type="email"
+                  name="name"
+                  placeholder="signup.nameTextFieldPlaceholder"
+                  type="text"
                   value=""
                 />
                 <fieldset
@@ -53,7 +53,7 @@ exports[`Test to componenet <Landing /> Should be match with snapshot 1`] = `
                     class="css-yjsfm1"
                   >
                     <span>
-                      Email Address
+                      signup.nameTextFieldLabel
                     </span>
                   </legend>
                 </fieldset>
@@ -72,7 +72,7 @@ exports[`Test to componenet <Landing /> Should be match with snapshot 1`] = `
                 for=":r1:"
                 id=":r1:-label"
               >
-                Password
+                signup.emailTextFieldLabel
               </label>
               <div
                 class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
@@ -81,8 +81,49 @@ exports[`Test to componenet <Landing /> Should be match with snapshot 1`] = `
                   aria-invalid="false"
                   class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
                   id=":r1:"
+                  name="email"
+                  placeholder="signup.emailTextFieldPlaceholder"
+                  type="email"
+                  value=""
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="css-yjsfm1"
+                  >
+                    <span>
+                      signup.emailTextFieldLabel
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-1idn90j-MuiGrid-root"
+          >
+            <div
+              class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink="false"
+                for=":r2:"
+                id=":r2:-label"
+              >
+                signup.passwordTextFieldLabel
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+                  id=":r2:"
                   name="password"
-                  placeholder="your password"
+                  placeholder="signup.passwordTextFieldPlaceholder"
                   type="password"
                   value=""
                 />
@@ -94,7 +135,7 @@ exports[`Test to componenet <Landing /> Should be match with snapshot 1`] = `
                     class="css-yjsfm1"
                   >
                     <span>
-                      Password
+                      signup.passwordTextFieldLabel
                     </span>
                   </legend>
                 </fieldset>
@@ -134,7 +175,7 @@ exports[`Test to componenet <Landing /> Should be match with snapshot 1`] = `
           tabindex="0"
           type="submit"
         >
-          Sign Up
+          signup.signupBtn
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
@@ -145,12 +186,12 @@ exports[`Test to componenet <Landing /> Should be match with snapshot 1`] = `
           <div
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
           >
-            By signing up, you agree to our Terms & Conditions.
+            signup.termsAndConditions
           </div>
           <div
             class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
           >
-            Already have an account? 
+            signup.alreadyHaveAnAccount
             <a
               class="MuiTypography-root MuiTypography-body2 MuiLink-root MuiLink-underlineAlways css-101ca9i-MuiTypography-root-MuiLink-root"
               href="/auth/signin"

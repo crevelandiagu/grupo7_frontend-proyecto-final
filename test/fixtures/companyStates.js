@@ -1,6 +1,7 @@
 export const initialState = {
   status: null,
   idCandidate: null,
+  idProcess: null,
   view: 'dashboard',
   errorMessage: null,
 };
