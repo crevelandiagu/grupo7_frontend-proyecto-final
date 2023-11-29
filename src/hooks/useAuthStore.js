@@ -42,7 +42,7 @@ export const useAuthStore = () => {
         dispatch( checking() );
         try {
             if(profile === 'candidate') {
-                const { data } = await candidateApi.post('/signup',{ email, password, name });
+                const { data } = await candidateApi.post('/signup',{ email, password });
                 // console.log(data, data.id, data.email);
                 localStorage.setItem('token', data.token );
                 localStorage.setItem('token-init-date', new Date().getTime() );

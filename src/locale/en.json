@@ -1,5 +1,27 @@
 {
-  "translations": {
-    "headerTitle": "My Header Title"
+  "landing": {
+    "title": "Select your profile",
+    "candidateBtn": "You are a candidate",
+    "companyBtn": "You are a company"
+  },
+  "signup": {
+    "title": "Create an account",
+    "nameTextFieldLabel": "company",
+    "nameTextFieldPlaceholder": "my company",
+    "emailTextFieldLabel": "email address",
+    "emailTextFieldPlaceholder": "your-email@domain.com",
+    "passwordTextFieldLabel": "password",
+    "passwordTextFieldPlaceholder": "your password",
+    "signupBtn": "Sign up",
+    "termsAndConditions": "By signing up, you agree to our Terms & Conditions.",
+    "alreadyHaveAnAccount": "Already have an account? Sign in here."
+  },
+  "signin": {
+    "title": "Welcome back!",
+    "emailTextFieldLabel": "Email address",
+    "emailTextFieldPlaceholder": "your-email@domain.com",
+    "passwordTextFieldLabel": "password",
+    "passwordTextFieldPlaceholder": "your password",
+    "signupBtn": "Sign in"      
   }
 }

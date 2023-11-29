@@ -9,6 +9,7 @@ import { Alert } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
+import { useTranslation } from 'react-i18next';
 import { useAuthStore, useForm } from '../../hooks';
 
 
@@ -26,6 +27,7 @@ function Copyright(props) {
 }
 
 const formData = {
+  name: "",
   email: "",
   password: ""
 }
@@ -37,14 +39,15 @@ const formValidations = {
 
 export const SignUp = () => {
 
-  const { startSignUp, errorMessage, status } = useAuthStore();
+  const { startSignUp, errorMessage, status, profile } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const { t } = useTranslation();
 
   const isCheckingAuthentication = useMemo(() => status === 'checking', [status]);
 
   const {
-    formState, email, password, onInputChange, isFormValid,
-    emailValid, passwordValid, } = useForm(formData, formValidations);
+    formState, name, email, password, onInputChange, isFormValid,
+    nameValid, emailValid, passwordValid, } = useForm(formData, formValidations);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -66,34 +69,49 @@ export const SignUp = () => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Create an account
+          {t('signup.title')}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
+            { profile === 'candidate'? '' :
+              <Grid item xs={12}>
+                <TextField
+                  label={t('signup.nameTextFieldLabel')}
+                  type="text"
+                  placeholder={t('signup.nameTextFieldPlaceholder')}
+                  fullWidth
+                  name="name"
+                  value={name}
+                  onChange={onInputChange}
+                  error={!!nameValid && formSubmitted}
+                  helperText={formSubmitted ? nameValid : ''}
+                />
+              </Grid>
+            }
             <Grid item xs={12}>
               <TextField
-                label="Email Address"
+                label={t('signup.emailTextFieldLabel')}
                 type="email"
-                placeholder='your-email@domain.com'
+                placeholder={t('signup.emailTextFieldPlaceholder')}
                 fullWidth
                 name="email"
                 value={email}
                 onChange={onInputChange}
                 error={!!emailValid && formSubmitted}
-                helperText={formSubmitted? emailValid: ''}
+                helperText={formSubmitted ? emailValid : ''}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Password"
+                label={t('signup.passwordTextFieldLabel')}
                 type="password"
-                placeholder="your password"
+                placeholder={t('signup.passwordTextFieldPlaceholder')}
                 fullWidth
                 name="password"
                 value={password}
                 onChange={onInputChange}
                 error={!!passwordValid && formSubmitted}
-                helperText={formSubmitted? passwordValid: ''}
+                helperText={formSubmitted ? passwordValid : ''}
               />
             </Grid>
 
@@ -111,14 +129,14 @@ export const SignUp = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign Up
+            {t('signup.signupBtn')}
           </Button>
           <Grid container justifyContent="flex-start">
             <Grid item>
-              By signing up, you agree to our Terms & Conditions.
+              {t('signup.termsAndConditions')}
             </Grid>
             <Grid item>
-              {`Already have an account? `}
+              {t('signup.alreadyHaveAnAccount')}
               <Link component={RouterLink} variant="body2" to="/auth/signin">
                 {" Sign In"}
               </Link>

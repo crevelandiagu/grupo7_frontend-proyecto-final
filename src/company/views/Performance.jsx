@@ -1,73 +1,85 @@
-import { Grid, Typography } from '@mui/material';
-import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid';
-import { getEnvPerformance } from '../../helpers/getEnvVaribles';
-import { useAuthStore, useFetch } from '../../hooks';
+import { useState } from "react";
+import { Alert, Box, Button, Container, Grid, TextField, Typography } from "@mui/material"
+import { useFetch,  useForm } from "../../hooks";
+import performanceApi from "../../api/performanceApi";
+import { getEnvPerformance } from "../../helpers/getEnvVaribles";
 
-const columns = [
-  { field: 'id', headerName: 'IDs', width: 20 },
-  { field: 'project', headerName: 'Project', width: 200 },
-  {
-    field: 'candidate',
-    headerName: 'Candidate',
-    type: 'text',
-    width: 200,
-    editable: true,
-  },
-  {
-    field: 'score',
-    headerName: 'Score',
-    type: 'number',
-    width: 80,
-    editable: true,
-  },
-];
+const formData = {
+  score: "",
+}
 
-const datas = [
-  { id: 1, project_id: 'Big project', candidate_name: 'Peter Parker',  score: 35 },
-  { id: 2, project_id: 'Small project', candidate_name: 'Harry Osborn',  score: 42 },
-  { id: 3, project_id: 'Medium Project', candidate_name: 'Ben Parker',  score: 45 },
- 
-];
+const formValidations = {
+  score: [(value) => value >= 0, 'name must be at least 5 characters long'],
+}
 
+const sendScore = async (score, performanceId) => {
+  console.log(score, performanceId)
+  try {
+    const { data } = await performanceApi.post('/make-evaluation', { score, performanceId })
+    console.log('data', data);
+    return data.message;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
 
 const performance = getEnvPerformance();
 
-export const Performance = () => {
+export const Performance = ({idCandidate}) => {
 
-  const { id } = useAuthStore();
-  const { data, loading } = useFetch(`${performance}/company/${id}/evaluation`)
+  const [message, setMessage] = useState('');
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
-  console.log(loading, !data,  loading && !data)
+  const { score, onInputChange, isFormValid, scoreValid } = useForm(formData, formValidations);
+  const {data, loading } = useFetch(`${performance}/candidate/${idCandidate}/evaluation`)
+  
+
+
+
+  const handledClick = (event) => {
+    event.preventDefault();
+    setFormSubmitted(true);
+
+    if (!isFormValid) return;
+    console.log('data', data[0].id, 'formData', formData, score)
+    sendScore(score, data[0].id);
+    setMessage('Send score');
+  }
 
   return (
-    <Box>
-      <Grid container justifyContent="center" mt={3} mb={3} >
-        <Typography component="h1" variant="h4">
-          List Performance
-        </Typography>
-      </Grid>
-      <DataGrid 
-        columns={columns}
-        rows={  
-            datas?.map((item, index) => ({
-            id: index+1,
-            project: item.project_id,
-            candidate: item.candidate_name,
-            score: item.score,
-          })) || []
-        }
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
-            },
-          },
+    <Container component="main" maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
-        pageSizeOptions={[5]}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
-    </Box >
-  );
+      >
+        <Typography component="h1" variant="h4">
+          Performance
+        </Typography>
+        <Box component="form" sx={{ mt: 3 }}>
+          <TextField
+            label="score"
+            type="number"
+            placeholder='score'
+            fullWidth
+            name="score"
+            value={score}
+            onChange={onInputChange}
+            error={!!scoreValid && formSubmitted}
+            helperText={formSubmitted ? scoreValid : ''}
+          />
+
+          <Button fullWidth onClick={handledClick} variant="contained" sx={{ mt: 3 }}>Evaluate</Button>
+          <Grid item sx={{ width: '380px' }}
+            display={message ? '' : 'none'}
+          >
+            <Alert severity="success">{message}</Alert>
+          </Grid>
+        </Box>
+      </Box>
+    </Container >
+  )
 }

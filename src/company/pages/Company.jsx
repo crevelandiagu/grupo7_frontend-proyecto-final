@@ -1,10 +1,7 @@
 import { useSelector } from 'react-redux';
 import { CompanyLayout } from '../layout/CompanyLayout';
-import { CompanyDashboard, CreateEmployeeAccount, CreateInterview, DetailProfile, Project, SearchCandidate, AssingProject, Interview, AssesmentList, ContractList } from '../views';
+import { CompanyDashboard, CreateEmployeeAccount, PerformanceList, Performance, CreateInterview, DetailProfile, Project, SearchCandidate, AssingProject, Interview, AssesmentList, Assesment, ContractList } from '../views';
 import { AssignEvaluator } from '../views/AssignEvaluator';
-import { Performance } from '../views/Performance';
-import { Assesment } from '../views/Assesment';
-import { PerformanceList } from '../../candidate/views/performanceList';
 
 export const Company = () => {
   const { view, idCandidate } = useSelector(state => state.company);
@@ -22,7 +19,7 @@ export const Company = () => {
     || view === 'assignEvaluator' && <AssignEvaluator />
     || view === 'contractList' && <ContractList />
     || view === 'performanceList' && <PerformanceList />
-    || view === 'performance' && <Performance />
+    || view === 'performance' && <Performance idCandidate={idCandidate} />
 
   return (
     <CompanyLayout>

@@ -1,5 +1,27 @@
 {
-  "translations": {
-    "headerTitle": "Este es el titulo en español"
+  "landing": {
+    "title": "Seleccione su perfil",
+    "candidateBtn": "Eres un candidato",
+    "companyBtn": "Eres una empresa"
+  },
+  "signup": {
+    "title": "Crear una cuenta",
+    "nameTextFieldLabel": "empresa",
+    "nameTextFieldPlaceholder": "mi empresa",
+    "emailTextFieldLabel": "Correo electrónico",
+    "emailTextFieldPlaceholder": "correo-electronico@dominio.com",
+    "passwordTextFieldLabel": "contraseña",
+    "passwordTextFieldPlaceholder": "su contraseña",
+    "signupBtn": "Registrarse",
+    "termsAndConditions": "Para registrarse, acepte los Terminos & Condiciones.",
+    "alreadyHaveAnAccount": "Ya tiene una cuenta? Ingresa aquí."
+  },
+  "signin": {
+    "title": "Bienvenido de nuevo!",
+    "emailTextFieldLabel": "Correo electrónico",
+    "emailTextFieldPlaceholder": "correo-electronico@dominio.com",
+    "passwordTextFieldLabel": "contraseña",
+    "passwordTextFieldPlaceholder": "su contraseña",
+    "signupBtn": "Ingrear"    
   }
 }
