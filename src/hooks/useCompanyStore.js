@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
   showView,
-  selectCandidate /*clearErrorMessages*/,
+  selectCandidate,
+  setIdProcess,
+   /*clearErrorMessages*/
 } from '../store/company/companySlice';
 
 export const useCompanyStore = () => {
@@ -16,6 +18,10 @@ export const useCompanyStore = () => {
     dispatch(selectCandidate({ idCandidate }));
   };
 
+  const startSetIdProcess = (idProcess) => {
+    dispatch(setIdProcess({ idProcess }));
+  };
+
   return {
     //* Propiedades
     errorMessage,
@@ -25,5 +31,6 @@ export const useCompanyStore = () => {
     //* Métodos
     startActiveView,
     startSelectCandidate,
+    startSetIdProcess,
   };
 };

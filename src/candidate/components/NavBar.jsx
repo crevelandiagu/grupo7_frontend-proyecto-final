@@ -1,4 +1,4 @@
-import { AppBar, Grid, IconButton, ThemeProvider, Toolbar, Typography, createTheme } from "@mui/material";
+import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
 import {
     AccountCircle,
     Language,
@@ -8,10 +8,20 @@ import {
 } from "@mui/icons-material";
 
 import { useAuthStore } from "../../hooks";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const NavBar = ({ drawerWidth = 240 }) => {
 
     const { startLogout } = useAuthStore();
+    const { i18n: { changeLanguage, language } } = useTranslation();
+    const [currentLanguage, setCurrentLanguage] = useState(language)
+
+    const handleChangeLanguage = () => {
+        const newLanguage = currentLanguage === "EN" ? "ES" : "EN";
+        setCurrentLanguage(newLanguage);
+        changeLanguage(newLanguage);
+    }
 
     return (
         <AppBar
@@ -42,10 +52,11 @@ export const NavBar = ({ drawerWidth = 240 }) => {
                         aria-label="account of current user"
                         aria-controls="menu-appbar"
                         aria-haspopup="true"
-                        // onClick={handleM
+                        onClick={handleChangeLanguage}
                         color="inherit"
                     >
                         <Language />
+                        <Typography ml={1}>{language} </Typography>
                     </IconButton>
                     <IconButton
                         size="large"

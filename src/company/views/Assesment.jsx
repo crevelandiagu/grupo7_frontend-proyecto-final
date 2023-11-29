@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { Alert, Box, Button, Container, Grid, TextField, Typography } from "@mui/material"
-import { useFetch,  useForm } from "../../hooks";
-import performanceApi from "../../api/performanceApi";
-import { getEnvPerformance } from "../../helpers/getEnvVaribles";
+import { useForm } from "../../hooks";
+import { useState } from "react";
+import selectionProcessApi from "../../api/selectionProcess";
 
 const formData = {
   score: "",
@@ -12,10 +11,9 @@ const formValidations = {
   score: [(value) => value >= 0, 'name must be at least 5 characters long'],
 }
 
-const sendScore = async (score, performanceId) => {
-  console.log(score, performanceId)
+const sendScore = async (score, idAssesment) => {
   try {
-    const { data } = await performanceApi.post('/make-evaluation', { score, performanceId })
+    const { data } = await selectionProcessApi.post(`/assement/take-exam/${idAssesment}/candidate`, { score })
     console.log('data', data);
     return data.message;
   } catch (error) {
@@ -23,17 +21,12 @@ const sendScore = async (score, performanceId) => {
   }
 }
 
-const performance = getEnvPerformance();
-
-export const Performance = ({idCandidate}) => {
+export const Assesment = ({idAssesment}) => {
 
   const [message, setMessage] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const { score, onInputChange, isFormValid, scoreValid } = useForm(formData, formValidations);
-  const {data, loading } = useFetch(`${performance}/candidate/${idCandidate}/evaluation`)
-  
-
 
 
   const handledClick = (event) => {
@@ -41,8 +34,7 @@ export const Performance = ({idCandidate}) => {
     setFormSubmitted(true);
 
     if (!isFormValid) return;
-    console.log('data', data[0].id, 'formData', formData, score)
-    sendScore(score, data[0].id);
+    sendScore(score, idAssesment);
     setMessage('Send score');
   }
 
@@ -57,7 +49,7 @@ export const Performance = ({idCandidate}) => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Performance
+          Assesment
         </Typography>
         <Box component="form" sx={{ mt: 3 }}>
           <TextField

@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
@@ -34,12 +32,10 @@ const saveAccount = async (companyId, name, position) => {
   }
 }
 
-const defaultTheme = createTheme();
-
 export const CreateEmployeeAccount = () => {
 
   const { id } = useAuthStore();
-  
+
   const [message] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -56,69 +52,64 @@ export const CreateEmployeeAccount = () => {
   }
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography component="h1" variant="h4">
-            Employee Account
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  label="name"
-                  type="text"
-                  placeholder='employee name'
-                  fullWidth
-                  name="name"
-                  value={name}
-                  onChange={onInputChange}
-                  error={!!nameValid && formSubmitted}
-                  helperText={nameValid}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="position"
-                  type="text"
-                  placeholder="position"
-                  fullWidth
-                  name="position"
-                  value={position}
-                  onChange={onInputChange}
-                  error={!!positionValid && formSubmitted}
-                  helperText={positionValid}
-                />
-              </Grid>
-
+    <Container component="main" maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography component="h1" variant="h4">
+          Employee Account
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                label="name"
+                type="text"
+                placeholder='employee name'
+                fullWidth
+                name="name"
+                value={name}
+                onChange={onInputChange}
+                error={!!nameValid && formSubmitted}
+                helperText={formSubmitted? nameValid: ''}
+              />
             </Grid>
-            <Grid item sx={{ mt: 2 }}
-              xs={12}
-              display={message ? '' : 'none'}
-            // display={ errorMessage ? '' : 'none' }
-
-            >
-              <Alert severity="success">{message}</Alert>
+            <Grid item xs={12}>
+              <TextField
+                label="position"
+                type="text"
+                placeholder="position"
+                fullWidth
+                name="position"
+                value={position}
+                onChange={onInputChange}
+                error={!!positionValid && formSubmitted}
+                helperText={formSubmitted? positionValid: ''}
+              />
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Create
-            </Button>
-          </Box>
+          </Grid>
+          <Grid item sx={{ mt: 2 }}
+            xs={12}
+            display={message ? '' : 'none'}
+          // display={ errorMessage ? '' : 'none' }
+          >
+            <Alert severity="success">{message}</Alert>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Create
+          </Button>
         </Box>
-      </Container>
-    </ThemeProvider>
+      </Box>
+    </Container>
   );
 }

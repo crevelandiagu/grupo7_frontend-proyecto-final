@@ -1,11 +1,10 @@
-
 import axios from 'axios';
-import { getEnvSelectionProcess } from '../helpers/getEnvVaribles';
+import { getEnvContract } from '../helpers/getEnvVaribles';
 
-const VITE_API_SELECTION_PROCESS = getEnvSelectionProcess()
+const VITE_API_CONTRACTS = getEnvContract()
 
-const selectionProcessApi = axios.create({
-    baseURL: VITE_API_SELECTION_PROCESS,
+const contractApi = axios.create({
+    baseURL: VITE_API_CONTRACTS
 });
 
 // axios.interceptors.request.use(
@@ -22,4 +21,4 @@ const selectionProcessApi = axios.create({
 //   );
 
 
-export default selectionProcessApi;
+export default contractApi;

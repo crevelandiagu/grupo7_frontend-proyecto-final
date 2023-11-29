@@ -135,13 +135,13 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                             </Grid>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem key='Assesment' disablePadding>
-                        <ListItemButton onClick={() => { startActiveView('assesment') }}>
+                    <ListItem key='List Assesment' disablePadding>
+                        <ListItemButton onClick={() => { startActiveView('assesmentList') }}>
                             <ListItemIcon>
                                 <TurnedInNot />
                             </ListItemIcon>
                             <Grid container>
-                                <ListItemText primary='Assesment' />
+                                <ListItemText primary='Assesment List' />
                             </Grid>
                         </ListItemButton>
                     </ListItem>
@@ -152,6 +152,16 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                             </ListItemIcon>
                             <Grid container>
                                 <ListItemText primary='Sign contract' />
+                            </Grid>
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem key='Performance List' disablePadding>
+                        <ListItemButton onClick={() => { startActiveView('performanceList') }}>
+                            <ListItemIcon>
+                                <TurnedInNot />
+                            </ListItemIcon>
+                            <Grid container>
+                                <ListItemText primary='Performance List' />
                             </Grid>
                         </ListItemButton>
                     </ListItem>
