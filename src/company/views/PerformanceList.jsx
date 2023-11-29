@@ -9,8 +9,7 @@ const performance = getEnvPerformance();
 export const PerformanceList = () => {
 
   const { id } = useAuthStore();
-  const { startSelectCandidate } = useCompanyStore();
-  const { startActiveView } = useCompanyStore();
+  const { startSelectCandidate, startActiveView, startSetIdProcess } = useCompanyStore();
   const { data, loading } = useFetch(`${performance}/company/${id}/evaluation`)
 
 
@@ -31,7 +30,7 @@ export const PerformanceList = () => {
       type: 'click',
       renderCell: (params) => {
         return (
-          <Button variant='contained' size='small' onClick={() => { startActiveView('performance'); startSelectCandidate(params.row.idCandidate)}} >
+          <Button variant='contained' size='small' onClick={() => { startActiveView('performance'); startSelectCandidate(params.row.idCandidate); startSetIdProcess(params.row.idAPerformance)}} >
             Evaluate
           </Button>
         )
@@ -52,6 +51,7 @@ export const PerformanceList = () => {
           data?.map((item, index) => ({
             id: index + 1,
             project: item.project_name,
+            idAPerformance: item.id,
             idCandidate: item.candidateId,
             candidate: item.candidate_name,
             score: item.score || 'Pending',

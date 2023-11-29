@@ -8,7 +8,6 @@ const columns = [
   { field: 'id', headerName: 'ID' },
   { field: 'company', headerName: 'Company' },
   { field: 'project', headerName: 'Project' },
-  { field: 'idAssesment', headerName: 'Id Assesment' },
   {
     field: 'score',
     headerName: 'Score',
@@ -35,8 +34,8 @@ export const PerformanceList = () => {
         rows={
           data?.map((item, index) => ({
             id: index + 1,
-            company: item.company_id,
-            project: item.project_id,
+            company: item.company_name,
+            project: item.project_name,
             idAssesment: item.id,
             score: item.score || 'Pending',
           })) || []

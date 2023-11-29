@@ -7,14 +7,16 @@ import { useAuthStore, useCompanyStore, useFetch } from '../../hooks';
 const selectionProcess = getEnvSelectionProcess();
 
 export const AssesmentList = () => {
+
   const { id } = useAuthStore();
-  const { startActiveView } = useCompanyStore();
+  const { startActiveView,startSelectCandidate, startSetIdProcess } = useCompanyStore();
   const { data, loading } = useFetch(`${selectionProcess}/selection-process/company/${id}`)
 
   const columns = [
-    { field: 'id', headerName: 'ID' },
+    { field: 'id', headerName: '#' },
     { field: 'project', headerName: 'Project' },
-    { field: 'idAssesment', headerName: 'Id Assesment' },
+    { field: 'idAssesment', headerName: 'Assesment' },
+    { field: 'idCandidate', headerName: 'Id', type: 'number' },
     { field: 'candidate', headerName: 'Candidate' },
     {
       field: 'score',
@@ -28,7 +30,7 @@ export const AssesmentList = () => {
       type: 'click',
       renderCell: (params) => {
         return (
-          <Button variant='contained' size='small' onClick={() => { startActiveView('assesment') }} >
+          <Button variant='contained' size='small' onClick={() => { startActiveView('assesment'); startSelectCandidate(params.row.idCandidate); startSetIdProcess(params.row.idAssesment) }} >
             Evaluate
           </Button>
         )
@@ -48,9 +50,10 @@ export const AssesmentList = () => {
         rows={
           data?.map((item, index) => ({
             id: index + 1,
-            project: item.project_id,
+            project: item.project_name,
             idAssesment: item.id,
-            candidate: item.candidate_id,
+            idCandidate: item.candidate_id,
+            candidate: item.candidate_name,
             score: item.score || 'Pending',
             action: `${item.id}`
           })) || []

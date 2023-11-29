@@ -6,6 +6,7 @@ export const companySlice = createSlice({
     status: null,
     idCandidate: null,
     view: 'dashboard',
+    idProcess: null,
     errorMessage: null,
   },
   reducers: {
@@ -16,8 +17,11 @@ export const companySlice = createSlice({
     selectCandidate: (state, {payload}) => { 
       state.idCandidate = payload.idCandidate;
     },
+    setIdProcess: (state, {payload}) => { 
+      state.idProcess = payload.idProcess;
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { showView, selectCandidate, clearErrorMessages } = companySlice.actions
+export const { showView, selectCandidate, setIdProcess,  clearErrorMessages } = companySlice.actions

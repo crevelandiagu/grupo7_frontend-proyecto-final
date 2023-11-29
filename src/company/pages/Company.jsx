@@ -4,7 +4,7 @@ import { CompanyDashboard, CreateEmployeeAccount, PerformanceList, Performance, 
 import { AssignEvaluator } from '../views/AssignEvaluator';
 
 export const Company = () => {
-  const { view, idCandidate } = useSelector(state => state.company);
+  const { view, idCandidate, idProcess } = useSelector(state => state.company);
 
   const children = view === 'dashboard' && <CompanyDashboard />
     || view === 'search' && <SearchCandidate />
@@ -13,13 +13,13 @@ export const Company = () => {
     || view === 'project' && <Project />
     || view === 'assignproject' && <AssingProject />
     || view === 'assesmentList' && <AssesmentList />
-    || view === 'assesment' && <Assesment />
+    || view === 'assesment' && <Assesment idCandidate={idCandidate} idAssesment={idProcess} />
     || view === 'interview' && <CreateInterview />
     || view === 'listInterview' && <Interview />
     || view === 'assignEvaluator' && <AssignEvaluator />
     || view === 'contractList' && <ContractList />
     || view === 'performanceList' && <PerformanceList />
-    || view === 'performance' && <Performance idCandidate={idCandidate} />
+    || view === 'performance' && <Performance idCandidate={idCandidate} idPerformance={idProcess} />
 
   return (
     <CompanyLayout>

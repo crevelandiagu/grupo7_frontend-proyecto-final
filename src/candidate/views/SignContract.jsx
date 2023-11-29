@@ -47,14 +47,13 @@ export const SignContract = () => {
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <TextField
-            id="outlined-multiline-static"
-            label="Contract"
+            id="contract"
+            disabled
             multiline
             fullWidth
             rows={10}
             readOnly
-            defaultValue={`CONTRATO DE TRABAJO ENTRE (Company ABC) Y (${id}) Entre las partes, por un lado (nombre completo del empleador), domiciliado en la ciudad de (lugar actual de domicilio), representante legal de (nombre de la empresa), con NIT (número de NIT) (en caso que el empleador sea una persona jurídica), quien en adelante y para los efectos del presente contrato se denomina como EL EMPLEADOR, y por el otro, (nombre completo del trabajador), domiciliado en la ciudad de (lugar actual de domicilio), quien en adelante y para los efectos del presente contrato se denomina como EL TRABAJADOR, ambos mayores de edad (las partes deben ser mayores de 18 años; especialmente el trabajador, salvo que se trate de un menor de edad con permiso de trabajo expedido por el Inspector del Trabajo), identificados como aparece al pie de las firmas, hemos acordado suscribir este contrato de trabajo`
-            }
+            value={ data?.message || data?.contract }
           />
 
           <Grid item sx={{ mt: 2 }}
@@ -65,6 +64,7 @@ export const SignContract = () => {
           </Grid>
           <Button
             type="submit"
+            disabled = {data?.message === "We don't have contracts yet" ? true : false}
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}

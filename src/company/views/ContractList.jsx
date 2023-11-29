@@ -5,9 +5,9 @@ import { getEnvSelectionProcess } from '../../helpers/getEnvVaribles';
 import { useAuthStore, useFetch } from '../../hooks';
 import selectionProcessApi from '../../api/selectionProcess';
 
-const sendContract = async (id,{project, candidate} ) => {
+const sendContract = async (id,{projectId, candidateId} ) => {
   try {
-    const { data } = await selectionProcessApi.post('/selection-process/sign-contract/', { companyId: id, projectId: project, candidateId: candidate })
+    const { data } = await selectionProcessApi.post('/selection-process/sign-contract/', { companyId: id, projectId, candidateId })
     console.log('data', data);
     return data.message;
   } catch (error) {
@@ -22,8 +22,10 @@ export const ContractList = () => {
   const { data } = useFetch(`${selectionProcess}/selection-process/company/${id}`)
 
   const columns = [
-    { field: 'id', headerName: 'ID' },
+    { field: 'id', headerName: '#' },
+    { field: 'projectId', headerName: 'Id' },
     { field: 'project', headerName: 'Project' },
+    { field: 'candidateId', headerName: 'Id' },
     { field: 'candidate', headerName: 'Candidate' },
     {
       field: 'click',
@@ -43,7 +45,7 @@ export const ContractList = () => {
     <Box>
       <Grid container justifyContent="center" mt={3} mb={3} >
         <Typography component="h1" variant="h4">
-          List Assesment
+          Contracts List
         </Typography>
       </Grid>
       <DataGrid
@@ -51,8 +53,10 @@ export const ContractList = () => {
         rows={
           data?.map((item, index) => ({
             id: index + 1,
-            project: item.project_id,
-            candidate: item.candidate_id,
+            projectId: item.project_id,
+            project: item.project_name,
+            candidateId: item.candidate_id,
+            candidate: item.candidate_name,
             action: `${item.id, item.project_id, item.candidate_id}`
           })) || []
         }
