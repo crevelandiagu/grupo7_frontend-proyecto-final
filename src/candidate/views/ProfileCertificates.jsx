@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
@@ -37,8 +35,6 @@ const saveCerticatesInfo = async (candidateId, { issuingOrganization: company, c
   }
 }
 
-const defaultTheme = createTheme();
-
 export const ProfileCertificates = () => {
 
   const { id } = useAuthStore();
@@ -58,90 +54,87 @@ export const ProfileCertificates = () => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography component="h1" variant="h4">
-            Certificates
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  label="certification"
-                  type="text"
-                  placeholder='certification'
-                  fullWidth
-                  name="certification"
-                  value={certification}
-                  onChange={onInputChange}
-                  error={!!certificationValid && formSubmitted}
-                  helperText={certificationValid}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="issuingOrganization"
-                  type="text"
-                  placeholder='issuing organization'
-                  fullWidth
-                  name="issuingOrganization"
-                  value={issuingOrganization}
-                  onChange={onInputChange}
-                  error={!!issuingOrganizationValid && formSubmitted}
-                  helperText={issuingOrganizationValid}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="startDate"
-                  type="date"
-                  fullWidth
-                  name="startDate"
-                  value={startDate || '2023-01-01'}
-                  onChange={onInputChange}
-                  error={!!startDateValid && formSubmitted}
-                  helperText={startDateValid}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  label="endDate"
-                  type="date"
-                  fullWidth
-                  name="endDate"
-                  value={endDate || '2023-01-01'}
-                  onChange={onInputChange}
-                  error={!!endDateValid && formSubmitted}
-                  helperText={endDateValid}
-                />
-              </Grid>
+    <Container component="main" maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography component="h1" variant="h4">
+          Certificates
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                label="certification"
+                type="text"
+                placeholder='certification'
+                fullWidth
+                name="certification"
+                value={certification}
+                onChange={onInputChange}
+                error={!!certificationValid && formSubmitted}
+                helperText={formSubmitted ? certificationValid : ''}
+              />
             </Grid>
-            <Grid item sx={{ mt: 2 }}
-              xs={12}
-              display={errorMessage ? '' : 'none'}
-            >
-              <Alert severity="error">{errorMessage}</Alert>
+            <Grid item xs={12}>
+              <TextField
+                label="issuingOrganization"
+                type="text"
+                placeholder='issuing organization'
+                fullWidth
+                name="issuingOrganization"
+                value={issuingOrganization}
+                onChange={onInputChange}
+                error={!!issuingOrganizationValid && formSubmitted}
+                helperText={formSubmitted ? issuingOrganizationValid : ''}
+              />
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Save
-            </Button>
-          </Box>
+            <Grid item xs={12}>
+              <TextField
+                label="startDate"
+                type="date"
+                fullWidth
+                name="startDate"
+                value={startDate || '2023-01-01'}
+                onChange={onInputChange}
+                error={!!startDateValid && formSubmitted}
+                helperText={formSubmitted ? startDateValid : ''}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="endDate"
+                type="date"
+                fullWidth
+                name="endDate"
+                value={endDate || '2023-01-01'}
+                onChange={onInputChange}
+                error={!!endDateValid && formSubmitted}
+                helperText={formSubmitted ? endDateValid : ''}
+              />
+            </Grid>
+          </Grid>
+          <Grid item sx={{ mt: 2 }}
+            xs={12}
+            display={errorMessage ? '' : 'none'}
+          >
+            <Alert severity="error">{errorMessage}</Alert>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Save
+          </Button>
         </Box>
-      </Container>
-    </ThemeProvider>
+      </Box>
+    </Container>
   );
 }

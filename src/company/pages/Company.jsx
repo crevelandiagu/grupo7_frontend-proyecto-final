@@ -1,28 +1,26 @@
 import { useSelector } from 'react-redux';
 import { CompanyLayout } from '../layout/CompanyLayout';
-import { CompanyDashboard, CreateEmployeeAccount, CreateInterview, DetailProfile, Project, SearchCandidate, AssingProject, Interview } from '../views';
+import { CompanyDashboard, CreateEmployeeAccount, PerformanceList, Performance, CreateInterview, DetailProfile, Project, SearchCandidate, AssingProject, Interview, AssesmentList, Assesment, ContractList } from '../views';
 import { AssignEvaluator } from '../views/AssignEvaluator';
-import { Performance } from '../views/Performance';
 
 export const Company = () => {
-  const { view, idCandidate } = useSelector(state => state.company);
-  console.log('view', view)
-
+  const { view, idCandidate, idProcess } = useSelector(state => state.company);
 
   const children = view === 'dashboard' && <CompanyDashboard />
     || view === 'search' && <SearchCandidate />
-    || view === 'project' && <Project />
-    || view === 'assesment' && <CompanyDashboard />
-    || view === 'interview' && <CreateInterview />
-    || view === 'CreateEmployeeAccount' && <CreateEmployeeAccount />
     || view === 'profile' && <DetailProfile idCandidate={idCandidate} />
-    || view === 'assingproject' && <AssingProject />
+    || view === 'CreateEmployeeAccount' && <CreateEmployeeAccount />
+    || view === 'project' && <Project />
+    || view === 'assignproject' && <AssingProject />
+    || view === 'assesmentList' && <AssesmentList />
+    || view === 'assesment' && <Assesment idCandidate={idCandidate} idAssesment={idProcess} />
+    || view === 'interview' && <CreateInterview />
     || view === 'listInterview' && <Interview />
     || view === 'assignEvaluator' && <AssignEvaluator />
-    || view === 'performance' && <Performance />
+    || view === 'contractList' && <ContractList />
+    || view === 'performanceList' && <PerformanceList />
+    || view === 'performance' && <Performance idCandidate={idCandidate} idPerformance={idProcess} />
 
-
-  console.log('view', view, children);
   return (
     <CompanyLayout>
       {

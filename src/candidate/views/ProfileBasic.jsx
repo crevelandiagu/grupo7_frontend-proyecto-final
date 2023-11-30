@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useAuthStore, useCandidateStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
@@ -38,11 +36,9 @@ const saveBasicInfo = async (candidateId, { birthdate='01/01/1999', lastName:las
   }
 }
 
-const defaultTheme = createTheme();
-
 export const ProfileBasic = () => {
 
-  const { startSaveProfile, errorMessage } = useCandidateStore();
+  const { errorMessage } = useCandidateStore();
   const { id } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -60,9 +56,7 @@ export const ProfileBasic = () => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
@@ -86,7 +80,7 @@ export const ProfileBasic = () => {
                   value= {name}
                   onChange={onInputChange}
                   error = {!!nameValid && formSubmitted}
-                  helperText = {nameValid}
+                  helperText = {formSubmitted? nameValid: ''}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -99,7 +93,7 @@ export const ProfileBasic = () => {
                   value= {lastName}
                   onChange={onInputChange}
                   error = {!!lastNameValid && formSubmitted}
-                  helperText = {lastNameValid}
+                  helperText = {formSubmitted? lastNameValid: ''}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -112,7 +106,7 @@ export const ProfileBasic = () => {
                   value= {numberId}
                   onChange={onInputChange}
                   error = {!!numberIdValid && formSubmitted}
-                  helperText = {numberIdValid}
+                  helperText = {formSubmitted? numberIdValid: ''}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -125,7 +119,7 @@ export const ProfileBasic = () => {
                   value= {location}
                   onChange={onInputChange}
                   error = {!!locationValid && formSubmitted}
-                  helperText = {locationValid}
+                  helperText = {formSubmitted? locationValid: ''}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -138,7 +132,7 @@ export const ProfileBasic = () => {
                   value= {phone}
                   onChange={onInputChange}
                   error = {!!phoneValid && formSubmitted}
-                  helperText = {phoneValid}
+                  helperText = {formSubmitted? phoneValid: ''}
                 />
               </Grid>
               
@@ -160,6 +154,5 @@ export const ProfileBasic = () => {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }

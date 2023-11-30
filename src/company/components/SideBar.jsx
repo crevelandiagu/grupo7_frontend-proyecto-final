@@ -29,14 +29,14 @@ export const SideBar = ({ drawerWidth = 240 }) => {
             view: 'project',
         },
         {
-            "name": "Assing Project",
+            "name": "Assign Project",
             "to": "/company/project",
-            view: 'assingproject',
+            view: 'assignproject',
         },
         {
-            "name": "Assesment",
+            "name": "Assesment List",
             "to": "/company/assesment",
-            view: 'assesment'
+            view: 'assesmentList'
         },
         {
             "name": "Interview",
@@ -54,11 +54,15 @@ export const SideBar = ({ drawerWidth = 240 }) => {
             view: 'assignEvaluator'
         },
         {
-            "name": "Performance",
-            "to": "/company/performance",
-            view: 'performance'
+            "name": "Contract List",
+            "to": "/company/interview",
+            view: 'contractList'
         },
-        
+        {
+            "name": "PerformanceList",
+            "to": "/company/performance",
+            view: 'performanceList'
+        },       
     ]
 
     return (
