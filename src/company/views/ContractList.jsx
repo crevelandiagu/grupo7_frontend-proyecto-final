@@ -1,11 +1,12 @@
 import { Button, Grid, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
+import { useTranslation } from 'react-i18next';
 import { getEnvSelectionProcess } from '../../helpers/getEnvVaribles';
 import { useAuthStore, useFetch } from '../../hooks';
 import selectionProcessApi from '../../api/selectionProcess';
 
-const sendContract = async (id,{projectId, candidateId} ) => {
+const sendContract = async (id, { projectId, candidateId }) => {
   try {
     const { data } = await selectionProcessApi.post('/selection-process/sign-contract/', { companyId: id, projectId, candidateId })
     console.log('data', data);
@@ -19,22 +20,23 @@ const selectionProcess = getEnvSelectionProcess();
 
 export const ContractList = () => {
   const { id } = useAuthStore();
+  const { t } = useTranslation();
   const { data } = useFetch(`${selectionProcess}/selection-process/company/${id}`)
 
   const columns = [
     { field: 'id', headerName: '#' },
     { field: 'projectId', headerName: 'Id' },
-    { field: 'project', headerName: 'Project' },
+    { field: 'project', headerName: t('contractList.projectColumn') },
     { field: 'candidateId', headerName: 'Id' },
-    { field: 'candidate', headerName: 'Candidate' },
+    { field: 'candidate', headerName: t('contractList.candidateColumn') },
     {
       field: 'click',
-      headerName: 'Action',
+      headerName: t('contractList.actionColumn'),
       type: 'click',
-      renderCell: ({row}) => {
+      renderCell: ({ row }) => {
         return (
           <Button variant='contained' size='small' onClick={() => { sendContract(id, row) }} >
-            Sign
+            {t('contractList.btnColumn')}
           </Button>
         )
       }
@@ -45,7 +47,7 @@ export const ContractList = () => {
     <Box>
       <Grid container justifyContent="center" mt={3} mb={3} >
         <Typography component="h1" variant="h4">
-          Contracts List
+          {t('contractList.title')}
         </Typography>
       </Grid>
       <DataGrid

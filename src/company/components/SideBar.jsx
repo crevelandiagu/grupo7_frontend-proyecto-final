@@ -35,16 +35,12 @@ export const SideBar = ({ drawerWidth = 240 }) => {
             view: 'assesmentList'
         },
         {
-            "name": t('sidebar.Interview'),
+            "name": t('sidebar.interview'),
             view: 'interview'
         },
         {
             "name": t('sidebar.listInterview'),
             view: 'listInterview'
-        },
-        {
-            "name": t('sidebar.assignEvaluator'),
-            view: 'assignEvaluator'
         },
         {
             "name": t('sidebar.contractList'),

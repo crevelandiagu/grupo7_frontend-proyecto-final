@@ -9,15 +9,11 @@ import Container from '@mui/material/Container';
 import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
 import { companyEmployeesApi } from '../../api';
+import { useTranslation } from 'react-i18next';
 
 const formData = {
   name: "",
   position: "",
-}
-
-const formValidations = {
-  name: [(value) => value.length >= 3, 'name must be at least 5 characters long'],
-  position: [(value) => value.length >= 3, 'position must be at least 5 characters long']
 }
 
 const saveAccount = async (companyId, name, position) => {
@@ -35,9 +31,15 @@ const saveAccount = async (companyId, name, position) => {
 export const CreateEmployeeAccount = () => {
 
   const { id } = useAuthStore();
+  const {t} = useTranslation();
 
   const [message] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const formValidations = {
+    name: [(value) => value.length >= 3, t('message.inputName')],
+    position: [(value) => value.length >= 3, t('message.inputPosition')]
+  }
 
   const {
     name, position, onInputChange, isFormValid,
@@ -62,15 +64,15 @@ export const CreateEmployeeAccount = () => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Employee Account
+          {t('employee.title')}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                label="name"
+                label={t('employee.nameTextFieldLabel')}
                 type="text"
-                placeholder='employee name'
+                placeholder={t('employee.nameTextFieldPlaceholder')}
                 fullWidth
                 name="name"
                 value={name}
@@ -81,9 +83,9 @@ export const CreateEmployeeAccount = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="position"
+                label={t('employee.positionTextFieldLabel')}
                 type="text"
-                placeholder="position"
+                placeholder={t('employee.positionTextFieldLabel')}
                 fullWidth
                 name="position"
                 value={position}
@@ -106,7 +108,7 @@ export const CreateEmployeeAccount = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Create
+            {t('employee.createBtn')}
           </Button>
         </Box>
       </Box>

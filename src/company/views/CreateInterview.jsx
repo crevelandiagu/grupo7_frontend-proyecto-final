@@ -12,10 +12,11 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useAuthStore, useFetch, useForm } from '../../hooks';
 import selectionProcessApi from '../../api/selectionProcess';
 import { getEnvProjects } from '../../helpers/getEnvVaribles';
+import { useTranslation } from 'react-i18next';
 
 const formData = {
-  date: new Date().toISOString().slice(0, 10),
-  hour: '00:00',
+  date: "",
+  hour: "",
 }
 
 const formValidations = {
@@ -38,6 +39,7 @@ const projects = getEnvProjects();
 export const CreateInterview = () => {
 
   const { id } = useAuthStore();
+  const { t } = useTranslation();
 
   const [message] = useState('');
   const [openProjects, setOpenProjects] = useState(false);
@@ -73,7 +75,7 @@ export const CreateInterview = () => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Create Interview
+          {t('interview.title')}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
@@ -99,7 +101,7 @@ export const CreateInterview = () => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="projects"
+                    label={t('interview.projectInputLabel')}
                     InputProps={{
                       ...params.InputProps,
                       endAdornment: (
@@ -136,7 +138,7 @@ export const CreateInterview = () => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="candidates"
+                    label={t('interview.candidateInputLabel')}
                   // InputProps={{
                   //   ...params.InputProps,
                   //   endAdornment: (
@@ -152,7 +154,7 @@ export const CreateInterview = () => {
             </Grid>
             <Grid item xs={12} >
               <TextField
-                label="date"
+                label={t('interview.dateInputLabel')}
                 type="date"
                 fullWidth
                 name="date"
@@ -164,7 +166,7 @@ export const CreateInterview = () => {
             </Grid>
             <Grid item xs={12} >
               <TextField
-                label="hour"
+                label={t('interview.timeInputLabel')}
                 type="time"
                 fullWidth
                 name="hour"
@@ -187,7 +189,7 @@ export const CreateInterview = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Schedule
+            {t('interview.assignBtn')}
           </Button>
         </Box>
       </Box>

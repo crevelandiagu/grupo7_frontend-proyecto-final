@@ -3,30 +3,32 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { getEnvPerformance } from '../../helpers/getEnvVaribles';
 import { useAuthStore, useCompanyStore, useFetch } from '../../hooks';
+import { useTranslation } from 'react-i18next';
 
 const performance = getEnvPerformance();
 
 export const PerformanceList = () => {
 
   const { id } = useAuthStore();
+  const { t } = useTranslation();
   const { startSelectCandidate, startActiveView, startSetIdProcess } = useCompanyStore();
   const { data, loading } = useFetch(`${performance}/company/${id}/evaluation`)
 
 
   const columns = [
     { field: 'id', headerName: '#' },
-    { field: 'project', headerName: 'Project' },
+    { field: 'project', headerName: t('performanceList.projectColumn') },
     { field: 'idCandidate', headerName: 'Id', type: 'number' },
-    { field: 'candidate', headerName: 'Candidate' },
+    { field: 'candidate', headerName: t('performanceList.candidateColumn') },
     {
       field: 'score',
-      headerName: 'Score',
+      headerName: t('performanceList.scoreColumn'),
       type: 'number',
       editable: false,
     },
     {
       field: 'click',
-      headerName: 'Action',
+      headerName: t('performanceList.actionColumn'),
       type: 'click',
       renderCell: (params) => {
         return (
@@ -42,7 +44,7 @@ export const PerformanceList = () => {
     <Box>
       <Grid container justifyContent="center" mt={3} mb={3} >
         <Typography component="h1" variant="h4">
-          Performance Evaluations
+          {t('performanceList.title')}
         </Typography>
       </Grid>
       <DataGrid

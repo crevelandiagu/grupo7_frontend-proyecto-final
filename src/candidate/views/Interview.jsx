@@ -3,43 +3,43 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { getEnvSelectionProcess } from '../../helpers/getEnvVaribles';
 import { useAuthStore, useFetch } from '../../hooks';
-
-const columns = [
-  { field: 'id', headerName: '#', width: 30 },
-  { field: 'companyId', headerName: 'Id', width: 30 },
-  { field: 'company', headerName: 'Company', width: 130 },
-  {
-    field: 'score',
-    headerName: 'Score',
-    type: 'number',
-    width: 80,
-  },
-  {
-    field: 'date',
-    headerName: 'Date',
-    width: 130,
-  },
-  {
-    field: 'time',
-    headerName: 'Time',
-    type: 'time',
-    width: 80,
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 const selectionProcess = getEnvSelectionProcess();
 
 export const Interview = () => {
   const { id } = useAuthStore();
+  const { t } = useTranslation();
   const { data, loading } = useFetch(`${selectionProcess}/interviews/candidate/${id}`)
 
-  console.log(loading, !data,  loading && !data)
+  const columns = [
+    { field: 'id', headerName: '#', width: 30 },
+    { field: 'companyId', headerName: 'Id', width: 30 },
+    { field: 'company', headerName: t('interviewList.companyColumn'), width: 130 },
+    {
+      field: 'score',
+      headerName: t('interviewList.scoreColumn'),
+      type: 'number',
+      width: 80,
+    },
+    {
+      field: 'date',
+      headerName: t('interviewList.dateColumn'),
+      width: 130,
+    },
+    {
+      field: 'time',
+      headerName: t('interviewList.timeColumn'),
+      type: 'time',
+      width: 80,
+    },
+  ];
 
   return (
     <Box>
       <Grid container justifyContent="center" mt={3} mb={3} >
         <Typography component="h1" variant="h4">
-          Interviews
+          {t('interviewList.title')}
         </Typography>
       </Grid>
       <DataGrid 
@@ -49,7 +49,7 @@ export const Interview = () => {
             id: index+1,
             companyId: item.company_id,
             company: item.company_name,
-            score: item.score || 'Pending',
+            score: item.score || t('interviewList.title'),
             date: item.date_interview.split('T')[0],
             time: item.date_interview.split('T')[1]
           })) || []

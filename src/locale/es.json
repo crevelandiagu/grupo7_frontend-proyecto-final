@@ -46,5 +46,167 @@
     "education": "Educacion",
     "certificates": "Certificados",
     "signContract": "Firmar Contrato"
+  },
+  "search":{
+    "skillInputLabel" : "habilidades",
+    "skillInputPlaceholder" : "seleccione habilidades",
+    "searchBtn": "Buscar",
+    "resultCardName": "Nombre",
+    "resultBtnContact": "Contactar"
+  },
+  "employee":{
+    "title": "Cuenta Empleado",
+    "nameTextFieldLabel": "nombre",
+    "nameTextFieldPlaceholder": "nombre empleado",
+    "positionTextFieldLabel": "posicion",
+    "positionTextFieldPlaceholder": "posicion",
+    "createBtn": "Crear"
+  },
+  "project":{
+    "title": "Crear Proyecto",
+    "nameTextFieldLabel": "proyecto",
+    "nameTextFieldPlaceholder": "nombre del proyecto",
+    "positionTextFieldLabel": "descripcion",
+    "positionTextFieldPlaceholder": "descripcion del proyecto",
+    "createBtn": "Crear"
+  },
+  "assignProject":{
+    "title": "Asignar Proyecto",
+    "projectInputLabel": "proyecto",
+    "employeeInputLabel": "empleado",
+    "assignBtn": "Asignar proyecto"
+  },
+  "assesment": {
+    "title": "Evaluar Pruebas",
+    "scoreTextFieldLabel": "puntaje",
+    "scoreTextFieldPlaceholder": "0-100",
+    "evaluateBtn": "Evaluar"
+  },
+  "assesmentList":{
+    "title": "Lista de Evaluaciones",
+    "companyColumn": "Empresa",
+    "projectColumn": "Proyecto",
+    "assesmentColumn": "Evaluacion",
+    "candidateColumn": "Candidato",
+    "scoreColumn": "Puntaje",
+    "actionColumn": "Accion",
+    "btnColumn": "Evaluar",
+    "pendingLabel": "Pendiente"
+  },
+  "interview":{
+    "title": "Crear Entrevista",
+    "projectInputLabel": "proyecto",
+    "candidateInputLabel": "candidato",
+    "dateInputLabel": "fecha",
+    "timeInputLabel": "hora",
+    "assignBtn": "Agendar"
+  },
+  "interviewList":{
+    "title": "Lista de Entrevistas",
+    "inteviewColumn": "Entrevista",
+    "companyColumn": "Empresa",
+    "timeColumn": "Hora",
+    "projectColumn": "Proyecto",
+    "candidateColumn": "Candidato",
+    "dateColumn": "Fecha",
+    "scoreColumn": "Puntos",
+    "actionColumn": "Accion",
+    "btnColumn": "Evaluar",
+    "pendingLabel": "Pendiente"
+  },
+  "contractList": {
+    "title": "Lista de Contratos",
+    "projectColumn": "Proyecto",
+    "candidateColumn": "Candidato",
+    "actionColumn": "Accion",
+    "btnColumn": "Firmar"
+  },
+  "performance": {
+    "title": "Evaluar Desempeño",
+    "scoreTextFieldLabel": "Puntaje",
+    "scoreTextFieldPlaceholder": "0-100",
+    "evaluateBtn": "Evaluar"
+  },
+  "performanceList":{
+    "title": "Evaluaciones de Desempeño",
+    "companyColumn": "Empresa",
+    "projectColumn": "Proyecto",
+    "candidateColumn": "Candidato",
+    "scoreColumn": "Puntos",
+    "actionColumn": "Accion",
+    "btnColumn": "Evaluar"
+  },
+  "basic": {
+    "title": "Perfil Basico",
+    "nameTextFieldLabel": "nombre",
+    "nameTextFieldPlaceholder": "Juan",
+    "lastnameTextFieldLabel": "apellido",
+    "lastnameTextFieldPlaceholder": "Rodriguez",
+    "idTextFieldLabel": "identificacion",
+    "idTextFieldPlaceholder": "100200300",
+    "locationTextFieldLabel": "ubicacion",
+    "locationTextFieldPlaceholder": "Medellin",
+    "phoneTextFieldPlaceholder": "telefono",
+    "phoneTextFieldLabel": "3112334455",
+    "saveBtn": "Guardar"
+  },
+  "experience":{
+    "title": "Experiencia",
+    "positionTextFieldLabel": "posicion",
+    "positionTextFieldPlaceholder": "posicion",
+    "companyTextFieldLabel": "empresa",
+    "companyTextFieldPlaceholder": "nombre empresa",
+    "startDateTextFieldLabel": "fecha inicio",
+    "endDateTextFieldLabel": "fecha fin",
+    "locationTextFieldLabel": "ubicacion",
+    "locationTextFieldPlaceholder": "bogota",
+    "skillTextFieldLabel": "habilidades",
+    "skillTextFieldPlaceholder": "seleccione sus habilidades",
+    "saveBtn": "Guardar"
+  },
+  "education":{
+    "title": "Educacion",
+    "schoolTextFieldLabel": "universidad",
+    "schoolTextFieldPlaceholder": "universidad libre",
+    "degreeTextFieldLabel": "titulo",
+    "degreeTextFieldPlaceholder": "titulo obtenido",
+    "startDateTextFieldLabel": "fecha inicio",
+    "endDateTextFieldLabel": "fecha fin",
+    "locationTextFieldLabel": "ubicacion",
+    "locationTextFieldPlaceholder": "bogota",
+    "skillTextFieldLabel": "habilidades",
+    "skillTextFieldPlaceholder": "seleccione habilidades",
+    "saveBtn": "Guardar"
+  },
+  "certificates":{
+    "title": "Certificados",
+    "certificationTextFieldLabel": "certificacion",
+    "certificationTextFieldPlaceholder": "AWS Arquitecto de soluciones",
+    "issuingTextFieldLabel": "organizacion emisora",
+    "issuingTextFieldPlaceholder": "Amazon Web Services",
+    "startDateTextFieldLabel": "fecha inicio",
+    "endDateTextFieldLabel": "fecha fin",
+    "saveBtn": "Guardar"
+  },
+  "signContract":{
+    "title": "Firmar Contrato",
+    "signBtn": "Firmar contrato"
+  },
+  "message":{
+    "inputName": "nombre deberia tener al menos 3 caracteres",
+    "inputLastname": "apellido deberia tener al menos 3 caracteres",
+    "inputPosition": "posición deberia tener al menos 3 caracteres",
+    "inputDescription": "descripcion deberia tener al menos 5 caracteres",
+    "inputScore": "puntaje debe estar entre  0 y 100",
+    "inputId": "identificacion deberia tener al menos 8 digitos",
+    "inputLocation": "ubicacion debe tener al menos 3 caracteres",
+    "inputPhone": "telefono debe tener al menos 6 digitos",
+    "inputCompany": "empresa debe tener al menos 3 caracteres",
+    "inputStartDate": "fecha inicio debe ser una fecha valida",
+    "inputEndDate": "fecha fin debe ser una fecha valida",
+    "inputSchool": "universidad debe tener al menos 3 caracteres",
+    "inputDegree": "titulo debe tener al menos 3 caracteres",
+    "inputCertification": "certificaion debe tener al menos 3 caracteres",
+    "inputIssuing": "organizacion emisora debe tener al menos 3 caracteres"
   }
 }

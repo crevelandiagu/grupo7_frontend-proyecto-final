@@ -9,19 +9,13 @@ import Container from '@mui/material/Container';
 import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
 import { candidateApi } from '../../api';
+import { useTranslation } from 'react-i18next';
 
 const formData = {
   certification: '',
   issuingOrganization: '',
   startDate: '',
   endDate: '',
-}
-
-const formValidations = {
-  certification: [(value) => value.length >= 3, 'certification must be at least 3 characters long'],
-  issuingOrganization: [(value) => value.length >= 3, 'issuing organization must be at least 3 characters long'],
-  startDate: [(value) => value.length >= 0, 'star date must be a date valid'],
-  endDate: [(value) => value.length >= 0, 'end date must be a date valid'],
 }
 
 const saveCerticatesInfo = async (candidateId, { issuingOrganization: company, certification: name_certificate, endDate: date_expiry, startDate: expedition_date }) => {
@@ -38,8 +32,16 @@ const saveCerticatesInfo = async (candidateId, { issuingOrganization: company, c
 export const ProfileCertificates = () => {
 
   const { id } = useAuthStore();
+  const { t } = useTranslation();
   const { errorMessage } = useAuthStore();
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const formValidations = {
+    certification: [(value) => value.length >= 3, t('message.inputCertification') ],
+    issuingOrganization: [(value) => value.length >= 3, t('message.inputIssuing') ],
+    startDate: [(value) => value.length >= 0, t('message.inputStartDate') ],
+    endDate: [(value) => value.length >= 0, t('message.inputEndDate')],
+  }
 
   const {
     formState, certification, issuingOrganization, startDate, endDate, onInputChange, isFormValid,
@@ -64,15 +66,15 @@ export const ProfileCertificates = () => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Certificates
+          {t('certificates.title')}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                label="certification"
+                label={t('certificates.certificationTextFieldLabel')}
                 type="text"
-                placeholder='certification'
+                placeholder={t('certificates.certificationTextFieldPlaceholder')}
                 fullWidth
                 name="certification"
                 value={certification}
@@ -83,9 +85,9 @@ export const ProfileCertificates = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="issuingOrganization"
+                label={t('certificates.issuingTextFieldLabel')}
                 type="text"
-                placeholder='issuing organization'
+                placeholder={t('certificates.issuingTextFieldPlaceholder')}
                 fullWidth
                 name="issuingOrganization"
                 value={issuingOrganization}
@@ -96,7 +98,7 @@ export const ProfileCertificates = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="startDate"
+                label={t('certificates.startDateTextFieldLabel')}
                 type="date"
                 fullWidth
                 name="startDate"
@@ -108,7 +110,7 @@ export const ProfileCertificates = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="endDate"
+                label={t('certificates.endDateTextFieldLabel')}
                 type="date"
                 fullWidth
                 name="endDate"
@@ -131,7 +133,7 @@ export const ProfileCertificates = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Save
+            {t('certificates.saveBtn')}
           </Button>
         </Box>
       </Box>

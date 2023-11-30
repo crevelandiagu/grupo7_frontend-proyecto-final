@@ -8,6 +8,7 @@ import { useAuthStore, useFetch } from '../../hooks';
 import { Alert, TextField } from '@mui/material';
 import contractApi  from '../../api/contractApi';
 import { getEnvContract } from '../../helpers/getEnvVaribles';
+import { useTranslation } from 'react-i18next';
 
 
 const signContract = async (candidateId) => {
@@ -25,6 +26,7 @@ const contract = getEnvContract();
 export const SignContract = () => {
 
   const { id, errorMessage } = useAuthStore();
+  const { t } = useTranslation();
   const { data } = useFetch(`${contract}/candidate/${id}`);
 
   const handleSubmit = (event) => {
@@ -43,7 +45,7 @@ export const SignContract = () => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Sign Contract
+          {t('signContract.title')}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <TextField
@@ -69,7 +71,7 @@ export const SignContract = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign contract
+            {t('signContract.signBtn')}
           </Button>
         </Box>
       </Box>

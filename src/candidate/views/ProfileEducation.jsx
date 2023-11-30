@@ -12,6 +12,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { useAuthStore, useCandidateStore, useForm } from '../../hooks';
 import { candidateApi } from '../../api';
 import { skillsListSelect } from '../../helpers/skillsListSelect';
+import { useTranslation } from 'react-i18next';
 
 const formData = {
   school: '',
@@ -19,14 +20,6 @@ const formData = {
   startDate: '',
   endDate: '',
   location: '',
-}
-
-const formValidations = {
-  school: [(value) => value.length >= 3, 'school must be at least 3 characters long'],
-  degree: [(value) => value.length >= 3, 'degree must be at least 5 characters long'],
-  startDate: [(value) => value.length >= 0, 'star date must be a date valid'],
-  endDate: [(value) => value.length >= 0, 'end date must be a date valid'],
-  location: [(value) => value.length >= 5, 'location must be at least 5 characters long'],
 }
 
 const saveEducationInfo = async (candidateId, { school: univerisity, endDate: end_date, degree: subject, skills, startDate: start_date }) => {
@@ -42,10 +35,19 @@ const saveEducationInfo = async (candidateId, { school: univerisity, endDate: en
 export const ProfileEducation = () => {
 
   const { id } = useAuthStore();
+  const { t } = useTranslation();
   const { errorMessage } = useCandidateStore();
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [skillsList, setSkillsList] = useState(null);
+
+  const formValidations = {
+    school: [(value) => value.length >= 3, t('message.inputSchool')],
+    degree: [(value) => value.length >= 3, t('message.inputDegree')],
+    startDate: [(value) => value.length >= 0, t('message.inputStartDate')],
+    endDate: [(value) => value.length >= 0, t('message.inputEndDate')],
+    location: [(value) => value.length >= 3, t('messsage.inputLocation')],
+  }
 
   const {
     formState, school, degree, startDate, endDate, location, onInputChange, isFormValid,
@@ -71,15 +73,15 @@ export const ProfileEducation = () => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Education
+          {t('education.title')}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                label="school"
+                label={t('education.schoolTextFieldLabel')}
                 type="text"
-                placeholder='school'
+                placeholder={t('education.schoolTextFieldPlaceholder')}
                 fullWidth
                 name="school"
                 value={school}
@@ -90,9 +92,9 @@ export const ProfileEducation = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="degree"
+                label={t('education.degreeTextFieldLabel')}
                 type="text"
-                placeholder="degree"
+                placeholder={t('education.degreeTextFieldPlaceholder')}
                 fullWidth
                 name="degree"
                 value={degree}
@@ -103,7 +105,7 @@ export const ProfileEducation = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="startDate"
+                label={t('education.startDateTextFieldLabel')}
                 type="date"
                 fullWidth
                 name="startDate"
@@ -115,7 +117,7 @@ export const ProfileEducation = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="endDate"
+                label={t('education.endDateTextFieldLabel')}
                 type="date"
                 fullWidth
                 name="endDate"
@@ -127,9 +129,9 @@ export const ProfileEducation = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="location"
+                label={t('education.locationTextFieldLabel')}
                 type="text"
-                placeholder="location"
+                placeholder={t('education.locationTextFieldPlaceholder')}
                 fullWidth
                 name="location"
                 value={location}
@@ -140,7 +142,7 @@ export const ProfileEducation = () => {
             </Grid>
             <Grid item xs={12}>
               <Autocomplete
-                id="skills"
+                id='skills'
                 multiple
                 limitTags={4}
                 onChange={(event, value) => {
@@ -154,8 +156,8 @@ export const ProfileEducation = () => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Skills"
-                    placeholder="Select your skills"
+                    label={t('education.skillTextFieldLabel')}
+                    placeholder={t('education.skillTextFieldPlaceholder')}
                   />
                 )}
               />
@@ -173,7 +175,7 @@ export const ProfileEducation = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Save
+            {t('education.schoolTextFieldLabel')}
           </Button>
         </Box>
       </Box>

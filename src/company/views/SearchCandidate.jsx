@@ -16,6 +16,7 @@ import { Circle } from '@mui/icons-material';
 import { useCompanyStore, useFetch, useForm } from '../../hooks';
 import { skillsListSelect } from '../../helpers/skillsListSelect';
 import { getEnvSearchTool } from '../../helpers/getEnvVaribles';
+import { useTranslation } from 'react-i18next';
 
 
 const setQueryParams = (skillsList, experience) => {
@@ -33,7 +34,7 @@ const searchTool = getEnvSearchTool();
 export const SearchCandidate = () => {
 
   const { startActiveView, startSelectCandidate } = useCompanyStore();
-
+  const {t} = useTranslation();
   const [skillsList, setSkillsList] = useState(null);
   const [queryString, setQueryString] = useState('')
 
@@ -72,7 +73,6 @@ export const SearchCandidate = () => {
             multiple
             limitTags={4}
             onChange={(event, value) => {
-              console.log('skills', value)
               setSkillsList(value);
             }}
             options={skillsListSelect}
@@ -82,13 +82,13 @@ export const SearchCandidate = () => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Skills"
-                placeholder="Select skills"
+                label={t('search.skillInputLabel')}
+                placeholder={t('search.skillInputPlaceholder')}
               />
             )}
           />
           <TextField
-            label="years"
+            label="exp"
             sx={{ width: '90px' }}
             type="number"
             placeholder='2'
@@ -102,7 +102,7 @@ export const SearchCandidate = () => {
             variant="contained"
             sx={{ width: '95px' }}
           >
-            Search
+            {t('search.searchBtn')}
           </Button>
         </Grid>
       </Box>
@@ -133,7 +133,7 @@ export const SearchCandidate = () => {
               }}>
                 <CardContent >
                   <Typography sx={{ fontSize: 14, color: 'primary.main' }} gutterBottom>
-                    <strong>Name: </strong>{candidate.name} {candidate.lastName} <Circle sx={{ widh: "10px", height: "10px" }} color="primary.main" />  <strong>Exp: </strong> {candidate.years_exp}
+                    <strong>{t('search.resultCardName')}: </strong>{candidate.name} {candidate.lastName} <Circle sx={{ widh: "10px", height: "10px" }} color="primary.main" />  <strong>Exp: </strong> {candidate.years_exp}
                   </Typography>
                   {candidate.skills.skills.map((skill) => (
                     <Chip key={skill} label={skill} size='small' sx={{ margin: '3px' }} />
@@ -142,7 +142,7 @@ export const SearchCandidate = () => {
                   }
                 </CardContent>
                 <CardActions >
-                  <Button size="small" variant='contained' onClick={() => { startActiveView('profile'); startSelectCandidate(candidate.candidateId) }}>contact</Button>
+                  <Button size="small" variant='contained' onClick={() => { startActiveView('profile'); startSelectCandidate(candidate.candidateId) }}>{t('search.resultBtnContact')}</Button>
                 </CardActions>
               </Card>
             ))
