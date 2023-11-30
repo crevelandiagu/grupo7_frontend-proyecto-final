@@ -7,13 +7,13 @@ services:
       context: .
       args:
         - VITE_HOLA=postgresql://postgres:postgres@db_candidate:5432/
-        - VITE_API_CANDIDATE=http://34.149.255.183/candidate    
-        - VITE_API_COMPANY=http://34.149.255.183/company
-        - VITE_API_COMPANY_EMPLOYEES=http://34.149.255.183/company-employees
-        - VITE_API_PROJECTS=http://34.149.255.183/projects
-        - VITE_API_SEARCH_TOOL=http://34.149.255.183/search-tool
-        - VITE_API_SELECTION_PROCESS=http://34.149.255.183/interviews
-        - VITE_API_PERFORMANCE=http://34.149.255.183/performance
+        - VITE_API_CANDIDATE=http://localhost:3000/candidate    
+        - VITE_API_COMPANY=http://localhost:3001/company
+        - VITE_API_COMPANY_EMPLOYEES=http://localhost:3002/company-employees
+        - VITE_API_PROJECTS=http://localhost:3007/projects
+        - VITE_API_SEARCH_TOOL=http://localhost:3008/search-tool
+        - VITE_API_SELECTION_PROCESS=http://localhost:3010/interviews
+        - VITE_API_PERFORMANCE=http://localhost:3006/performance
     ports:
       - "8080:8080"
     expose:

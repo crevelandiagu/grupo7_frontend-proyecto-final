@@ -2,13 +2,13 @@ FROM node:18-alpine as BUILD_IMAGE
 WORKDIR /usr/src/app
 
 ARG VITE_HOLA=holadesdedocker
-ARG VITE_API_CANDIDATE=http://34.149.255.183/candidate
-ARG VITE_API_COMPANY=http://34.149.255.183/company
-ARG VITE_API_COMPANY_EMPLOYEES=http://34.149.255.183/company-employees
-ARG VITE_API_PROJECTS=http://34.149.255.183/projects
-ARG VITE_API_SEARCH_TOOL=http://34.149.255.183/search-tool
-ARG VITE_API_SELECTION_PROCESS=http://34.149.255.183/interviews
-ARG VITE_API_PERFORMANCE=http://34.149.255.183/performance
+ARG VITE_API_CANDIDATE=http://localhost:3000/candidate
+ARG VITE_API_COMPANY=http://localhost:3001/company
+ARG VITE_API_COMPANY_EMPLOYEES=http://localhost:3002/company-employees
+ARG VITE_API_PROJECTS=http://localhost:3007/projects
+ARG VITE_API_SEARCH_TOOL=http://localhost:3008/search-tool
+ARG VITE_API_SELECTION_PROCESS=http://localhost:3010/interviews
+ARG VITE_API_PERFORMANCE=http://localhost:3006/performance
 
 COPY package.json .
 
