@@ -25,14 +25,14 @@ const assignScoreInterview = async (idInterview, score) => {
 }
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 20 },
+  { field: 'id', headerName: '#', width: 20 },
   { field: 'idInterview', headerName: 'Interview', width: 80 },
-  { field: 'project', headerName: 'Project', width: 65},
+  { field: 'project', headerName: 'Project', width: 150},
   {
     field: 'candidate',
     headerName: 'Candidate',
     type: 'text',
-    width: 200,
+    width: 150,
     editable: false,
   },
   {
@@ -83,7 +83,7 @@ export const Interview = () => {
             data?.map((item, index) => ({
             id: index+1,
             idInterview: item.id,
-            project: item.project_id,
+            project: item.project_name,
             candidate: item.candidate_name,
             date: item.date_interview,
             score: item.score || 'Pending',

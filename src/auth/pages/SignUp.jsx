@@ -139,7 +139,7 @@ export const SignUp = () => {
             <Grid item>
               {t('signup.alreadyHaveAnAccount')}
               <Link component={RouterLink} variant="body2" to="/auth/signin">
-                {" Sign In"}
+              {t('signup.signinLink')}
               </Link>
             </Grid>
           </Grid>

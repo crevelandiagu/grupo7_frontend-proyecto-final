@@ -2,47 +2,20 @@ import { Box, Collapse, Drawer, Grid, List, ListItem, ListItemButton, ListItemIc
 import { Approval, ExpandLess, ExpandMore, Feed, School, TurnedInNot, Work } from '@mui/icons-material';
 import { useState } from 'react';
 import { useCandidateStore } from '../../hooks/useCandidateStore';
+import { useTranslation } from 'react-i18next';
 
 
 
 export const SideBar = ({ drawerWidth = 240 }) => {
 
     const { startActiveView } = useCandidateStore();
+    const { t } = useTranslation();
 
     const [open, setOpen] = useState(true);
 
     const handleClick = () => {
         setOpen(!open);
     };
-
-    const items = [
-        {
-            "name": "Dashboard",
-            view: 'dashboard'
-
-        },
-        {
-            "name": "Profile",
-            view: 'basic',
-            subMenu: ['basic', 'experience', 'education', 'certificates']
-        },
-        {
-            "name": "Assesment",
-            view: 'project'
-        },
-        {
-            "name": "Sign contract",
-            view: 'assesment'
-        },
-        {
-            "name": "Interview",
-            view: 'interview'
-        },
-        {
-            "name": "Sign contract",
-            view: 'signcontract'
-        },
-    ]
 
     return (
         <Box
@@ -63,24 +36,13 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                     </Typography>
                 </Toolbar>
                 <List>
-                    {/* {
-                        items.map(item => (
-                            <ListItemButton key={item.name} onClick={() => { startActiveView(item.view) }}>
-                                <ListItemIcon>
-                                    <TurnedInNot />
-                                </ListItemIcon>
-                                <ListItemText primary={item.name} />
-                                {open ? <ExpandLess /> : <ExpandMore />}
-                            </ListItemButton>
-                        ))
-                    } */}
                     <ListItem key='Dashboard' disablePadding sx={{ bgcolor: 'primary.main', color: 'white' }}>
                         <ListItemButton onClick={() => { startActiveView('dashboard') }}>
                             <ListItemIcon>
                                 <TurnedInNot />
                             </ListItemIcon>
                             <Grid container>
-                                <ListItemText primary='Dashboard' />
+                                <ListItemText primary={t('sidebar.dashboard')} />
                             </Grid>
                         </ListItemButton>
                     </ListItem>
@@ -88,7 +50,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                         <ListItemIcon>
                             <TurnedInNot />
                         </ListItemIcon>
-                        <ListItemText primary="Profile" />
+                        <ListItemText primary={t('sidebar.profile')} />
                         {open ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
                     <Collapse in={open} timeout="auto" unmountOnExit>
@@ -97,7 +59,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                                 <ListItemIcon>
                                     <Feed />
                                 </ListItemIcon>
-                                <ListItemText primary="Basic" />
+                                <ListItemText primary={t('sidebar.basic')} />
                             </ListItemButton>
                         </List>
                         <List component="div" disablePadding>
@@ -105,7 +67,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                                 <ListItemIcon>
                                     <Work />
                                 </ListItemIcon>
-                                <ListItemText primary="Experience" />
+                                <ListItemText primary={t('sidebar.experience')} />
                             </ListItemButton>
                         </List>
                         <List component="div" disablePadding>
@@ -113,7 +75,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                                 <ListItemIcon>
                                     <School />
                                 </ListItemIcon>
-                                <ListItemText primary="Education" />
+                                <ListItemText primary={t('sidebar.education')} />
                             </ListItemButton>
                         </List>
                         <List component="div" disablePadding>
@@ -121,7 +83,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                                 <ListItemIcon>
                                     <Approval />
                                 </ListItemIcon>
-                                <ListItemText primary="Certificates" />
+                                <ListItemText primary={t('sidebar.certificates')} />
                             </ListItemButton>
                         </List>
                     </Collapse>
@@ -131,7 +93,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                                 <TurnedInNot />
                             </ListItemIcon>
                             <Grid container>
-                                <ListItemText primary='Interview' />
+                                <ListItemText primary={t('sidebar.interview')} />
                             </Grid>
                         </ListItemButton>
                     </ListItem>
@@ -141,7 +103,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                                 <TurnedInNot />
                             </ListItemIcon>
                             <Grid container>
-                                <ListItemText primary='Assesment List' />
+                                <ListItemText primary={t('sidebar.assesmentList')} />
                             </Grid>
                         </ListItemButton>
                     </ListItem>
@@ -151,7 +113,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                                 <TurnedInNot />
                             </ListItemIcon>
                             <Grid container>
-                                <ListItemText primary='Sign contract' />
+                                <ListItemText primary={t('sidebar.signContract')} />
                             </Grid>
                         </ListItemButton>
                     </ListItem>
@@ -161,7 +123,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                                 <TurnedInNot />
                             </ListItemIcon>
                             <Grid container>
-                                <ListItemText primary='Performance List' />
+                                <ListItemText primary={t('sidebar.performanceList')} />
                             </Grid>
                         </ListItemButton>
                     </ListItem>

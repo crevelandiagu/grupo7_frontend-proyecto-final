@@ -52,7 +52,6 @@ export const NavBar = ({ drawerWidth = 240 }) => {
                         <IconButton
                             size="large"
                             aria-label="account of current user"
-                            aria-controls="menu-appbar"
                             aria-haspopup="true"
                             onClick={handleChangeLanguage}
                             color="inherit"
@@ -63,7 +62,6 @@ export const NavBar = ({ drawerWidth = 240 }) => {
                         <IconButton
                             size="large"
                             aria-label="account of current user"
-                            aria-controls="menu-appbar"
                             aria-haspopup="true"
                             color="inherit"
                         >
@@ -72,7 +70,6 @@ export const NavBar = ({ drawerWidth = 240 }) => {
                         <IconButton
                             size="large"
                             aria-label="account of current user"
-                            aria-controls="menu-appbar"
                             aria-haspopup="true"
                             color="inherit"
                         >
@@ -82,7 +79,6 @@ export const NavBar = ({ drawerWidth = 240 }) => {
                         <IconButton
                             size="large"
                             aria-label="account of current user"
-                            aria-controls="menu-appbar"
                             aria-haspopup="true"
                             onClick={startLogout}
                             color="inherit"

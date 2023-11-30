@@ -14,7 +14,8 @@
     "passwordTextFieldPlaceholder": "su contraseña",
     "signupBtn": "Registrarse",
     "termsAndConditions": "Para registrarse, acepte los Terminos & Condiciones.",
-    "alreadyHaveAnAccount": "Ya tiene una cuenta? Ingresa aquí."
+    "alreadyHaveAnAccount": "Ya tiene una cuenta?",
+    "signinLink": "Ingresar"
   },
   "signin": {
     "title": "Bienvenido!",
@@ -22,6 +23,28 @@
     "emailTextFieldPlaceholder": "correo-electronico@dominio.com",
     "passwordTextFieldLabel": "contraseña",
     "passwordTextFieldPlaceholder": "su contraseña",
-    "signupBtn": "Ingrear"    
+    "signupBtn": "Ingrear",
+    "forgotPassword": "Olvido su contraseña?",
+    "dontHaveAnAccount": "No tiene una cuenta?",
+    "signupLink": "Registrarse"   
+  },
+  "sidebar": {
+    "dashboard": "Panel",
+    "search": "Buscar candidato",
+    "createAccount": "Crear cuenta",
+    "project": "Proyecto",
+    "assignProject": "Asignar Proyecto",
+    "assesmentList": "Listar Evaluaciones",
+    "interview": "Entrevista",
+    "listInterview": "Evaluar Entrevista",
+    "assignEvaluator": "Asignar Evaluador",
+    "contractList": "Listar Contratos",
+    "performanceList": "Listar Desempeño",
+    "profile": "Perfil",
+    "basic": "Basico",
+    "experience": "Experiencia",
+    "education": "Educacion",
+    "certificates": "Certificados",
+    "signContract": "Firmar Contrato"
   }
 }

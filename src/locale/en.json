@@ -14,7 +14,8 @@
     "passwordTextFieldPlaceholder": "your password",
     "signupBtn": "Sign up",
     "termsAndConditions": "By signing up, you agree to our Terms & Conditions.",
-    "alreadyHaveAnAccount": "Already have an account? Sign in here."
+    "alreadyHaveAnAccount": "Already have an account?",
+    "signupLink": "Sign up"
   },
   "signin": {
     "title": "Welcome back!",
@@ -22,6 +23,29 @@
     "emailTextFieldPlaceholder": "your-email@domain.com",
     "passwordTextFieldLabel": "password",
     "passwordTextFieldPlaceholder": "your password",
-    "signupBtn": "Sign in"      
+    "signupBtn": "Sign in",
+    "forgotPassword": "Forgot password?",      
+    "dontHaveAnAccount": "Don't have an account?",
+    "signupLink": "Sign up"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "search": "Search candidate",
+    "createAccount": "Create Account",
+    "project": "Project",
+    "assignProject": "Assign Project",
+    "assesmentList": "Assesment List",
+    "interview": "Interview",
+    "listInterview": "Evaluate Interview",
+    "assignEvaluator": "Assign Evaluator",
+    "contractList": "Contract List",
+    "performanceList": "Performance List",
+    "profile": "Profile",
+    "basic": "Basic",
+    "experience": "Experience",
+    "education": "Education",
+    "certificates": "Certificates",
+    "signContract": "Sign Contract"
+
   }
 }
