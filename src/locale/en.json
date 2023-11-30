@@ -8,7 +8,7 @@
     "title": "Create an account",
     "nameTextFieldLabel": "company",
     "nameTextFieldPlaceholder": "my company",
-    "emailTextFieldLabel": "email address",
+    "emailTextFieldLabel": "email",
     "emailTextFieldPlaceholder": "your-email@domain.com",
     "passwordTextFieldLabel": "password",
     "passwordTextFieldPlaceholder": "your password",
@@ -18,7 +18,7 @@
   },
   "signin": {
     "title": "Welcome back!",
-    "emailTextFieldLabel": "Email address",
+    "emailTextFieldLabel": "email",
     "emailTextFieldPlaceholder": "your-email@domain.com",
     "passwordTextFieldLabel": "password",
     "passwordTextFieldPlaceholder": "your password",

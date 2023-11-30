@@ -42,7 +42,7 @@ export const AssesmentList = () => {
     <Box>
       <Grid container justifyContent="center" mt={3} mb={3} >
         <Typography component="h1" variant="h4">
-          List Assesment
+          Assesment List
         </Typography>
       </Grid>
       <DataGrid

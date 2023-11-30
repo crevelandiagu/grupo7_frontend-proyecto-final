@@ -17,7 +17,7 @@
     "alreadyHaveAnAccount": "Ya tiene una cuenta? Ingresa aquí."
   },
   "signin": {
-    "title": "Bienvenido de nuevo!",
+    "title": "Bienvenido!",
     "emailTextFieldLabel": "Correo electrónico",
     "emailTextFieldPlaceholder": "correo-electronico@dominio.com",
     "passwordTextFieldLabel": "contraseña",

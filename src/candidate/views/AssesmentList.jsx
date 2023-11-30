@@ -5,7 +5,8 @@ import { getEnvSelectionProcess } from '../../helpers/getEnvVaribles';
 import { useAuthStore, useFetch } from '../../hooks';
 
 const columns = [
-  { field: 'id', headerName: 'ID' },
+  { field: 'id', headerName: '#' },
+  { field: 'companyId', headerName: 'Id' },
   { field: 'company', headerName: 'Company' },
   { field: 'project', headerName: 'Project' },
   { field: 'idAssesment', headerName: 'Id Assesment' },
@@ -27,7 +28,7 @@ export const AssesmentList = () => {
     <Box>
       <Grid container justifyContent="center" mt={3} mb={3} >
         <Typography component="h1" variant="h4">
-          List Assesment
+          Assesments
         </Typography>
       </Grid>
       <DataGrid
@@ -35,8 +36,9 @@ export const AssesmentList = () => {
         rows={
           data?.map((item, index) => ({
             id: index + 1,
-            company: item.company_id,
-            project: item.project_id,
+            companyId: item.company_id,
+            company: item.company_name,
+            project: item.project_name,
             idAssesment: item.id,
             score: item.score || 'Pending',
           })) || []

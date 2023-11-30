@@ -5,7 +5,7 @@ import { getEnvPerformance } from '../../helpers/getEnvVaribles';
 import { useAuthStore, useFetch } from '../../hooks';
 
 const columns = [
-  { field: 'id', headerName: 'ID' },
+  { field: 'id', headerName: '#' },
   { field: 'company', headerName: 'Company' },
   { field: 'project', headerName: 'Project' },
   {
@@ -26,7 +26,7 @@ export const PerformanceList = () => {
     <Box>
       <Grid container justifyContent="center" mt={3} mb={3} >
         <Typography component="h1" variant="h4">
-          List Performace Evaluation
+          Performace Results
         </Typography>
       </Grid>
       <DataGrid
