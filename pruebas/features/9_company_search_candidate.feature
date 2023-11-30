@@ -9,5 +9,6 @@ Feature: Search candidate
         Then I add an employee account
         Then I create the project
         Then I search for a candidate
+        Then I wait for the flow
         Then I schedule an interview
 

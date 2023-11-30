@@ -14,6 +14,7 @@ Then('I sign up as company', {timeout: 60000}, async function (){
     await this.driver.manage().setTimeouts({ implicit: 10000 });
     await this.driver.findElement(By.xpath('//*[@id="root"]/main/div/form/div[3]/div/a')).click()
     await this.driver.sleep(1000);
+    await this.driver.findElement(By.name('name')).sendKeys(this.companyName);
     const email = await this.driver.findElement(By.name('email'))
     await clearf(this.driver, email);
     await this.driver.sleep(1000);

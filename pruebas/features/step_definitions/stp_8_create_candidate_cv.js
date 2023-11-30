@@ -52,3 +52,8 @@ Then('I fill in the form', {timeout: 60000}, async function (){
     await this.driver.sleep(1000);
 
 });
+
+Then('I wait for the flow', {timeout: 60000}, async function (){    
+    
+    await this.driver.sleep(10000);
+});

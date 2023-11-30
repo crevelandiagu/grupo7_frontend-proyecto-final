@@ -19,6 +19,7 @@ Before(async function() {
    this.employeeposition = faker.person.jobTitle();
    this.candidatename = faker.person.firstName();
    this.candidatelastname = faker.person.lastName();
+   this.companyName = faker.company.name();
    this.candidateid = faker.number.int({min:100000, max:99999999999})
    this.candidatelocation = faker.location.country();
    this.candidatetel = faker.number.int({min:100000, max:99999999999})
