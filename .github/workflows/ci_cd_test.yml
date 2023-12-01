@@ -7,7 +7,7 @@ on:
 jobs:
   codecov:
     name: Codecov
-    if:  ${{ contains(github.event.head_commit.message, 'hecho')
+    if:  ${{ contains(github.event.head_commit.message, 'coverage')}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout de repositorio
