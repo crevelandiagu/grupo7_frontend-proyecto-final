@@ -9,6 +9,7 @@ import Container from '@mui/material/Container';
 import { useAuthStore, useCandidateStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
 import { candidateApi } from '../../api';
+import { useTranslation } from 'react-i18next';
 
 const formData = {
   name:'',
@@ -16,14 +17,6 @@ const formData = {
   numberId: '',
   location: '',
   phone: '',
-}
-
-const formValidations =  {
-  name: [ (value) => value.length>= 3, 'name must be at least 8 characters long' ],
-  lastName: [ (value) => value.length>= 3, 'last name must be at least 8 characters long' ],
-  numberId: [ (value) => value.length>= 3, 'number must be at least 8 characters long' ],
-  location: [ (value) => value.length>= 3, 'location must be at least 8 characters long' ],
-  phone: [ (value) => value.length>= 3, 'phone must be at least 8 characters long' ],
 }
 
 const saveBasicInfo = async (candidateId, { birthdate='01/01/1999', lastName:lastname, location:nacionality, name, numberId, phone: phone_number }) => {
@@ -40,7 +33,16 @@ export const ProfileBasic = () => {
 
   const { errorMessage } = useCandidateStore();
   const { id } = useAuthStore();
+  const { t } = useTranslation();
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const formValidations =  {
+    name: [ (value) => value.length>= 3, t('message.inputName') ],
+    lastName: [ (value) => value.length>= 3, t('message.inputlastname') ],
+    numberId: [ (value) => value.length>= 8, t('message.inputId') ],
+    location: [ (value) => value.length>= 3, t('message.inputLocation') ],
+    phone: [ (value) => value.length >= 6, t('message.inputPhone') ],
+  }
 
   const {
     formState, name, lastName, numberId, location, phone,  onInputChange, isFormValid, 
@@ -51,7 +53,6 @@ export const ProfileBasic = () => {
     setFormSubmitted(true);
 
     if ( !isFormValid ) return;
-    console.log('form:', {...formState})
     saveBasicInfo(id, {...formState});
   };
 
@@ -66,15 +67,15 @@ export const ProfileBasic = () => {
           }}
         >
           <Typography component="h1" variant="h4">
-            Basic Information
+            {t('basic.title')}
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  label="name"
+                  label={t('basic.nameTextFieldLabel')}
                   type="text"
-                  placeholder='name'
+                  placeholder={t('basic.nameTextFieldPlaceholder')}
                   fullWidth
                   name="name"
                   value= {name}
@@ -85,11 +86,11 @@ export const ProfileBasic = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="lastName"
+                  label={t('basic.lastnameTextFieldLabel')}
                   type="text"
-                  placeholder="last name"
+                  placeholder={t('basic.lastnameTextFieldPlaceholder')}
                   fullWidth
-                  name="lastName"
+                  name= "lastName"
                   value= {lastName}
                   onChange={onInputChange}
                   error = {!!lastNameValid && formSubmitted}
@@ -98,9 +99,9 @@ export const ProfileBasic = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="numberId"
+                  label={t('basic.idTextFieldLabel')}
                   type="number"
-                  placeholder="number id"
+                  placeholder={t('basic.idTextFieldPlaceholder')}
                   fullWidth
                   name="numberId"
                   value= {numberId}
@@ -111,9 +112,9 @@ export const ProfileBasic = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="location"
+                  label={t('basic.locationTextFieldLabel')}
                   type="text"
-                  placeholder="location"
+                  placeholder={t('basic.locationTextFieldPlaceholder')}
                   fullWidth
                   name="location"
                   value= {location}
@@ -124,9 +125,9 @@ export const ProfileBasic = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  label="phone"
+                  label={t('basic.phoneTextFieldPlaceholder')}
                   type="number"
-                  placeholder="phone"
+                  placeholder={t('basic.phoneTextFieldLabel')}
                   fullWidth
                   name="phone"
                   value= {phone}
@@ -149,7 +150,7 @@ export const ProfileBasic = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Save
+              {t('basic.saveBtn')}
             </Button>
           </Box>
         </Box>

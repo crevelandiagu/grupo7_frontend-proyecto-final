@@ -9,15 +9,11 @@ import Container from '@mui/material/Container';
 import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
 import { projectsApi } from '../../api';
+import { useTranslation } from 'react-i18next';
 
 const formData = {
   name: "",
   description: ""
-}
-
-const formValidations = {
-  name: [(value) => value.length >= 3, 'name must be at least 8 characters long'],
-  description: [(value) => value.length >= 5, 'description must be at least 5 characters long']
 }
 
 const saveProject = async (companyId, projectName, description) => {
@@ -35,7 +31,14 @@ export const Project = () => {
   const [message] = useState('');
 
   const { id } = useAuthStore();
+  const {t} = useTranslation();
+
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const formValidations = {
+    name: [(value) => value.length >= 3, t('message.inputName')],
+    description: [(value) => value.length >= 5, t('message.inputDescription')]
+  }
 
   const {
     name, description, onInputChange, isFormValid,
@@ -61,16 +64,16 @@ export const Project = () => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Create Project
+          {t('project.title')}
         </Typography>
         {/* <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}> */}
         <Box component="div" sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                label="name of project"
+                label={t('project.nameTextFieldLabel')}
                 type="text"
-                placeholder='name of project'
+                placeholder={t('project.nameTextFieldPlaceholder')}
                 fullWidth
                 name="name"
                 value={name}
@@ -81,9 +84,9 @@ export const Project = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="description"
+                label={t('project.positionTextFieldLabel')}
                 type="text"
-                placeholder="description of project"
+                placeholder={t('project.positionTextFieldPlaceholder')}
                 fullWidth
                 name="description"
                 value={description}
@@ -107,7 +110,7 @@ export const Project = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Create Project
+            {t('project.createBtn')}
           </Button>
         </Box>
       </Box>

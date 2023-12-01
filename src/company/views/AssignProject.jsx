@@ -3,6 +3,7 @@ import { projectsApi } from "../../api";
 import { useAuthStore, useFetch } from "../../hooks";
 import { getEnvCompanyEmployees, getEnvProjects } from "../../helpers/getEnvVaribles";
 import { Fragment, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const assignProject = async (projectId, employeeId) => {
   try {
@@ -17,9 +18,10 @@ const assignProject = async (projectId, employeeId) => {
 const projects = getEnvProjects();
 const companyEmployees = getEnvCompanyEmployees();
 
-export const AssingProject = () => {
+export const AssignProject = () => {
 
   const { id } = useAuthStore();
+  const {t} = useTranslation();
 
   const [message, setMessage] = useState('');
   const [openProjects, setopenProjects] = useState(false);
@@ -48,7 +50,7 @@ export const AssingProject = () => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Assign Project
+          {t('assignProject.title')}
         </Typography>
         <Box component="form" sx={{ mt: 3 }}>
           <Grid container direction="column" spacing={2} justifyContent="space-around" alignItems="start" sx={{ width: '396px' }}>
@@ -72,7 +74,7 @@ export const AssingProject = () => {
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="projects"
+                  label={t('assignProject.projectInputLabel')}
                   InputProps={{
                     ...params.InputProps,
                     endAdornment: (
@@ -106,7 +108,7 @@ export const AssingProject = () => {
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="employees"
+                  label={t('assignProject.employeeInputLabel')}
                   InputProps={{
                     ...params.InputProps,
                     endAdornment: (
@@ -119,7 +121,7 @@ export const AssingProject = () => {
                 />
               )}
             />
-            <Button fullWidth onClick={handledClick} variant="contained">Assign Project</Button>
+            <Button fullWidth onClick={handledClick} variant="contained">{t('assignProject.assignBtn')}</Button>
             <Grid item sx={{ width: '380px' }}
               display={message ? '' : 'none'}
             >

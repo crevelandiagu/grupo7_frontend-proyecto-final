@@ -33,7 +33,8 @@ const formData = {
 }
 
 const formValidations = {
-  email: [(value) => value.includes('@'), 'Enter a valid email'],
+  name: [(value) => value.length >= 3, 'name must be at least 3 characters long'],
+  email: [(value) => value.includes('@'), 'enter a valid email'],
   password: [(value) => value.length >= 6, 'password must be at least 8 characters long']
 }
 
@@ -138,7 +139,7 @@ export const SignUp = () => {
             <Grid item>
               {t('signup.alreadyHaveAnAccount')}
               <Link component={RouterLink} variant="body2" to="/auth/signin">
-                {" Sign In"}
+              {t('signup.signinLink')}
               </Link>
             </Grid>
           </Grid>

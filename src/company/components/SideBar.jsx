@@ -1,66 +1,53 @@
 import { Box, Drawer,List, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import { TurnedInNot } from '@mui/icons-material';
 import { useCompanyStore } from '../../hooks';
+import { useTranslation } from 'react-i18next';
 
 export const SideBar = ({ drawerWidth = 240 }) => {
 
     const { startActiveView } = useCompanyStore();
+    const { t } = useTranslation();
 
     const items = [
-        {
-            "name": "Dashboard",
-            "to": "/company/dashboard",
+        {   
+            "name": t('sidebar.dashboard'),
             view: 'dashboard'
         
         },
         {
-            "name": "Search candidate",
-            "to": "/company/search",
+            "name": t('sidebar.search'),
             view: 'search'
         },
         {
-            "name": "Create Account",
-            "to": "/company/interview",
+            "name": t('sidebar.createAccount'),
             view: 'CreateEmployeeAccount'
         },
         {
-            "name": "Project",
-            "to": "/company/project",
+            "name": t('sidebar.project'),
             view: 'project',
         },
         {
-            "name": "Assign Project",
-            "to": "/company/project",
+            "name": t('sidebar.assignProject'),
             view: 'assignproject',
         },
         {
-            "name": "Assesment List",
-            "to": "/company/assesment",
+            "name": t('sidebar.assesmentList'),
             view: 'assesmentList'
         },
         {
-            "name": "Interview",
-            "to": "/company/interview",
+            "name": t('sidebar.interview'),
             view: 'interview'
         },
         {
-            "name": "Evaluate Interview",
-            "to": "/company/interview",
+            "name": t('sidebar.listInterview'),
             view: 'listInterview'
         },
         {
-            "name": "Assign Evaluator",
-            "to": "/company/interview",
-            view: 'assignEvaluator'
-        },
-        {
-            "name": "Contract List",
-            "to": "/company/interview",
+            "name": t('sidebar.contractList'),
             view: 'contractList'
         },
         {
-            "name": "PerformanceList",
-            "to": "/company/performance",
+            "name": t('sidebar.performanceList'),
             view: 'performanceList'
         },       
     ]

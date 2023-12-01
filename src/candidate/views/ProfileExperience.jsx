@@ -11,6 +11,7 @@ import { Alert } from '@mui/material';
 import { useAuthStore, useCandidateStore, useForm } from '../../hooks';
 import { candidateApi } from '../../api';
 import { skillsListSelect } from '../../helpers/skillsListSelect';
+import { useTranslation } from 'react-i18next';
 
 const formData = {
   position: '',
@@ -18,14 +19,6 @@ const formData = {
   startDate: '',
   endDate: '',
   location: '',
-}
-
-const formValidations = {
-  position: [(value) => value.length >= 3, 'name must be at least 8 characters long'],
-  company: [(value) => value.length >= 3, 'last name must be at least 8 characters long'],
-  startDate: [(value) => value.length >= 0, 'star date must be a date valid'],
-  endDate: [(value) => value.length >= 0, 'end date must be a date valid'],
-  location: [(value) => value.length >= 3, 'location must be at least 8 characters long'],
 }
 
 const saveExperienceInfo = async (candidateId, { company: company_name, endDate: end_date, location: place, position, skills, startDate: start_date }) => {
@@ -38,14 +31,22 @@ const saveExperienceInfo = async (candidateId, { company: company_name, endDate:
   }
 }
 
-
 export const ProfileExperience = () => {
 
   const { id } = useAuthStore();
+  const { t } = useTranslation();
   const { errorMessage } = useCandidateStore();
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [skillsList, setSkillsList] = useState(null);
+
+  const formValidations = {
+    position: [(value) => value.length >= 3, t('message.inputPosition') ],
+    company: [(value) => value.length >= 3, t('message.inputCompany') ],
+    startDate: [(value) => value.length >= 0, t('message.inputStartDate') ],
+    endDate: [(value) => value.length >= 0, t('message.inputEndDate') ],
+    location: [(value) => value.length >= 3, t('messsage.inputLocation')],
+  }
 
   const {
     formState, position, company, startDate, endDate, location, onInputChange, isFormValid,
@@ -70,15 +71,15 @@ export const ProfileExperience = () => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Experience
+          {t('experience.title')}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                label="position"
+                label={t('experience.positionTextFieldLabel')}
                 type="text"
-                placeholder='position'
+                placeholder={t('experience.positionTextFieldPlaceholder')}
                 fullWidth
                 name="position"
                 value={position}
@@ -89,9 +90,9 @@ export const ProfileExperience = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="company"
+                label={t('experience.companyTextFieldLabel')}
                 type="text"
-                placeholder="company"
+                placeholder={t('experience.companyTextFieldPlaceholder')}
                 fullWidth
                 name="company"
                 value={company}
@@ -102,7 +103,7 @@ export const ProfileExperience = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="startDate"
+                label={t('experience.startDateTextFieldLabel')}
                 type="date"
                 // placeholder="start date"
                 fullWidth
@@ -115,7 +116,7 @@ export const ProfileExperience = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="endDate"
+                label={t('experience.endDateTextFieldLabel')}
                 type="date"
                 // placeholder="end date"
                 fullWidth
@@ -128,9 +129,9 @@ export const ProfileExperience = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="location"
+                label={t('experience.locationTextFieldLabel')}
                 type="text"
-                placeholder="location"
+                placeholder={t('experience.locationTextFieldPlaceholder')}
                 fullWidth
                 name="location"
                 value={location}
@@ -145,7 +146,6 @@ export const ProfileExperience = () => {
                 multiple
                 limitTags={4}
                 onChange={(event, value) => {
-                  console.log('skills', value)
                   setSkillsList(value);
                 }}
                 options={skillsListSelect}
@@ -155,8 +155,8 @@ export const ProfileExperience = () => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Skills"
-                    placeholder="Select your skills"
+                    label={t('experience.skillTextFieldLabel')}
+                    placeholder={t('experience.skillTextFieldPlaceholder')}
                   />
                 )}
               />
@@ -174,7 +174,7 @@ export const ProfileExperience = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Save
+            {t('experience.saveBtn')}
           </Button>
         </Box>
       </Box>

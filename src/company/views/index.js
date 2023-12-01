@@ -11,3 +11,4 @@ export * from './Assesment';
 export * from './ContractList';
 export * from './PerformanceList';
 export * from './Performance';
+export * from './AssignProject';

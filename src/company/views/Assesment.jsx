@@ -2,13 +2,10 @@ import { Alert, Box, Button, Container, Grid, TextField, Typography } from "@mui
 import { useForm } from "../../hooks";
 import { useState } from "react";
 import selectionProcessApi from "../../api/selectionProcess";
+import { useTranslation } from "react-i18next";
 
 const formData = {
-  score: "",
-}
-
-const formValidations = {
-  score: [(value) => value >= 0, 'name must be at least 5 characters long'],
+  score: 0,
 }
 
 const sendScore = async (score, idAssesment) => {
@@ -24,6 +21,11 @@ const sendScore = async (score, idAssesment) => {
 export const Assesment = ({idAssesment}) => {
 
   const [message, setMessage] = useState('');
+  const { t } = useTranslation();
+
+  const formValidations = {
+    score: [(value) => value >= 0, t('message.score')],
+  }
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const { score, onInputChange, isFormValid, scoreValid } = useForm(formData, formValidations);
@@ -49,13 +51,13 @@ export const Assesment = ({idAssesment}) => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Assesment
+          {t('assesment.title')}
         </Typography>
         <Box component="form" sx={{ mt: 3 }}>
           <TextField
-            label="score"
+            label={t('assesment.scoreTextFieldLabel')}
             type="number"
-            placeholder='score'
+            placeholder={t('assesment.scoreTextFieldPlaceholder')}
             fullWidth
             name="score"
             value={score}
@@ -64,7 +66,7 @@ export const Assesment = ({idAssesment}) => {
             helperText={formSubmitted ? scoreValid : ''}
           />
 
-          <Button fullWidth onClick={handledClick} variant="contained" sx={{ mt: 3 }}>Evaluate</Button>
+          <Button fullWidth onClick={handledClick} variant="contained" sx={{ mt: 3 }}>{t('assesment.evaluateBtn')}</Button>
           <Grid item sx={{ width: '380px' }}
             display={message ? '' : 'none'}
           >

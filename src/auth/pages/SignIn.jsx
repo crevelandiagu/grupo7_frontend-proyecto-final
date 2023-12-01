@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 
 import { useAuthStore, useForm } from '../../hooks';
 import { Alert } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 
 function Copyright(props) {
@@ -39,6 +40,7 @@ const formValidations = {
 export const SignIn = () => {
 
   const { startSignIn, errorMessage, status } = useAuthStore();
+  const { t } = useTranslation();
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -67,39 +69,39 @@ export const SignIn = () => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Welcome Back!
+          {t('signin.title')}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                label="Email Address"
+                label={t('signin.emailTextFieldLabel')}
                 type="email"
-                placeholder='yourmail@domain.com'
+                placeholder={t('signin.emailTextFieldPlaceholder')}
                 fullWidth
                 name="email"
                 value={email}
                 onChange={onInputChange}
                 error={!!emailValid && formSubmitted}
-                helperText={formSubmitted? emailValid: ''}
+                helperText={formSubmitted ? emailValid : ''}
               />
             </Grid>
             <Grid item xs justifySelf="flex-end">
               <Link href="#" variant="body2">
-                Forgot password?
+                {t('signin.forgotPassword')}
               </Link>
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label="Password"
+                label={t('signin.passwordTextFieldLabel')}
                 type="password"
-                placeholder="your password"
+                placeholder={t('signin.passwordTextFieldPlaceholder')}
                 fullWidth
                 name="password"
                 value={password}
                 onChange={onInputChange}
                 error={!!passwordValid && formSubmitted}
-                helperText={formSubmitted? passwordValid: ''}
+                helperText={formSubmitted ? passwordValid : ''}
               />
             </Grid>
           </Grid>
@@ -116,13 +118,13 @@ export const SignIn = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            {t('signin.signupBtn')}
           </Button>
           <Grid container>
             <Grid item>
-              {"Don't have an account?"}
+              {t('signin.dontHaveAnAccount')}
               <Link component={RouterLink} variant="body2" to="/auth/signup">
-                {" Sign Up"}
+                {t('signin.signupLink')}
               </Link>
             </Grid>
           </Grid>

@@ -64,7 +64,6 @@ export const Landing = () => {
         >
           <Typography component="h1" variant="h4">
             {t('landing.title')}
-            {console.log(getEnvCandidate(), getEnvCompany(), getEnvProjects())}
           </Typography>
           <Box sx={{
             marginTop: 8,

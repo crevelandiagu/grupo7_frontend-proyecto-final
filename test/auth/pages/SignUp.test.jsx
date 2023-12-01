@@ -1,16 +1,17 @@
 import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { store } from '../../../src/store';
 import { SignUp } from '../../../src/auth/pages/SignUp';
-import { MemoryRouter } from 'react-router';
+import { store } from '../../../src/store';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-describe('Test to componenet <Landing />', () => {
+
+describe('Test to componenet <SignUp />', () => {
   test('Should be match with snapshot', () => {
     const { container } = render(
       <Provider store={store}>
-        <MemoryRouter>
+        <BrowserRouter>
         <SignUp />
-        </MemoryRouter>
+        </BrowserRouter>
       </Provider>
     );
     expect(container).toMatchSnapshot();

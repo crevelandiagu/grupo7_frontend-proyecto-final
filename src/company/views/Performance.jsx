@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { Alert, Box, Button, Container, Grid, TextField, Typography } from "@mui/material"
-import { useFetch,  useForm } from "../../hooks";
+import { useFetch, useForm } from "../../hooks";
 import performanceApi from "../../api/performanceApi";
 import { getEnvPerformance } from "../../helpers/getEnvVaribles";
+import { useTranslation } from "react-i18next";
 
 const formData = {
-  score: "",
-}
-
-const formValidations = {
-  score: [(value) => value >= 0, 'name must be at least 5 characters long'],
+  score: 0,
 }
 
 const sendScore = async (score, performanceId) => {
@@ -25,24 +22,25 @@ const sendScore = async (score, performanceId) => {
 
 const performance = getEnvPerformance();
 
-export const Performance = ({idCandidate}) => {
+export const Performance = ({ idPerformance }) => {
 
   const [message, setMessage] = useState('');
+  const { t } = useTranslation();
+
+
+  const formValidations = {
+    score: [(value) => value >= 0, 'name must be at least 5 characters long'],
+  }
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const { score, onInputChange, isFormValid, scoreValid } = useForm(formData, formValidations);
-  const {data, loading } = useFetch(`${performance}/candidate/${idCandidate}/evaluation`)
-  
-
-
 
   const handledClick = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
 
     if (!isFormValid) return;
-    console.log('data', data[0].id, 'formData', formData, score)
-    sendScore(score, data[0].id);
+    sendScore(score, idPerformance);
     setMessage('Send score');
   }
 
@@ -57,13 +55,13 @@ export const Performance = ({idCandidate}) => {
         }}
       >
         <Typography component="h1" variant="h4">
-          Performance
+          {t('performance.title')}
         </Typography>
         <Box component="form" sx={{ mt: 3 }}>
           <TextField
-            label="score"
+            label={t('performance.scoreTextFieldLabel')}
             type="number"
-            placeholder='score'
+            placeholder={t('performance.scoreTextFieldPlaceholder')}
             fullWidth
             name="score"
             value={score}
@@ -72,7 +70,7 @@ export const Performance = ({idCandidate}) => {
             helperText={formSubmitted ? scoreValid : ''}
           />
 
-          <Button fullWidth onClick={handledClick} variant="contained" sx={{ mt: 3 }}>Evaluate</Button>
+          <Button fullWidth onClick={handledClick} variant="contained" sx={{ mt: 3 }}>{t('performance.evaluateBtn')}</Button>
           <Grid item sx={{ width: '380px' }}
             display={message ? '' : 'none'}
           >

@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import { CompanyLayout } from '../layout/CompanyLayout';
-import { CompanyDashboard, CreateEmployeeAccount, PerformanceList, Performance, CreateInterview, DetailProfile, Project, SearchCandidate, AssingProject, Interview, AssesmentList, Assesment, ContractList } from '../views';
-import { AssignEvaluator } from '../views/AssignEvaluator';
+import { CompanyDashboard, CreateEmployeeAccount, PerformanceList, Performance, CreateInterview, DetailProfile, Project, SearchCandidate, AssignProject, Interview, AssesmentList, Assesment, ContractList } from '../views';
 
 export const Company = () => {
   const { view, idCandidate, idProcess } = useSelector(state => state.company);
@@ -11,12 +10,11 @@ export const Company = () => {
     || view === 'profile' && <DetailProfile idCandidate={idCandidate} />
     || view === 'CreateEmployeeAccount' && <CreateEmployeeAccount />
     || view === 'project' && <Project />
-    || view === 'assignproject' && <AssingProject />
+    || view === 'assignproject' && <AssignProject />
     || view === 'assesmentList' && <AssesmentList />
     || view === 'assesment' && <Assesment idCandidate={idCandidate} idAssesment={idProcess} />
     || view === 'interview' && <CreateInterview />
     || view === 'listInterview' && <Interview />
-    || view === 'assignEvaluator' && <AssignEvaluator />
     || view === 'contractList' && <ContractList />
     || view === 'performanceList' && <PerformanceList />
     || view === 'performance' && <Performance idCandidate={idCandidate} idPerformance={idProcess} />

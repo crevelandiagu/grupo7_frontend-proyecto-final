@@ -4,6 +4,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { getEnvSelectionProcess } from '../../helpers/getEnvVaribles';
 import { useAuthStore, useFetch } from '../../hooks';
 import selectionProcessApi from '../../api/selectionProcess';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -24,57 +25,58 @@ const assignScoreInterview = async (idInterview, score) => {
   }
 }
 
-const columns = [
-  { field: 'id', headerName: 'ID', width: 20 },
-  { field: 'idInterview', headerName: 'Interview', width: 80 },
-  { field: 'project', headerName: 'Project', width: 65},
-  {
-    field: 'candidate',
-    headerName: 'Candidate',
-    type: 'text',
-    width: 200,
-    editable: false,
-  },
-  {
-    field: 'date',
-    headerName: 'Date',
-    width: 180,
-    editable: false,
-  },
-  {
-    field: 'score',
-    headerName: 'Score',
-    type: 'number',
-    width: 90,
-    editable: true,
-  },
-  {
-    field: 'click',
-    headerName: 'Action',
-    type: 'click',
-    width: 110,
-    renderCell: (params) => {
-      return (
-        <strong>
-          <Button variant='contained' size='small' onClick={sendScore(params)} >Evaluate</Button>
-        </strong>
-      )
-    }
-  },
-];
-
 const selectionProcess = getEnvSelectionProcess();
 
 export const Interview = () => {
 
   const { id } = useAuthStore();
+  const { t } = useTranslation();
   const { data } = useFetch(`${selectionProcess}/interviews/company/${id}`)
+
+  const columns = [
+    { field: 'id', headerName: '#', width: 20 },
+    { field: 'idInterview', headerName: t('interviewList.inteviewColumn'), width: 80 },
+    { field: 'project', headerName: t('interviewList.projectColumn'), width: 150},
+    {
+      field: 'candidate',
+      headerName: t('interviewList.candidateColumn'),
+      type: 'text',
+      width: 150,
+      editable: false,
+    },
+    {
+      field: 'date',
+      headerName: t('interviewList.dateColumn'),
+      width: 180,
+      editable: false,
+    },
+    {
+      field: 'score',
+      headerName: t('interviewList.scoreColumn'),
+      type: 'number',
+      width: 90,
+      editable: true,
+    },
+    {
+      field: 'click',
+      headerName: t('interviewList.actionColumn'),
+      type: 'click',
+      width: 110,
+      renderCell: (params) => {
+        return (
+          <strong>
+            <Button variant='contained' size='small' onClick={sendScore(params)} >{t('interviewList.btnColumn')}</Button>
+          </strong>
+        )
+      }
+    },
+  ];
 
   return (
     <Box>
       <Grid container justifyContent="center" mt={3} mb={3} >
         <Typography component="h1" variant="h4">
-          List Interviews
+          {t('interviewList.title')}
         </Typography>
       </Grid>
       <DataGrid 
@@ -83,10 +85,10 @@ export const Interview = () => {
             data?.map((item, index) => ({
             id: index+1,
             idInterview: item.id,
-            project: item.project_id,
+            project: item.project_name,
             candidate: item.candidate_name,
             date: item.date_interview,
-            score: item.score || 'Pending',
+            score: item.score || t('interviewList.pendingLabel'),
             click: item.id
           })) || []
         }
