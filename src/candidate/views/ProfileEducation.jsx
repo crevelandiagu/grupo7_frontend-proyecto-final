@@ -146,7 +146,6 @@ export const ProfileEducation = () => {
                 multiple
                 limitTags={4}
                 onChange={(event, value) => {
-                  console.log('skills', value)
                   setSkillsList(value);
                 }}
                 options={skillsListSelect}

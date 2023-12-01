@@ -171,6 +171,6 @@ export const DetailProfile = ({idCandidate}) => {
   )
 }
 
-DetailProfile.propTypes = {
-  idCandidate: PropTypes.string.isRequired
-} 
+// DetailProfile.propTypes = {
+//   idCandidate: PropTypes.string.isRequired
+// } 

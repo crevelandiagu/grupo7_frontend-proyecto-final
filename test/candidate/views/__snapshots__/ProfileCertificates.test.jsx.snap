@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
+exports[`Test to componenet <ProfileCertificates /> Should be match with snapshot 1`] = `
 <div>
   <main
     class="MuiContainer-root MuiContainer-maxWidthXs css-nzinn5-MuiContainer-root"
@@ -11,7 +11,7 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
       <h1
         class="MuiTypography-root MuiTypography-h4 css-5lbw0b-MuiTypography-root"
       >
-        signup.title
+        certificates.title
       </h1>
       <form
         class="MuiBox-root css-178yklu"
@@ -31,7 +31,7 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
                 for=":r0:"
                 id=":r0:-label"
               >
-                signup.nameTextFieldLabel
+                certificates.certificationTextFieldLabel
               </label>
               <div
                 class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
@@ -40,8 +40,8 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
                   aria-invalid="false"
                   class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
                   id=":r0:"
-                  name="name"
-                  placeholder="signup.nameTextFieldPlaceholder"
+                  name="certification"
+                  placeholder="certificates.certificationTextFieldPlaceholder"
                   type="text"
                   value=""
                 />
@@ -53,7 +53,7 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
                     class="css-yjsfm1"
                   >
                     <span>
-                      signup.nameTextFieldLabel
+                      certificates.certificationTextFieldLabel
                     </span>
                   </legend>
                 </fieldset>
@@ -72,7 +72,7 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
                 for=":r1:"
                 id=":r1:-label"
               >
-                signup.emailTextFieldLabel
+                certificates.issuingTextFieldLabel
               </label>
               <div
                 class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
@@ -81,9 +81,9 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
                   aria-invalid="false"
                   class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
                   id=":r1:"
-                  name="email"
-                  placeholder="signup.emailTextFieldPlaceholder"
-                  type="email"
+                  name="issuingOrganization"
+                  placeholder="certificates.issuingTextFieldPlaceholder"
+                  type="text"
                   value=""
                 />
                 <fieldset
@@ -94,7 +94,7 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
                     class="css-yjsfm1"
                   >
                     <span>
-                      signup.emailTextFieldLabel
+                      certificates.issuingTextFieldLabel
                     </span>
                   </legend>
                 </fieldset>
@@ -108,12 +108,12 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
               class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
             >
               <label
-                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
-                data-shrink="false"
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink="true"
                 for=":r2:"
                 id=":r2:-label"
               >
-                signup.passwordTextFieldLabel
+                certificates.startDateTextFieldLabel
               </label>
               <div
                 class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
@@ -122,20 +122,59 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
                   aria-invalid="false"
                   class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
                   id=":r2:"
-                  name="password"
-                  placeholder="signup.passwordTextFieldPlaceholder"
-                  type="password"
-                  value=""
+                  name="startDate"
+                  type="date"
+                  value="2023-01-01"
                 />
                 <fieldset
                   aria-hidden="true"
                   class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    class="css-yjsfm1"
+                    class="css-14lo706"
                   >
                     <span>
-                      signup.passwordTextFieldLabel
+                      certificates.startDateTextFieldLabel
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-1idn90j-MuiGrid-root"
+          >
+            <div
+              class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+                data-shrink="true"
+                for=":r3:"
+                id=":r3:-label"
+              >
+                certificates.endDateTextFieldLabel
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+                  id=":r3:"
+                  name="endDate"
+                  type="date"
+                  value="2023-01-01"
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="css-14lo706"
+                  >
+                    <span>
+                      certificates.endDateTextFieldLabel
                     </span>
                   </legend>
                 </fieldset>
@@ -175,47 +214,13 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
           tabindex="0"
           type="submit"
         >
-          signup.signupBtn
+          certificates.saveBtn
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
-        <div
-          class="MuiGrid-root MuiGrid-container css-1bzpx2o-MuiGrid-root"
-        >
-          <div
-            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-          >
-            signup.termsAndConditions
-          </div>
-          <div
-            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-          >
-            signup.alreadyHaveAnAccount
-            <a
-              class="MuiTypography-root MuiTypography-body2 MuiLink-root MuiLink-underlineAlways css-101ca9i-MuiTypography-root-MuiLink-root"
-              href="/auth/signin"
-            >
-              signup.signinLink
-            </a>
-          </div>
-        </div>
       </form>
     </div>
-    <p
-      class="MuiTypography-root MuiTypography-body2 MuiTypography-alignCenter css-4cdb0b-MuiTypography-root"
-    >
-      Copyright © 
-      <a
-        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-xdxgn1-MuiTypography-root-MuiLink-root"
-        href="/landing"
-      >
-        ABC Jobs
-      </a>
-       
-      2023
-      .
-    </p>
   </main>
 </div>
 `;

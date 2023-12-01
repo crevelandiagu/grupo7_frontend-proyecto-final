@@ -22,7 +22,7 @@ const sendScore = async (score, performanceId) => {
 
 const performance = getEnvPerformance();
 
-export const Performance = ({ idCandidate }) => {
+export const Performance = ({ idPerformance }) => {
 
   const [message, setMessage] = useState('');
   const { t } = useTranslation();
@@ -34,18 +34,13 @@ export const Performance = ({ idCandidate }) => {
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const { score, onInputChange, isFormValid, scoreValid } = useForm(formData, formValidations);
-  const { data, loading } = useFetch(`${performance}/candidate/${idCandidate}/evaluation`)
-
-
-
 
   const handledClick = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
 
     if (!isFormValid) return;
-    console.log('data', data[0].id, 'formData', formData, score)
-    sendScore(score, data[0].id);
+    sendScore(score, idPerformance);
     setMessage('Send score');
   }
 

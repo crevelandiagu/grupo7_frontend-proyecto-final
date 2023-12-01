@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
+exports[`Test to component company <CreateEmployeeAccount /> Should be match with snapshot 1`] = `
 <div>
   <main
     class="MuiContainer-root MuiContainer-maxWidthXs css-nzinn5-MuiContainer-root"
@@ -11,7 +11,7 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
       <h1
         class="MuiTypography-root MuiTypography-h4 css-5lbw0b-MuiTypography-root"
       >
-        signup.title
+        employee.title
       </h1>
       <form
         class="MuiBox-root css-178yklu"
@@ -31,7 +31,7 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
                 for=":r0:"
                 id=":r0:-label"
               >
-                signup.nameTextFieldLabel
+                employee.nameTextFieldLabel
               </label>
               <div
                 class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
@@ -41,7 +41,7 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
                   class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
                   id=":r0:"
                   name="name"
-                  placeholder="signup.nameTextFieldPlaceholder"
+                  placeholder="employee.nameTextFieldPlaceholder"
                   type="text"
                   value=""
                 />
@@ -53,7 +53,7 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
                     class="css-yjsfm1"
                   >
                     <span>
-                      signup.nameTextFieldLabel
+                      employee.nameTextFieldLabel
                     </span>
                   </legend>
                 </fieldset>
@@ -72,7 +72,7 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
                 for=":r1:"
                 id=":r1:-label"
               >
-                signup.emailTextFieldLabel
+                employee.positionTextFieldLabel
               </label>
               <div
                 class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
@@ -81,9 +81,9 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
                   aria-invalid="false"
                   class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
                   id=":r1:"
-                  name="email"
-                  placeholder="signup.emailTextFieldPlaceholder"
-                  type="email"
+                  name="position"
+                  placeholder="employee.positionTextFieldLabel"
+                  type="text"
                   value=""
                 />
                 <fieldset
@@ -94,48 +94,7 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
                     class="css-yjsfm1"
                   >
                     <span>
-                      signup.emailTextFieldLabel
-                    </span>
-                  </legend>
-                </fieldset>
-              </div>
-            </div>
-          </div>
-          <div
-            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-1idn90j-MuiGrid-root"
-          >
-            <div
-              class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
-            >
-              <label
-                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
-                data-shrink="false"
-                for=":r2:"
-                id=":r2:-label"
-              >
-                signup.passwordTextFieldLabel
-              </label>
-              <div
-                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
-              >
-                <input
-                  aria-invalid="false"
-                  class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-                  id=":r2:"
-                  name="password"
-                  placeholder="signup.passwordTextFieldPlaceholder"
-                  type="password"
-                  value=""
-                />
-                <fieldset
-                  aria-hidden="true"
-                  class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-                >
-                  <legend
-                    class="css-yjsfm1"
-                  >
-                    <span>
-                      signup.passwordTextFieldLabel
+                      employee.positionTextFieldLabel
                     </span>
                   </legend>
                 </fieldset>
@@ -147,7 +106,7 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
           class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 css-1vddya1-MuiGrid-root"
         >
           <div
-            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-standardError MuiAlert-standard css-1hdyuqk-MuiPaper-root-MuiAlert-root"
+            class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-standardSuccess MuiAlert-standard css-wnkddu-MuiPaper-root-MuiAlert-root"
             role="alert"
           >
             <div
@@ -156,12 +115,12 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
               <svg
                 aria-hidden="true"
                 class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
-                data-testid="ErrorOutlineIcon"
+                data-testid="SuccessOutlinedIcon"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
                 <path
-                  d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+                  d="M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2, 4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0, 0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z"
                 />
               </svg>
             </div>
@@ -175,47 +134,13 @@ exports[`Test to componenet <SignUp /> Should be match with snapshot 1`] = `
           tabindex="0"
           type="submit"
         >
-          signup.signupBtn
+          employee.createBtn
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
-        <div
-          class="MuiGrid-root MuiGrid-container css-1bzpx2o-MuiGrid-root"
-        >
-          <div
-            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-          >
-            signup.termsAndConditions
-          </div>
-          <div
-            class="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
-          >
-            signup.alreadyHaveAnAccount
-            <a
-              class="MuiTypography-root MuiTypography-body2 MuiLink-root MuiLink-underlineAlways css-101ca9i-MuiTypography-root-MuiLink-root"
-              href="/auth/signin"
-            >
-              signup.signinLink
-            </a>
-          </div>
-        </div>
       </form>
     </div>
-    <p
-      class="MuiTypography-root MuiTypography-body2 MuiTypography-alignCenter css-4cdb0b-MuiTypography-root"
-    >
-      Copyright © 
-      <a
-        class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-xdxgn1-MuiTypography-root-MuiLink-root"
-        href="/landing"
-      >
-        ABC Jobs
-      </a>
-       
-      2023
-      .
-    </p>
   </main>
 </div>
 `;

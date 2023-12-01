@@ -53,7 +53,6 @@ export const ProfileBasic = () => {
     setFormSubmitted(true);
 
     if ( !isFormValid ) return;
-    console.log('form:', {...formState})
     saveBasicInfo(id, {...formState});
   };
 
@@ -91,7 +90,7 @@ export const ProfileBasic = () => {
                   type="text"
                   placeholder={t('basic.lastnameTextFieldPlaceholder')}
                   fullWidth
-                  name={t('basic.title')}
+                  name= "lastName"
                   value= {lastName}
                   onChange={onInputChange}
                   error = {!!lastNameValid && formSubmitted}

@@ -18,7 +18,7 @@ const assignProject = async (projectId, employeeId) => {
 const projects = getEnvProjects();
 const companyEmployees = getEnvCompanyEmployees();
 
-export const AssingProject = () => {
+export const AssignProject = () => {
 
   const { id } = useAuthStore();
   const {t} = useTranslation();

@@ -1,15 +1,15 @@
 import { render } from '@testing-library/react';
-import { Landing } from '../../../src/auth/pages/Landing';
+import { Project } from '../../../src/company/views/Project';
 import { store } from '../../../src/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-describe('Test to componenet <Landing />', () => {
+describe('Test to component company <Project />', () => {
   test('Should be match with snapshot', () => {
     const { container } = render(
       <Provider store={store}>
         <BrowserRouter>
-          <Landing />
+          <Project />
         </BrowserRouter>
       </Provider>
     );
