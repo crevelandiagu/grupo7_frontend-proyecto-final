@@ -2,7 +2,7 @@ name: App Web
 run-name: ${{ github.actor }} is deploy App Web 🚀
 on:
   push:
-    branches: [feature/PROY**, fix/FIX**]
+    branches: [feature/PROY**, fix/FIX**, develop]
 jobs:
   test-app-web:
     name: Correr-test

@@ -33,7 +33,6 @@ const formData = {
 }
 
 const formValidations = {
-  name: [(value) => value.length >= 3, 'name must be at least 3 characters long'],
   email: [(value) => value.includes('@'), 'enter a valid email'],
   password: [(value) => value.length >= 6, 'password must be at least 8 characters long']
 }
@@ -54,7 +53,7 @@ export const SignUp = () => {
     event.preventDefault();
     setFormSubmitted(true);
 
-
+    console.log(formState)
     if (!isFormValid) return;
     startSignUp(formState);
   };
